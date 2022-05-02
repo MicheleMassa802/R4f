@@ -1,5 +1,5 @@
 # R4f
-R4f is an website (as of now) that works as a birthday tracker for people who are close to you. 
+R4f is a website (as of now) that works as a birthday tracker for people who are close to you. 
 
 What divides R4f from other birthday trackers is the way you get the birthdays of those important people onto your calendar. As a user, you get your own calendar assigned to you, which comes with a link to a survey, this link can be shared onto your social media, and as people start filling this survey with their basic birtday information (day, month, year, name, lastname, social media link/s), R4f automatically allocates some space in your calendar to fit that persons birthday in order to remind you of it.
 

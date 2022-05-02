@@ -5,7 +5,7 @@ What divides R4f from other birthday trackers is the way you get the birthdays o
 
 In order to get the notification across, R4f sends you an email on the days of your calendar where a birthday has been allocated, along with the information of the person related to the birthday and a set of randomized possible default messages which can be sent to congratulate these people.
 
-The app is not about caring less about the special occassions by making sure you dont worry too much about them, it is about making sure you can remember to make the special occassions special with the fast paced life we are all stuck in.
+The app is not about caring less about the special occasions by making sure you dont worry too much about them, it is about making sure you can remember to make the special occasions special with the fast paced life we are all stuck in.
 
 
 

@@ -1,14 +1,11 @@
-# Aqua
-Aqua is an application/website that lets its users take on the roles of a seller or customer while navigating the user-created Aqua Mall stores with high level of customization that make the shopping experience easier and less reliant on end-to-end communication between customers and sellers.
+# R4f
+R4f is an website (as of now) that works as a birthday tracker for people who are close to you. 
 
-When it comes to the selling of services, sellers can create detailed ITEM structure slips made to fit all the details required for an order/service to be completed, which are to be filled and submitted by customers along with each order.
+What divides R4f from other birthday trackers is the way you get the birthdays of those important people onto your calendar. As a user, you get your own calendar assigned to you, which comes with a link to a survey, this link can be shared onto your social media, and as people start filling this survey with their basic birtday information (day, month, year, name, lastname, social media link/s), R4f automatically allocates some space in your calendar to fit that persons birthday in order to remind you of it.
 
-Customers can look for specific services/item-specific-stores through the cashtag system ($) using the search system, and stores can be followed in order to build a more personalized experience.
+In order to get the notification across, R4f sends you an email on the days of your calendar where a birthday has been allocated, along with the information of the person related to the birthday and a set of randomized possible default messages which can be sent to congratulate these people.
 
-
-
-
-
+The app is not about caring less about the special ocassions by making sure you dont worry too much about them, it is about making sure you can remember to make the special ocassions special with the fast paced life we are all stuck in.
 
 
 

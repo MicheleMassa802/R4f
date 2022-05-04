@@ -1,0 +1,3 @@
+Review when its time to make cmdline reader and once the topic has been reviewed
+This is what main will call to initiate the program, think well about the structure and check the recommended design
+pattern.

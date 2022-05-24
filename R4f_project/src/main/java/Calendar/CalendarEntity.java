@@ -12,7 +12,6 @@ public class CalendarEntity {
     /**
      * Constructor for initializing the Calendar object with the given User ID (user is created before calendar)
      * 
-     * 
      * @param userId        the user ID of the user who this calendar is being created for
      */
     public CalendarEntity(String userId){
@@ -28,19 +27,30 @@ public class CalendarEntity {
         for (i = 1; i < 13; i++){
             int j;
             for (j = 1; j < 32; i++){
-                String date = Integer.toString(j) + "-" + Integer.toString(i);  // "<j>-<i>" = "dd-mm"
-                this.year.put( date, bdIdsForDate);
+                String date;
+                // fill in zeros
+                if (j < 10 && i < 10){
+                    date = "0" + Integer.toString(j) + "-" + "0" + Integer.toString(i);  // "<j>-<i>" = "dd-mm"
+                } else if (j < 10){
+                    date = "0" +  Integer.toString(j) + "-" + Integer.toString(i);
+                } else if (i < 10){
+                    date = Integer.toString(j) + "-" + "0" + Integer.toString(i);
+                } else {
+                    date = Integer.toString(j) + "-" + Integer.toString(i);
+                }
+
+                this.year.put(date, bdIdsForDate);
             }
         }
 
         // after its filled we manually remove the dates that dont exist
         // feb 30 and 31
-        this.year.remove("30-2");
-        this.year.remove("31-2");
+        this.year.remove("30-02");
+        this.year.remove("31-02");
         // apr, jun, sep, nov 31
-        this.year.remove("31-4");
-        this.year.remove("31-6");
-        this.year.remove("31-9");
+        this.year.remove("31-04");
+        this.year.remove("31-06");
+        this.year.remove("31-09");
         this.year.remove("31-11");
         // at this point, this.year has all valid days for a leap year with no birthday ids associated
 

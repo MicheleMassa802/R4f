@@ -1,1 +1,1 @@
-# Create the database tables here
+-- Create the database tables here

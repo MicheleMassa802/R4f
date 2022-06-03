@@ -1,3 +1,7 @@
+/**
+ * This class has now gone into maintenance state, as for the moment being, ids are going to be done through SQL and their auto
+ * incremented integer system
+ */
 package main.java.Helpers;
 
 public class EntityIdGenerator {

@@ -1,6 +1,10 @@
 package main.java;
 
 import main.java.Helpers.UseCaseMsgGenerator;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import main.java.Database.ExecuteQuery;
 import main.java.Helpers.UseCaseMsgGenerator;
 
@@ -9,10 +13,10 @@ public class Main {
         // main code here ...
 
 
-        /** random message generation using the msg generator helper */
+        /** random message generation using the msg generator helper (testing of row retrieval) */
 
-        UseCaseMsgGenerator msgGen = new UseCaseMsgGenerator();
-        System.out.println("Random message generated: " + msgGen.generateMessage());
+        //UseCaseMsgGenerator msgGen = new UseCaseMsgGenerator();
+        //System.out.println("Random message generated: " + msgGen.generateMessage());
 
 
         /** message insertion into msg table */
@@ -23,11 +27,31 @@ public class Main {
 
         // ExecuteQuery sql = new ExecuteQuery("msg_gen", "msg");
         
-        // // insert a single row
         // for (String msg : messageArray){
         //     System.out.println("Current message: " + msg);
         //     sql.executeInsert(msg);
         // }
+
+        
+        /** message replacement into msg table */
+
+        // ExecuteQuery sql = new ExecuteQuery("msg_gen", "");
+        // sql.executeUpdate("msg_id", "1", "msg", "Happy Birthday! Hope you get to enjoy your day to the fullest, and I wish you all the best :)");
+        
+
+        /** message retrieval column extraction test */
+        ExecuteQuery sql = new ExecuteQuery("msg_gen", "");
+        
+        ArrayList<String> data = new ArrayList<>();
+        try {
+            // retrieve all existing usernames
+            data = sql.executeRetrieve(null, null, 1, "msg_id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Id column: " + data.toString());
+
         
     }
 }

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ExecuteQuery {
+public class ExecuteQuery implements IDBConnectionPoint {
     // the object used to update the R4F database, allowing you to insert and get information from the database based on the selected
     // table and columns that you want to modify. You should only need one of these objects to update an entire table according to the
     // objects modified by the user, the columns attribute is to be filled and used only to execute an insertion
@@ -74,7 +74,7 @@ public class ExecuteQuery {
      * Function creating and executing a query to insert the information provided as string arguments into the object's table atrribute
      * @param values    the values to be inserted into the database provided in the same order as the columns attribute in this object's constructor
      */
-    public void executeInsert(String... values){
+    public void executeInsert(String... values) throws SQLException{
         // check appropriate + of values is being provided
         if(values.length != this.columns.size()){
             System.out.println("Insertion error into " + this.table + " table, number of columns and values don't match! Class: DBConnect.java");
@@ -123,15 +123,29 @@ public class ExecuteQuery {
      * @param idColumn  the name of the column to use to compare objectId to find the correct row
      * @param objectId  the id of the object that is to be retrieved (for identification of the correct row)
      * @param columnNum the number of columns to retrieve from the table, to be put in the resulting row
+     * @param colToGet  the specific column to SELECT. If null select all columns, indicating we are retrieving a row;
+     *                  if not null, we are selecting the entirety of a column.
      * @return          an arrayList of strings containing the information from all columns of the desired table
      */
-    public ArrayList<String> executeRetrieve(String idColumn, String objectId, int columnNum){
+    public ArrayList<String> executeRetrieve(String idColumn, String objectId, int columnNum, String colToGet) throws SQLException{
         
         StringBuilder query = new StringBuilder();
         ArrayList<String> row = new ArrayList<>();
 
         // setup query to retrieve everything from the desired table
-        query.append("SELECT * FROM ").append(this.table).append(" WHERE ").append(idColumn).append(" = ").append(objectId);
+        query.append("SELECT ");
+        if (colToGet != null){
+            query.append(colToGet);
+        } else {
+            query.append("*");
+        }
+        query.append(" FROM ").append(this.table);
+        
+        if (idColumn != null && objectId != null){
+            // if row identifiers are not null, append WHERE clause
+            query.append(" WHERE ").append(idColumn).append(" = ").append(objectId);
+        }
+        
         
         // connect to db
         try {
@@ -171,14 +185,17 @@ public class ExecuteQuery {
 
     /**
      * Function in charge of inserting and replacing information from the setup table and column attributes in the database
-     * @param idColumn  the name of the column at which we are to make an information replacement
-     * @param objectId  the id of the object that is to have information replaced in the database
+     * @param idColumn          the name of the identifying column
+     * @param objectId          the id of the object that is to have information replaced in the database (row identifier)
+     * @param columnToUpdate    the name of the column at which we are inserting the new value
+     * @param newValue          the value to insert at the columnToUpdate column in the table
      */
-    public void executeReplace(String idColumn, String objectId){
+    public void executeUpdate(String idColumn, String objectId, String columnToUpdate, String newValue) throws SQLException{
 
         StringBuilder query = new StringBuilder();
         // setup for a single cell replacement
-        query.append("INSERT INTO ").append(this.table).append(" (").append(idColumn).append(") VALUES (?)");
+        query.append("UPDATE ").append(this.table).append(" SET ").append(columnToUpdate).append(" = '");
+        query.append(newValue).append("' WHERE ").append(idColumn).append(" = ").append(objectId);
         
         // connect to db
         try {
@@ -188,7 +205,7 @@ public class ExecuteQuery {
             // setup statement with its parameters (values)
             PreparedStatement statement = connection.prepareStatement(query.toString());
             
-            statement.setString(1, objectId);
+            //statement.setString(1, objectId);
 
             System.out.println("Statement to execute: " + statement.toString());
 
@@ -205,7 +222,7 @@ public class ExecuteQuery {
             connection.close();
 
         } catch (SQLException e) {
-            System.out.println("Connection error in the database! Class: DBConnect.java");
+            System.out.println("Exception raised, error in the database! Class: DBConnect.java");
             e.printStackTrace();
         }
     }

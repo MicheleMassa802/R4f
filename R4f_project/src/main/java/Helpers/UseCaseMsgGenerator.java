@@ -1,5 +1,6 @@
 package main.java.Helpers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 import main.java.Database.ExecuteQuery;
@@ -20,12 +21,16 @@ public class UseCaseMsgGenerator {
         // pull all default messages from the database table and store them inside the messages arraylist
         this.messages = new ArrayList<>();
         
-        String msg;
+        String msg = "";
         int i;
         for (i = 1; i <= NUM_OF_ROWS; i++){
             // get the single column using index 1 from msg table (index 0: msg_id, index 1: msg)
             // compare based on msg_id column to the current i, extracting 2 columns
-            msg = sql.executeRetrieve("msg_id", Integer.toString(i), 2).get(1);
+            try {
+                msg = sql.executeRetrieve("msg_id", Integer.toString(i), 2, null).get(1);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             this.messages.add(msg);
             System.out.println("Current message being pulled: " + msg);
         }

@@ -11,7 +11,7 @@ public class CreateUserUseCase {
 
     // db constants (table name and columns)
     private final String DB_TABLE = "users";
-    private final String ID = "user_id";
+    // private final String ID = "user_id";
     private final String USERNAME = "username";
     private final String PASSWORD = "password";
     private final String NAME = "name";

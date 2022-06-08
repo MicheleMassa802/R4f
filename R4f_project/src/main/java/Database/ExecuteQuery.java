@@ -143,7 +143,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
         
         if (idColumn != null && objectId != null){
             // if row identifiers are not null, append WHERE clause
-            query.append(" WHERE ").append(idColumn).append(" = ").append(objectId);
+            query.append(" WHERE ").append(idColumn).append(" = '").append(objectId).append("'");
         }
         
         

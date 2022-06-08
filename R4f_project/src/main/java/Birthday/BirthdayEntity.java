@@ -17,19 +17,19 @@ public class BirthdayEntity {
      * Constructor for initializing the Birthday object through the information provided through account linked
      * surveys (SurveyDS object).
      * 
-     * @param day,month,year        representing the date of birth of a person
-     * @param name                  real name of person
-     * @param lastname              real last name of person
-     * @param insta,twitter,snap    strings containning social media account names to link to user
+     * @param day,month,year            representing the date of birth of a person
+     * @param name                      real name of person
+     * @param lastname                  real last name of person
+     * @param insta,twitter,discord     strings containning social media account names to link to user
      */
     public BirthdayEntity(int day, int month, int year, String name, String lastname,
-        String insta, String twitter, String snap){
+        String insta, String twitter, String discord){
             this.name = name;
             this.lastname = lastname;
             this.socialMediaLinks = new HashMap<>();
             this.socialMediaLinks.put("Instagram", insta);
             this.socialMediaLinks.put("Twitter", twitter);
-            this.socialMediaLinks.put("SnapChat", snap);
+            this.socialMediaLinks.put("Discord", discord);
             this.birthday = LocalDate.of(year, month, day);
             // id String created alongside this object
     }

@@ -40,6 +40,7 @@ public class LoginUserUseCase {
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Username provided not valid, please enter another one");
+                return false;
             }
 
             // create user entity instance and store it as an attribute

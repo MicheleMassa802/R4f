@@ -1,5 +1,6 @@
 package main.java;
 
+import main.java.Helpers.UseCaseAccessSML;
 import main.java.Helpers.UseCaseMsgGenerator;
 
 import java.sql.SQLException;
@@ -40,18 +41,23 @@ public class Main {
         
 
         /** message retrieval column extraction test */
-        ExecuteQuery sql = new ExecuteQuery("msg_gen", "");
+        // ExecuteQuery sql = new ExecuteQuery("msg_gen", "");
         
-        ArrayList<String> data = new ArrayList<>();
-        try {
-            // retrieve all existing usernames
-            data = sql.executeRetrieve(null, null, 1, "msg_id");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // ArrayList<String> data = new ArrayList<>();
+        // try {
+        //     // retrieve all existing usernames
+        //     data = sql.executeRetrieve(null, null, 1, "msg_id");
+        // } catch (SQLException e) {
+        //     e.printStackTrace();
+        // }
 
-        System.out.println("Id column: " + data.toString());
+        // System.out.println("Id column: " + data.toString());
 
+
+        /** Testing accessSML */
+        UseCaseAccessSML smlAccess = new UseCaseAccessSML();
+        String id = smlAccess.insertLinks("poop.instagram.com", "poop.twitter.com", "poop.discord.com");
+        smlAccess.getLinks(id);
         
     }
 }

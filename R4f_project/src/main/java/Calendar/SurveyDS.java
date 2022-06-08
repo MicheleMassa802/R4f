@@ -16,7 +16,7 @@ public class SurveyDS {
         "2:  What is your birthday? [dd-mm-yyyy]",
         "3:  What is your instagram username?",
         "4:  What is your twitter username?",
-        "5:  What is your snapchat username?"
+        "5:  What is your discord username?"
     };
     
     /**

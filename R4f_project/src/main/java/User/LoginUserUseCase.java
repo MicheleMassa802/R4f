@@ -30,17 +30,21 @@ public class LoginUserUseCase {
         this.dbConnection = new ExecuteQuery(DB_TABLE, "");  // no need to insert so we leave the columns attribute empty
     }
 
-    public boolean login(){
+
+    /**
+     * Execute the login action for a user using their username and password
+     * @return  the user_id related to this username (which is then used to fetch the related information)
+     */
+    public String login(){
         if (this.checkPassword()){
             // create user entity and validate login
             ArrayList<String> data = new ArrayList<>();
             try {
                 // retrieve the 10 columns (in order) from the column with username this.username
-                data = dbConnection.executeRetrieve(USERNAME, this.username, 9, null);
+                data = dbConnection.executeRetrieve(USERNAME, this.username, 10, null);
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Username provided not valid, please enter another one");
-                return false;
             }
 
             // create user entity instance and store it as an attribute
@@ -48,11 +52,11 @@ public class LoginUserUseCase {
                 Integer.parseInt(data.get(6)));
             
             System.out.println("Login Successful. Welcome " + this.username);
-            return true;
+            return data.get(0);
         }
         // else
         System.out.println("Credentials didn't match, please re-enter your username and password");
-        return false;
+        return null;
 
     }
 

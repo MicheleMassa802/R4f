@@ -7,7 +7,7 @@ import main.java.Database.ExecuteQuery;
 import main.java.Database.IDBConnectionPoint;
 import main.java.Helpers.UseCaseAccessSML;
 
-public class CreateFetchBirthdayUseCase {
+public class CreateBirthdayUseCase {
     // use case for setup and creation of a birthday object
 
     // db constants (table name and columns)
@@ -19,10 +19,8 @@ public class CreateFetchBirthdayUseCase {
     private final String SML_ID = "sml_id";
 
     private IDBConnectionPoint dbConnection;
-    // private UseCaseAccessSML smlConnection;  // used to access social media links table
     private String smlId;
     public BirthdayEntity bdInstance;
-
 
 
     /**
@@ -30,7 +28,7 @@ public class CreateFetchBirthdayUseCase {
      * @param smlId     the id used to identify corresponding links in the sml_table, this we get after inserting a row with the function
      *                  insertLinks from the class UseCaseAccessSML.java
      */
-    public CreateFetchBirthdayUseCase(String smlId){
+    public CreateBirthdayUseCase(String smlId){
         // table name and columns where we'll insert info
         this.dbConnection = new ExecuteQuery(DB_TABLE, DATE, NAME, LAST_NAME, SML_ID);
         this.smlId = smlId;
@@ -50,8 +48,8 @@ public class CreateFetchBirthdayUseCase {
     public String runBdCreation(String bd, String name, String lName){
         String result = "";
         try {
-            dbConnection.executeInsert(bd, name, lName, this.smlId);
-            result = dbConnection.executeRetrieve(SML_ID, this.smlId, 1, null).get(0);
+            this.dbConnection.executeInsert(bd, name, lName, this.smlId);
+            result = this.dbConnection.executeRetrieve(SML_ID, this.smlId, 1, null).get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,7 +69,7 @@ public class CreateFetchBirthdayUseCase {
         
         // fetch birthday object info
         try {
-            dbConnection.executeRetrieve(ID, birthdayId, 5, null);
+            this.dbConnection.executeRetrieve(ID, birthdayId, 5, null);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Birthday Id not found, please enter correct id");

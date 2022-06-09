@@ -1,12 +1,13 @@
 package main.java.Calendar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CalendarEntity {
     // the actual calendar object
     private String calendarId;
     private final String userId;
-    private HashMap<String, StringBuilder> year;  // day string to string builder of birthday ids separated by commas
+    private HashMap<String, ArrayList<String>> year;  // day string to string builder of birthday ids separated by commas
 
 
     /**
@@ -20,8 +21,8 @@ public class CalendarEntity {
         // initiate year calendar with all keys set to empty strings
         this.year = new HashMap<>();
 
-        StringBuilder bdIdsForDate = new StringBuilder();
-        bdIdsForDate.append("");  // set to empty string
+        ArrayList<String> bdIdsForDate = new ArrayList<>();  // no bd Ids when created
+        
         // we fill each month with 31 days (from month 1 to 12)
         int i;
         for (i = 1; i < 13; i++){
@@ -58,10 +59,22 @@ public class CalendarEntity {
 
     }
 
+    /**
+     * Insert into the year attribute a birthday id into the corresponding date
+     * @param date  the key in the year hashmap into which we insert the value bdId
+     * @param bdId  the corresponding value to insert into the arraylist at the correct date in the year hashmap
+     */
+    public void insertBdId(String date, String bdId){
+        this.year.get(date).add(bdId);
+    }
+
     // no overwrite of toString needed
 
     // setters and getters
     public String getCalendarId(){return this.calendarId;}
     public void setCalendarId(String calId){this.calendarId = calId;}
+    public HashMap<String, ArrayList<String>> getYearCal(){return this.year;}
+    //public void setYearCal(HashMap<String, ArrayList<String>> yearCal){this.year = yearCal;}
+    
 
 }

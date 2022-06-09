@@ -30,7 +30,7 @@ public class UseCaseAccessSML {
      */
     public UseCaseAccessSML(){
         this.dbConnection = new ExecuteQuery(DB_TABLE, ID, TYPE, LINK);
-        //this.dbConnection2 = new ExecuteQuery(DB_TABLE, ID, TYPE, LINK);
+        
         String countStr = "1001";
         try {
             countStr = this.dbConnection.executeRetrieve(ID, "0", 3, null).get(2);
@@ -51,37 +51,23 @@ public class UseCaseAccessSML {
      * @return      a string representing the sml_id to access these links through
      */
     public String insertLinks(String ig, String twt, String dsc){
-
+        String currSmlId = Integer.toString(idCount);
         // insert instagram link as the first one
         try {
-            this.dbConnection.executeInsert(Integer.toString(idCount), IG, ig);
-            idCount += 1;
+            this.dbConnection.executeInsert(currSmlId, IG, ig);
+            this.dbConnection.executeInsert(currSmlId, TWT, twt);
+            this.dbConnection.executeInsert(currSmlId, DSC, dsc);
+            this.idCount += 1;
             // update idCount in table
             this.dbConnection.executeUpdate(ID, "0", LINK, Integer.toString(idCount));
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        // fetch the sml_id of this insertion
-        String resultId = "";
-        try {
-            resultId = this.dbConnection.executeRetrieve(LINK, ig, 1, null).get(0);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        // insert the two other rows under the same id
-        try {
-            this.dbConnection.executeInsert(resultId, TWT, twt);
-            this.dbConnection.executeInsert(resultId, DSC, dsc);
         } catch (SQLException e) {
             System.out.println("Insertion unsucessful, please try again. Class: UseCaseAccessSML.java");
             e.printStackTrace();
         }
 
-        System.out.println("Insertion Successful, sml_id: " + resultId);
-        return resultId;
+        System.out.println("Insertion Successful, sml_id: " + currSmlId);
+        return currSmlId;
     }
 
 

@@ -1,1 +1,3 @@
-Review when its time to make presenters and once the topic has been reviewed
+Review when its time to make presenters and once the topic has been reviewed.
+The controllers will allow for the usage of the entities to execute any use case from the main loop, while the presenters are there to dictate how to display these entities to the user, the inputs they need to fill, etc...
+Users are prompted for the required information for an action executed by a controller before the action of the controller is called, the tree in the main loop handles this decision making and information storage

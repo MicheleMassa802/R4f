@@ -54,4 +54,6 @@ public class UserEntity {
     public String getCalendarId(){return this.calendarId;}
     public void setCalendarId(String calendarId){this.calendarId = calendarId;}
 
+    public String getUsername(){return this.username;}
+
 }

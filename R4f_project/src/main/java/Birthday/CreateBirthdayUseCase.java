@@ -19,19 +19,15 @@ public class CreateBirthdayUseCase {
     private final String SML_ID = "sml_id";
 
     private IDBConnectionPoint dbConnection;
-    private String smlId;
     public BirthdayEntity bdInstance;
 
 
     /**
      * Constructor for birthday object creation use case, in charge of initiating the link to the database connection class to store bd info
-     * @param smlId     the id used to identify corresponding links in the sml_table, this we get after inserting a row with the function
-     *                  insertLinks from the class UseCaseAccessSML.java
      */
-    public CreateBirthdayUseCase(String smlId){
+    public CreateBirthdayUseCase(){
         // table name and columns where we'll insert info
         this.dbConnection = new ExecuteQuery(DB_TABLE, DATE, NAME, LAST_NAME, SML_ID);
-        this.smlId = smlId;
     }
 
 
@@ -41,15 +37,13 @@ public class CreateBirthdayUseCase {
      * @param bd        the string in format yyyy-mm-dd representing the date of birth of a user
      * @param name      the name used to refer to the person with bd birthday
      * @param lName     the last name used to refer to the person with bd birthday
-     * @param smlId     the id used to identify corresponding links in the sml_table, this we get after inserting a row with the function
-     *                  insertLinks from the class UseCaseAccessSML.java
      * @return          a string representing the id of the bd object in the table
      */
-    public String runBdCreation(String bd, String name, String lName){
+    public String runBdCreation(String bd, String name, String lName, String smlId){
         String result = "";
         try {
-            this.dbConnection.executeInsert(bd, name, lName, this.smlId);
-            result = this.dbConnection.executeRetrieve(SML_ID, this.smlId, 1, null).get(0);
+            this.dbConnection.executeInsert(bd, name, lName, smlId);
+            result = this.dbConnection.executeRetrieve(SML_ID, smlId, 1, null).get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,15 +63,16 @@ public class CreateBirthdayUseCase {
         
         // fetch birthday object info
         try {
-            this.dbConnection.executeRetrieve(ID, birthdayId, 5, null);
+            data = this.dbConnection.executeRetrieve(ID, birthdayId, 5, null);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Birthday Id not found, please enter correct id");
         }
+        String smlId = data.get(4);
 
         // fetch SML link information using smlConnection to fill in birthday object information
         UseCaseAccessSML smlAccess = new UseCaseAccessSML();
-        ArrayList<String> links = smlAccess.getLinks(this.smlId);  
+        ArrayList<String> links = smlAccess.getLinks(smlId);  
 
         String[] dateArray = data.get(1).split("-");  // index 0 = year, 1 = month, 2 = day
 

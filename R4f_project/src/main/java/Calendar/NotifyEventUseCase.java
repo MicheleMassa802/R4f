@@ -17,30 +17,28 @@ public class NotifyEventUseCase {
     private final String BD_IDS = "birthday_ids";
 
     private IDBConnectionPoint dbConnection;
-    private String calendarId;
 
 
     /**
      * Constructor for the calendar use case in charge of notifying the existence of an event
-     * @param calId     the calendar id used to identify the correct object in the calendar table to monitor
      */
-    public NotifyEventUseCase(String calId){
-        this.calendarId = calId;
+    public NotifyEventUseCase(){
         this.dbConnection = new ExecuteQuery(DB_TABLE, "");  // this use case wont insert columns so its left blank
     }
 
 
     /**
      * Return the bdIds the user should be notified of or null
-     * @param date  date to check for birthdays (within controller, this is set as today's date using LocalDate.now())
-     * @return      the arraylist of bdIds user should be notified of
+     * @param date          date to check for birthdays (within controller, this is set as today's date using LocalDate.now())
+     * @param calendarId    the calendar id used to identify the correct object in the calendar table to monitor
+     * @return              the arraylist of bdIds user should be notified of
      */
-    public ArrayList<String> notifyBdsPresent(String date){
+    public ArrayList<String> notifyBdsPresent(String date, String calendarId){
         
         String bdIdsString = "";
         // fetch specific row
         try {
-            bdIdsString = this.dbConnection.executeRetrieve2(C_ID, this.calendarId, DATE, date, 1, BD_IDS).get(0);
+            bdIdsString = this.dbConnection.executeRetrieve2(C_ID, calendarId, DATE, date, 1, BD_IDS).get(0);
         } catch (SQLException e) {
             System.out.println("Invalid date or calendar id entered, please re-enter the information and try again");
             e.printStackTrace();
@@ -52,7 +50,7 @@ public class NotifyEventUseCase {
         
         // check trimmed string length is not 0
         if (bdIdsString.length() == 0){
-            return null;  // empty arraylist case
+            return new ArrayList<>();  // empty arraylist case
         }
 
         // else, extract and return those bdIds

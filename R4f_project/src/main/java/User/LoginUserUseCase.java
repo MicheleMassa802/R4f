@@ -118,4 +118,9 @@ public class LoginUserUseCase {
         }
     }
 
+
+    public void createUserFromId(){
+        
+    }
+
 }

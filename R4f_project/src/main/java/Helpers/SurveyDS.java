@@ -3,19 +3,22 @@ package main.java.Helpers;
 import java.util.HashMap;
 
 public class SurveyDS {
-    // the data structure for the survey entity to be filled by users
+    // the data structure for the survey entity filled by users through the survey page
 
     // this object is always temporary and not stored in the databases beyond just its
-    // information used to fill birthday objects
+    // information used to fill birthday objects, which are built from the main loop using the
+    // birthday controller
 
     private String calendarId;  // calendar Id used to have bd objects refer to the correct calendar
     private HashMap<String, String> questions;  // question key : answer value
     private final String[] qConstants = {
-        "1:  What is your full name? [firstname lastname]",
-        "2:  What is your birthday? [dd-mm-yyyy]",
-        "3:  What is your instagram username?",
-        "4:  What is your twitter username?",
-        "5:  What is your discord username?"
+        "0: What is the user ID of the person inviting you to fill this survey?",
+        "1: What is your name?",
+        "2: What is your last name?",
+        "3: What is your birthday? [dd-mm-yyyy]",
+        "4: What is your instagram username?",
+        "5: What is your twitter username?",
+        "6: What is your discord username?"
     };
     
     /**
@@ -61,6 +64,7 @@ public class SurveyDS {
         }
         return answer;
     }
+
 
     public String getCalendarId(){return this.calendarId;}
 

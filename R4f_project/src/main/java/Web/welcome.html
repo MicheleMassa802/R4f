@@ -3,8 +3,165 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Welcome Page</title>
+	<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<!-- Header Image -->
+	<div class="header-img">
+		<img src="Images/header.png"> 
+	</div>
+
+	<div class="container">
+		<div class="welcome-header">
+			<h1>Welcome to R4F, your best friend for remembering the special days!</h1>
+		</div>
+
+		<div class="buttons-content-wrapper"> <!-- 3 main left grid buttons -->  
+
+			<div class="button-content-wrapper">
+				<div class="button-img-background" style="background-image:url(Images/logos/loginLogo.png)"></div>
+
+				<div class="img-btn-wrapper">
+					<button> LOGIN </button>
+				</div>
+			</div>
+
+			<div class="button-content-wrapper">
+				<div class="button-img-background" style="background-image:url(Images/logos/registerLogo.png)"></div>
+
+				<div class="img-btn-wrapper">
+					<button> REGISTER </button>
+				</div>
+			</div>
+
+			<div class="button-content-wrapper">
+				<div class="button-img-background" style="background-image:url(Images/logos/aboutUsLogo.png)"></div>
+
+				<div class="img-btn-wrapper">
+					<a href="about.html">
+						<button> ABOUT US </button>
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- LOGIN -->
+		<div class="left-form-content-wrapper">
+			<form action="" method="GET">
+				<div class="left-questions-container">
+					<div class="q-username">
+						<label> 
+							Username:
+							<input type="text" name="username" id="username" required>  
+						</label>
+					</div>
+
+					<div class="q-email">
+						<label> 
+							Email:
+							<input type="email" name="email" id="email" required>  
+						</label>
+					</div>
+
+					<div class="q-password">
+						<label> 
+							Password:
+							<input type="password" name="password" id="password" required>  
+						</label>
+					</div>
+
+					<div class="q-firstname">
+						<label> 
+							First Name:
+							<input type="text" name="name" id="name" required>  
+						</label>
+					</div>
+
+					<div class="q-last-name">
+						<label> 
+							Last Name:
+							<input type="text" name="last-name" id="last-name" required>  
+						</label>
+					</div>
+
+					<div class="q-birthday">
+						<label> 
+							Birthday:
+							<input type="date" name="birthday" id="birthday" required>  
+						</label>
+					</div>
+
+					<div class="q-links">
+
+						<label> 
+							Instagram @:
+							<input type="text" name="ig" id="ig">  
+						</label>
+
+						<label> 
+							Twitter @:
+							<input type="text" name="twt" id="twt">  
+						</label>
+
+						<label> 
+							Discord Username:
+							<input type="text" name="dsc" id="dsc">  
+						</label>
+					</div>
+
+					<div class="q-noti-type">
+						<label> 
+							How many daily notifications would you like to receive for each birthday?
+							<input type="number" name="noti-type" id="noti-type" min="1" max="3" required>  
+						</label>
+					</div>
+					
+					<div class="submit-reg-button">
+						<button onclick=""> Submit Registration Form </button>
+					</div>
+					
+
+				</div>
+			</form>
+		</div>
+
+		<!-- ACOOUNT CREATION -->
+		<div class="right-form-content-wrapper">
+			<form action="" method="GET">
+				<div class="right-questions-container">
+					
+					<div class="q-username">
+						<label> 
+							Username:
+							<input type="text" name="username" id="username" required>  
+						</label>
+					</div>
+
+					<div class="q-password">
+						<label> 
+							Password:
+							<input type="password" name="password" id="password" required>  
+						</label>
+					</div>
+
+					<div class="q-first-time">
+						<label> 
+							Is this your first time ever logging in? [check if true]
+							<input type="checkbox" name="first-time" id="first-time" value="True" required>  
+						</label>
+					</div>
+
+					<div class="submit-login-button">
+						<button onclick=""> Submit Login Form </button>
+					</div>
+					
+				</div>
+			</form>
+		</div>
+
+	</div>
 
 </body>
 </html>

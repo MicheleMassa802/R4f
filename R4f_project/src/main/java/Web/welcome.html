@@ -4,7 +4,8 @@
 	<meta charset="utf-8" />
 	<title>Welcome Page</title>
 	<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="welcomeStyles.css">
+	<link rel="stylesheet" href="globalStyles.css">
 </head>
 <body>
 	<!-- Header Image -->
@@ -29,7 +30,7 @@
 
 					<div class="img-text-wrapper">
 						<div class="logo-wrapper">
-							<img src="Images/miniLogos/loginLogo.png">  <!-- Make form visibility from 0 to 100 -->
+							<img id="button-1" src="Images/miniLogos/loginLogo.png"> 
 						</div>
 					</div>
 				</div>
@@ -39,7 +40,7 @@
 
 					<div class="img-text-wrapper">
 						<div class="logo-wrapper">
-							<img src="Images/miniLogos/registerLogo.png">  <!-- Make form visibility from 0 to 100 -->
+							<img id="button-2" src="Images/miniLogos/registerLogo.png"> 
 						</div>
 					</div>
 				</div>
@@ -49,151 +50,155 @@
 
 					<div class="img-text-wrapper">
 						<div class="logo-wrapper">
-							<img src="Images/miniLogos/aboutUsLogo.png">  <!-- Make form visibility from 0 to 100 -->
+							<a href="aboutNoNav.html">
+								<img src="Images/miniLogos/aboutUsLogo.png">
+							</a>  
 						</div>
 					</div>
 				</div>
 
 			</div>
 
-			<!-- LOGIN -->
-			<div class="left-form-content-wrapper">
-				<form action="" method="GET">
-					<div class="left-questions-container">
-						<div class="question">
-							<label> 
-								Username:
-								<div class="survey-answer-box">
-									<input type="text" name="username" id="username" required> 
-								</div> 
-							</label>
+			<div class="forms-content-wrapper">
+				<!-- LOGIN -->
+				<div class="left-form-content-wrapper">
+					<form action="" method="GET">
+						<div class="left-questions-container">
+							<div class="question">
+								<label> 
+									Username:
+									<div class="survey-answer-box">
+										<input type="text" name="username" id="username" required> 
+									</div> 
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									Email:
+									<div class="survey-answer-box">
+										<input type="email" name="email" id="email" required>
+									</div>
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									Password:
+									<div class="survey-answer-box">
+										<input type="password" name="password" id="password" required>
+									</div>	
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									First Name:
+									<div class="survey-answer-box">
+										<input type="text" name="name" id="name" required>
+									</div> 
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									Last Name:
+									<div class="survey-answer-box">
+										<input type="text" name="last-name" id="last-name" required>
+									</div>  
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									Birthday:
+									<div class="survey-answer-box">
+										<input type="date" name="birthday" id="birthday" required>
+									</div>  
+								</label>
+							</div>
+
+							<div class="question">
+
+								<label> 
+									Instagram @:
+									<div class="survey-answer-box">
+										<input type="text" name="ig" id="ig">
+									</div>
+								</label>
+
+								<label> 
+									Twitter @:
+									<div class="survey-answer-box">
+										<input type="text" name="twt" id="twt">
+									</div>  
+								</label>
+
+								<label> 
+									Discord Username:
+									<div class="survey-answer-box">
+										<input type="text" name="dsc" id="dsc">
+									</div>
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									How many times would you like to be notified of a birthday?
+									<div class="survey-answer-box">
+										<input type="number" name="noti-type" id="noti-type" min="1" max="3" required>
+									</div> 
+								</label>
+							</div>
+							
+							<div class="submit-reg-button">
+								<button onclick=""> Submit Registration Form </button>
+							</div>
+							
+
 						</div>
+					</form>
+				</div>
 
-						<div class="question">
-							<label> 
-								Email:
-								<div class="survey-answer-box">
-									<input type="email" name="email" id="email" required>
-								</div>
-							</label>
+				<!-- ACOOUNT CREATION -->
+				<div class="right-form-content-wrapper">
+					<form action="" method="GET">
+						<div class="right-questions-container">
+							
+							<div class="question">
+								<label> 
+									Username:
+									<div class="survey-answer-box">
+										<input type="text" name="username" id="username" required>
+									</div> 
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									Password:
+									<div class="survey-answer-box">
+										<input type="password" name="password" id="password" required>
+									</div> 
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									Is this your first time ever logging in? [check if true]
+									<div class="survey-answer-box">
+										<input type="checkbox" name="first-time" id="first-time" value="True" required>
+									</div>
+								</label>
+							</div>
+
+							<div class="submit-login-button">
+								<button onclick=""> Submit Login Form </button>
+							</div>
+							
 						</div>
-
-						<div class="question">
-							<label> 
-								Password:
-								<div class="survey-answer-box">
-									<input type="password" name="password" id="password" required>
-								</div>	
-							</label>
-						</div>
-
-						<div class="question">
-							<label> 
-								First Name:
-								<div class="survey-answer-box">
-									<input type="text" name="name" id="name" required>
-								</div> 
-							</label>
-						</div>
-
-						<div class="question">
-							<label> 
-								Last Name:
-								<div class="survey-answer-box">
-									<input type="text" name="last-name" id="last-name" required>
-								</div>  
-							</label>
-						</div>
-
-						<div class="question">
-							<label> 
-								Birthday:
-								<div class="survey-answer-box">
-									<input type="date" name="birthday" id="birthday" required>
-								</div>  
-							</label>
-						</div>
-
-						<div class="question">
-
-							<label> 
-								Instagram @:
-								<div class="survey-answer-box">
-									<input type="text" name="ig" id="ig">
-								</div>
-							</label>
-
-							<label> 
-								Twitter @:
-								<div class="survey-answer-box">
-									<input type="text" name="twt" id="twt">
-								</div>  
-							</label>
-
-							<label> 
-								Discord Username:
-								<div class="survey-answer-box">
-									<input type="text" name="dsc" id="dsc">
-								</div>
-							</label>
-						</div>
-
-						<div class="question">
-							<label> 
-								How many daily notifications would you like to receive for each birthday?
-								<div class="survey-answer-box">
-									<input type="number" name="noti-type" id="noti-type" min="1" max="3" required>
-								</div> 
-							</label>
-						</div>
-						
-						<div class="submit-reg-button">
-							<button onclick=""> Submit Registration Form </button>
-						</div>
-						
-
-					</div>
-				</form>
-			</div>
-
-			<!-- ACOOUNT CREATION -->
-			<div class="right-form-content-wrapper">
-				<form action="" method="GET">
-					<div class="right-questions-container">
-						
-						<div class="question">
-							<label> 
-								Username:
-								<div class="survey-answer-box">
-									<input type="text" name="username" id="username" required>
-								</div> 
-							</label>
-						</div>
-
-						<div class="question">
-							<label> 
-								Password:
-								<div class="survey-answer-box">
-									<input type="password" name="password" id="password" required>
-								</div> 
-							</label>
-						</div>
-
-						<div class="question">
-							<label> 
-								Is this your first time ever logging in? [check if true]
-								<div class="survey-answer-box">
-									<input type="checkbox" name="first-time" id="first-time" value="True" required>
-								</div>
-							</label>
-						</div>
-
-						<div class="submit-login-button">
-							<button onclick=""> Submit Login Form </button>
-						</div>
-						
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 
@@ -207,4 +212,49 @@
 	</footer>
 
 </body>
+
+<!-- js code starts here -->
+<script>
+	
+	// button effects
+    const contentItems = document.querySelectorAll('.button-content-wrapper');  // select all images
+	
+    contentItems.forEach(contentItem => {
+        // for loop over each image (content item)
+        contentItem.addEventListener('mouseover', () => {
+            // every time you hover over one of the images, perform the following
+            // access first child node in button-content-wrapper = button-img-background, and add img-darken css
+            contentItem.childNodes[1].classList.add('img-darken'); 
+            contentItem.childNodes[1].classList.remove('img-lighten');
+
+        })
+
+        contentItem.addEventListener('mouseout', () => {
+            // every time you hover out of one of the images, perform the following
+            // access first child node in content-item-wrapper = content-img-background, and add img-lighten css
+            contentItem.childNodes[1].classList.add('img-lighten');
+            contentItem.childNodes[1].classList.remove('img-darken'); 
+        })
+
+    })
+	
+	
+	// appearing of forms
+	var button1 = document.getElementById('button-1'); // login
+	var button2 = document.getElementById('button-2'); // sign-up
+	var loginContent = document.getElementsByClassName('left-form-content-wrapper');  // login from
+	var regContent = document.getElementsByClassName('right-form-content-wrapper');  // registration from
+
+	button1.onclick = function(){
+		loginContent[0].style.opacity=100;
+		regContent[0].style.opacity=0;
+	
+	}
+	button2.onclick = function(){
+		regContent[0].style.opacity=100;
+		loginContent[0].style.opacity=0;
+	}
+	
+</script>
+
 </html>

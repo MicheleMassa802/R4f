@@ -60,10 +60,50 @@
 			</div>
 
 			<div class="forms-content-wrapper">
-				<!-- LOGIN -->
+				<!-- Login -->
 				<div class="left-form-content-wrapper">
 					<form action="" method="GET">
 						<div class="left-questions-container">
+							
+							<div class="question">
+								<label> 
+									Username:
+									<div class="survey-answer-box">
+										<input type="text" name="username" id="username" required>
+									</div> 
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									Password:
+									<div class="survey-answer-box">
+										<input type="password" name="password" id="password" required>
+									</div> 
+								</label>
+							</div>
+
+							<div class="question">
+								<label> 
+									Is this your first time ever logging in? [check if true]
+									<div class="survey-answer-box">
+										<input type="checkbox" name="first-time" id="first-time" value="True" required>
+									</div>
+								</label>
+							</div>
+
+							<div class="submit-login-button">
+								<button onclick=""> Submit Login Form </button>
+							</div>
+							
+						</div>
+					</form>
+				</div>
+
+				<!-- Register -->
+				<div class="right-form-content-wrapper">
+					<form action="" method="GET">
+						<div class="right-questions-container">
 							<div class="question">
 								<label> 
 									Username:
@@ -156,46 +196,6 @@
 							</div>
 							
 
-						</div>
-					</form>
-				</div>
-
-				<!-- ACOOUNT CREATION -->
-				<div class="right-form-content-wrapper">
-					<form action="" method="GET">
-						<div class="right-questions-container">
-							
-							<div class="question">
-								<label> 
-									Username:
-									<div class="survey-answer-box">
-										<input type="text" name="username" id="username" required>
-									</div> 
-								</label>
-							</div>
-
-							<div class="question">
-								<label> 
-									Password:
-									<div class="survey-answer-box">
-										<input type="password" name="password" id="password" required>
-									</div> 
-								</label>
-							</div>
-
-							<div class="question">
-								<label> 
-									Is this your first time ever logging in? [check if true]
-									<div class="survey-answer-box">
-										<input type="checkbox" name="first-time" id="first-time" value="True" required>
-									</div>
-								</label>
-							</div>
-
-							<div class="submit-login-button">
-								<button onclick=""> Submit Login Form </button>
-							</div>
-							
 						</div>
 					</form>
 				</div>

@@ -36,12 +36,11 @@ public class BirthdayController {
 
     /**
      * Feeds birthday creation information to user case to execute creation steps
-     * @param year,month,day    the birthday date
-     * @param name              name of user
-     * @param lastName          last name of user
+     * @param bd        the birthday date in yyyy-mm-dd
+     * @param name      name of user
+     * @param lastName  last name of user
      */
-    public void executeCreateBirthday(int year, int month, int day, String name, String lastName){
-        String bd = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day);
+    public void executeCreateBirthday(String bd, String name, String lastName){
         this.bdId = this.bdCreator.runBdCreation(bd, name, lastName, this.smlId);
 
 

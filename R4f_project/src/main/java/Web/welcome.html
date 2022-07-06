@@ -87,13 +87,13 @@
 								<label> 
 									Is this your first time ever logging in? [check if true]
 									<div class="survey-answer-box">
-										<input type="checkbox" name="first-time" id="first-time" value="True" required>
+										False <input type="range" name="first-time" id="first-time" min="0" max="1" value="true" required> True
 									</div>
 								</label>
 							</div>
 
 							<div class="submit-login-button">
-								<button onclick=""> Submit Login Form </button>
+								<button onclick="loginFunc()"> Submit Login Form </button>
 							</div>
 							
 						</div>
@@ -108,7 +108,7 @@
 								<label> 
 									Username:
 									<div class="survey-answer-box">
-										<input type="text" name="username" id="username" required> 
+										<input type="text" name="username2" id="username2" required> 
 									</div> 
 								</label>
 							</div>
@@ -126,7 +126,7 @@
 								<label> 
 									Password:
 									<div class="survey-answer-box">
-										<input type="password" name="password" id="password" required>
+										<input type="password" name="password2" id="password2" required>
 									</div>	
 								</label>
 							</div>
@@ -192,7 +192,7 @@
 							</div>
 							
 							<div class="submit-reg-button">
-								<button onclick=""> Submit Registration Form </button>
+								<button onclick="regFunc()"> Submit Registration Form </button>
 							</div>
 							
 
@@ -254,7 +254,33 @@
 		regContent[0].style.opacity=100;
 		loginContent[0].style.opacity=0;
 	}
+
+
+	// Login function
+	function loginFunc(){
+		var username = document.getElementById("username").value;
+		var pswd = document.getElementById("password").value;
+		var firstTime = document.getElementById("first-time").value == 1;
+
+
+		// login user
+		var userControllerClass = Java.type("main.java.Controllers.BirthdayController");
+		userControllerClass.userController();
+		userControllerClass.executeLoginUser(username, pswd, firstTime);
+
+		var userId = userControllerClass.userId;
+		var calendarId = userControllerClass.userCalendarId;
+
+		// move onto home page
+		window.location.href = "index.html";
+	}
+
+	// Register function
+	function regFunc(){
+
+	}
 	
 </script>
+<script src="treeManager.js"></script>
 
 </html>

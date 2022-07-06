@@ -1,0 +1,1 @@
+// The page in charge of managing the MainPage.SurveyManager.java class in order to feed and execute the correct steps to conclude a survey submission

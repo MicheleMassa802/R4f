@@ -1,0 +1,2 @@
+// The class connected to all the webpages along the main tree of operation actions, in charge of using the MainPage.TreeManager.java class to move the user along the
+// R4F website while keeping all needed entities active, quering for backend info to display, and moving the user through the html pages

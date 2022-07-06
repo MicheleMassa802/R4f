@@ -22,7 +22,7 @@
 
 		<div class="survey-form">
 			<!-- GET allows us to get the submitted answers in the link, and upon submission, user is sent to results page -->
-			<form action="surveyResults.html" method="GET">
+			<form>
 				<div class="questions-container">
 					<div class="question">
 						<label> 
@@ -36,16 +36,16 @@
 
 					<div class="question">
 						<label> 
-							What is your name?
+							What is the calendar ID of the person inviting you to fill this survey?
 							<div class="survey-answer-box">
-								<input type="text" name="q2" id="q2" required>
+								<input type="text" name="q2" id="q2" required>  
 							</div>
 						</label>
 					</div>
 
 					<div class="question">
 						<label> 
-							What is your last name? 
+							What is your name?
 							<div class="survey-answer-box">
 								<input type="text" name="q3" id="q3" required>
 							</div>
@@ -54,9 +54,18 @@
 
 					<div class="question">
 						<label> 
+							What is your last name? 
+							<div class="survey-answer-box">
+								<input type="text" name="q4" id="q4" required>
+							</div>
+						</label>
+					</div>
+
+					<div class="question">
+						<label> 
 							What is your date of birth? [yyyy=mm-dd]
 							<div class="survey-answer-box">
-								<input type="date" name="q4" id="q4" required>
+								<input type="date" name="q5" id="q5" required>
 							</div>	
 						</label>
 					</div>
@@ -65,7 +74,7 @@
 						<label> 
 							What is your instagram username?
 							<div class="survey-answer-box">
-								<input type="text" name="q5" id="q5">
+								<input type="text" name="q6" id="q6">
 							</div>
 						</label>
 					</div>
@@ -74,7 +83,7 @@
 						<label> 
 							What is your twitter username?
 							<div class="survey-answer-box">
-								<input type="text" name="q6" id="q6">
+								<input type="text" name="q7" id="q7">
 							</div>
 						</label>
 					</div>
@@ -83,7 +92,7 @@
 						<label> 
 							What is your discord username?
 							<div class="survey-answer-box">
-								<input type="text" name="q7" id="q7">
+								<input type="text" name="q8" id="q8">
 							</div>
 						</label>
 					</div>
@@ -110,20 +119,37 @@
 			<img src="Images/footer-img.png">
 		</div>
 	</footer>
-	
-
-	<!-- Submission function js -->
-	<script>
-		function submitFunc(){
-			var q1 = documnet.getElementById("q1").value;
-			var q2 = documnet.getElementById("q2").value;
-			var q3 = documnet.getElementById("q3").value;
-			var q4 = documnet.getElementById("q4").value;
-			var q5 = documnet.getElementById("q5").value;
-			var q6 = documnet.getElementById("q6").value;
-			var q7 = documnet.getElementById("q7").value;
-		}
-	</script>
 
 </body>
+
+<!-- Submission function js FOR NOW-->
+<script>
+	function submitFunc(){
+		// get values
+		var q1 = document.getElementById("q1").value;
+		var q2 = document.getElementById("q2").value;
+		var q3 = document.getElementById("q3").value;
+		var q4 = document.getElementById("q4").value;
+		var q5 = document.getElementById("q5").value;
+		var q6 = document.getElementById("q6").value;
+		var q7 = document.getElementById("q7").value;
+		var q8 = document.getElementById("q8").value;
+
+		// create birthday object with the given answers
+		var bdControllerClass = Java.type("main.java.Controllers.BirthdayController");
+		bdControllerClass.bdController();
+		bdControllerClass.executCreateSML(q6, q7, q8);
+		bdControllerClass.executCreateBirthday(q5, q3, q4);
+
+		// create calendar object from ids provided
+		var calendarControllerClass = Java.type("main.java.Controllers.CalendarController");
+		calendarControllerClass.calendarController(q1);
+		calendarControllerClass.setCalendarEventManager(q2);
+
+		// add bdid to calendar
+		calendarControllerClass.modifyCalendarEvent(true, q5, bdControllerClass.bdId);
+	}
+</script>
+
+<script src="survey.js"></script>
 </html>

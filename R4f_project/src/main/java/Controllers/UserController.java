@@ -1,7 +1,10 @@
 package main.java.Controllers;
 
+import java.util.ArrayList;
+
 import main.java.User.CreateUserUseCase;
 import main.java.User.LoginUserUseCase;
+import main.java.User.UserEntity;
 
 public class UserController {
     // manages communication to the use cases for the User object
@@ -34,7 +37,7 @@ public class UserController {
      * @param notiType  type of notification to be sent to user
      */
     public void executeCreateUser(String username, String pswd, String name, String lName, int notiType){
-        this.userCreator.runUserCreation(username, pswd, name, lName, notiType);
+        this.userId = this.userCreator.runUserCreation(username, pswd, name, lName, notiType);
     }
 
 
@@ -65,6 +68,18 @@ public class UserController {
      */
     public void firstLoginFollowUp(String username, String bdId, String calId, String smlId){
         this.userLogger.updateRemainingInfo(username, bdId, calId, smlId);
+    }
+
+
+    /**
+     * This method is used to fetch user info given their id (to show account details)
+     * @param userId    the id of the user
+     * @return          the arraylist with all of the user information (entire row)
+     */
+    public ArrayList<String> getUserFromId(String userId){
+        ArrayList<String> userData = this.userCreator.createUserFromId(userId);
+        return userData;
+
     }
 
 

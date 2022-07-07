@@ -55,9 +55,27 @@ public class BirthdayEntity {
     }
 
 
+    /**
+     * @return the string with the birthday information to be displayed on the R4F website
+     */
+    public String toStringWS() {
+        String info = this.name + " " + this.lastname;
+        
+        StringBuilder smLinks = new StringBuilder();
+    
+        int i = 1;
+        for (String link : this.socialMediaLinks.keySet()){
+            smLinks.append("[Link ").append(i).append("] ").append(link).append("\n");
+            i += 1;
+        }
+
+        return info + " ||| " + smLinks;
+    }
+
+
     // getters and setters
     public String getBirthdayId(){return this.birthdayId;}
     public void setBirthdayId(String bdId){this.birthdayId = bdId;}
-
+    public String getBirthdayString(){return this.birthday.toString();}
 
 }

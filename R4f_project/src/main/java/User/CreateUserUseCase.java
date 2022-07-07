@@ -11,7 +11,7 @@ public class CreateUserUseCase {
 
     // db constants (table name and columns)
     private final String DB_TABLE = "users";
-    // private final String ID = "user_id";
+    private final String U_ID = "user_id";
     private final String USERNAME = "username";
     private final String PASSWORD = "password";
     private final String NAME = "name";
@@ -39,18 +39,27 @@ public class CreateUserUseCase {
      * @param name      name of user
      * @param lName     last name of user
      * @param notiType  type of notification to be sent to user
+     * @return          return the userId of the user that was just created or null
      */
-    public void runUserCreation(String username, String pswd, String name, String lName, int notiType){
+    public String runUserCreation(String username, String pswd, String name, String lName, int notiType){
         
+        String userId = "";
+
         if (this.checkUniqueUsername(username)){
             // upload info to db
             try {
                 dbConnection.executeInsert(username, pswd, name, lName, "", Integer.toString(notiType), "", "");
+                userId = dbConnection.executeRetrieve(USERNAME, username, 1, null).get(0);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
+            return userId;
+
+
         }
         // else, do nothing, answer already printed
+        return null;
     }
 
     /**
@@ -77,5 +86,24 @@ public class CreateUserUseCase {
         }
         // else
         return true;
+    }
+
+
+    /**
+     * Create and return all the information corresponding to the user their user id
+     * @param userId    the user id to use to fetch db info
+     * @return          the arraylist with all of the user information (entire row)
+     */
+    public ArrayList<String> createUserFromId(String userId){
+        ArrayList<String> data = new ArrayList<>();
+
+        // fetch the correct row of information
+        try {
+            data = this.dbConnection.executeRetrieve(U_ID, userId, 10, null);
+        } catch (SQLException e) {
+            System.out.println("User id entered not recognized, please retry with a valid user id. Class: CreateUserUseCase.java");
+            e.printStackTrace();
+        }
+        return data;
     }
 }

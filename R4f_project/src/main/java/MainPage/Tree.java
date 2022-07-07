@@ -9,10 +9,10 @@ public class Tree{
     }
 
     // class for structuring the tree for traversing the different pages to be displayed
-    private Tree parent;
-    private TreeState stateName;  // Invariant: this String should be unique within the tree nodes
-    private String currPageName;
-    private ArrayList<Tree> subtrees;
+    protected Tree parent;
+    protected TreeState stateName;  // Invariant: this String should be unique within the tree nodes
+    protected String currPageName;
+    protected ArrayList<Tree> subtrees;
     
 
     /** Usage:  

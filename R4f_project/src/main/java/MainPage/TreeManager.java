@@ -18,21 +18,24 @@ public class TreeManager {
     static final String CALENDAR = "calendar.html";
     static final String ABOUT = "about.html";
     static final String ABOUT_NO_NAV = "aboutNoNav.html";
+    static final String SURVEY = "survey.html";
 
     // tree  managing
-    private Tree currentNode;
+    protected Tree currentNode;
     
     // controllers
     private BirthdayController bdController;
     private CalendarController calController;
     private UserController userController;
+    private BirthdayController visitorBdController;
+    private CalendarController visitorCalController;
     
     // user identifying info
-    private String userId;
-    private String username;
-    private String bdId;
-    private String calendarId;
-    private String smlId;
+    protected String userId;
+    protected String username;
+    protected String bdId;
+    protected String calendarId;
+    protected String smlId;
 
     // other attributes
     HashMap<String, ArrayList<String>> calendar;
@@ -44,6 +47,7 @@ public class TreeManager {
         // build the controllers
         this.bdController = new BirthdayController();
         this.userController = new UserController();
+
     }
 
     /**
@@ -61,9 +65,10 @@ public class TreeManager {
     public static Tree buildR4fDefault(){
         // stage 0, start
         Tree parent = new Tree(null, TreeState.WELCOME, WELCOME);
-        // 1st stage (main and first about us)
+        // 1st stage (main, first about us, and survey filling)
         Tree mainPage = parent.addSub(TreeState.HOME, MAIN);
         parent.addSub(TreeState.ABOUT, ABOUT_NO_NAV);  // aboutNoNav
+        parent.addSub(TreeState.SURVEY, SURVEY);
         // 2nd stage (after mainPage: calendar, account, about us)
         mainPage.addSub(TreeState.CALENDAR, CALENDAR);  // calendar
         mainPage.addSub(TreeState.ACCOUNT, ACCOUNT);  // account
@@ -161,6 +166,49 @@ public class TreeManager {
         this.userController.firstLoginFollowUp(username, this.bdId, this.calendarId, this.smlId);
 
         // move tree to 0th stage welcome page (so user logs in), so no change in tree state
+
+    }
+
+
+    /**
+     * Submit a survey to update the calendar corresponding to the given calId
+     * 
+     * TO BE CALLED: line after submission of survey form  
+     * 
+     * All the parameters below are the information needed to complete a R4F birthday survey
+     * @param userId
+     * @param calId
+     * @param name
+     * @param lName
+     * @param birthday
+     * @param ig
+     * @param twt
+     * @param dsc
+     */
+    public void submitVisitorSurvey(String userId, String calId, String name, String lName, String birthday, String ig, String twt, String dsc){    
+        this.moveToChild(TreeState.SURVEY);
+        // if state is survey
+        if (this.currentNode.stateName != TreeState.SURVEY) {
+            System.out.println("Tree error: incorrect state");
+            return;
+        }
+        // else
+
+        // set up visitor controllers
+        this.visitorBdController = new BirthdayController();
+        this.visitorCalController = new CalendarController(userId);
+
+        // create birthday object with the given answers
+        this.visitorBdController.executeCreateSML(ig, twt, dsc);
+        this.visitorBdController.executeCreateBirthday(birthday, name, lName);
+
+        // create calendar object from ids provided
+        this.visitorCalController.setCalendarEventManager(calId);
+        
+        // add bdid to calendar
+        String dateArray[] = birthday.split("-");
+        String monthDayDate = dateArray[1] + "-" + dateArray[2];
+        this.visitorCalController.modifyCalendarEvent(true, monthDayDate, this.visitorBdController.bdId);
 
     }
 

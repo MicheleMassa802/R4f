@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Tree{
 
     public enum TreeState {
-        WELCOME, HOME, ACCOUNT, CALENDAR, ABOUT;
+        WELCOME, HOME, ACCOUNT, CALENDAR, ABOUT, SURVEY;
     }
 
     // class for structuring the tree for traversing the different pages to be displayed

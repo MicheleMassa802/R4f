@@ -39,7 +39,7 @@ public class ManageEventsUseCase {
 
     /**
      * Method in charge of adding a birthday to the calendar object at the given date
-     * @param date  value at which we'll modify the bdId arrayList
+     * @param date  value at which we'll modify the bdId arrayList mm-dd
      * @param bdId  value to add to the bdId arrayList
      */
     public void addBirthday(String date, String bdId){

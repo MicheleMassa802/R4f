@@ -8,4 +8,6 @@ In order to get the notification across, R4f sends you an email on the days of y
 The app is not about caring less about the special occasions by making sure you dont worry too much about them, it is about making sure you can remember to make the special occasions special with the fast paced life we are all stuck in.
 
 
-Current Stage: connection of front and back end Current Version: N/A
+Current Stage: CMD line interface development
+Next Stage: Creation of C server to print HTML pages
+Current Version: N/A

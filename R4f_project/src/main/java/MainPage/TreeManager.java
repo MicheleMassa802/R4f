@@ -239,7 +239,7 @@ public class TreeManager {
      * 
      * @return  an arraylist containing the information to be displayed linked to todays birthdays
      */
-    public ArrayList<String> showIndex() {
+    public ArrayList<String> showIndexBds() {
         // user id and cal id already setup
 
         // get todays birthdays to display on hover display
@@ -339,7 +339,7 @@ public class TreeManager {
      * @param month     the int value of a month (index 1-12)
      * @return          the string value corresponding to the month index
      */
-    public static String convertMonthToInt(int month) {
+    public static String convertIntToMonth(int month) {
         // this warning does not work in some versions of java, so we've kept it
         switch (month) {
             case 1:
@@ -366,6 +366,44 @@ public class TreeManager {
                 return "November";
             default:
                 return "December";
+        }
+    }
+
+    /**
+     * Helper to return correct month strings given an int (to display months in calendar page)
+     * 
+     * TO BE CALLED: line before moving onto calendar page (both button and nav)
+     * 
+     * @param month     the int value of a month (index 1-12)
+     * @return          the string value corresponding to the month index
+     */
+    public static String convertMonthIntToMM(int month) {
+        // this warning does not work in some versions of java, so we've kept it
+        switch (month) {
+            case 1:
+                return "01";
+            case 2:
+                return "02";
+            case 3:
+                return "03";
+            case 4:
+                return "04";
+            case 5:
+                return "05";
+            case 6:
+                return "06";
+            case 7:
+                return "07";
+            case 8:
+                return "08";
+            case 9:
+                return "09";
+            case 10:
+                return "10";
+            case 11:
+                return "11";
+            default:
+                return "12";
         }
     }
 

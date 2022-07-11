@@ -27,18 +27,19 @@ public class CalendarEntity {
         int i;
         for (i = 1; i < 13; i++){
             int j;
-            for (j = 1; j < 32; i++){
+            for (j = 1; j < 32; j++){
                 String date;
                 // fill in zeros
                 if (j < 10 && i < 10){
-                    date = "0" + Integer.toString(j) + "-" + "0" + Integer.toString(i);  // "<j>-<i>" = "dd-mm"
+                    date = "0" + Integer.toString(i) + "-"  + "0" + Integer.toString(j);  // "<i>-<j>" = "mm-dd"
                 } else if (j < 10){
-                    date = "0" +  Integer.toString(j) + "-" + Integer.toString(i);
+                    date =  Integer.toString(i) + "-" + "0" +  Integer.toString(j);
                 } else if (i < 10){
-                    date = Integer.toString(j) + "-" + "0" + Integer.toString(i);
+                    date = "0" + Integer.toString(i) + "-" + Integer.toString(j);
                 } else {
-                    date = Integer.toString(j) + "-" + Integer.toString(i);
+                    date = Integer.toString(i) + "-" + Integer.toString(j);
                 }
+
 
                 this.year.put(date, bdIdsForDate);
             }

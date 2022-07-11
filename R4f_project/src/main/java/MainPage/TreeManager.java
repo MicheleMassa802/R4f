@@ -262,8 +262,8 @@ public class TreeManager {
      * @param month the month being displayed in the calendar (string in format "mm")  
      * @return      the arraylist of 31 elements (indices 0 - 30) to be sorted in the JS
      */
-    public ArrayList<String> showCalendar(String month){
-        ArrayList<String> result = new ArrayList<>();
+    public ArrayList<ArrayList<String>> showCalendarArrayList(String month){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
         
         // if state is home
         if (this.currentNode.stateName != TreeState.HOME) {
@@ -279,17 +279,17 @@ public class TreeManager {
             String monthToDisplay = LocalDate.now().toString().split("-")[1];
             
             for (String date: this.calendar.keySet()){
-                if (date.contains("-" + monthToDisplay + "-")){  // when month matches
+                if (date.contains(monthToDisplay + "-")){  // when month matches
                     // append to result array the string version of all bdIds related to this date
-                    result.add(this.calendar.get(date).toString()); 
+                    result.add(this.calendar.get(date)); 
                 }
             }
         } else {
             // month to display is specified
             for (String date: this.calendar.keySet()){
-                if (date.contains("-" + month + "-")){  // when month matches
+                if (date.contains(month + "-")){  // when month matches
                     // append to result array the string version of all bdIds related to this date
-                    result.add(this.calendar.get(date).toString()); 
+                    result.add(this.calendar.get(date)); 
                 }
             }
         }
@@ -298,7 +298,55 @@ public class TreeManager {
         this.moveToChild(TreeState.CALENDAR);
         return result;
 
-    } 
+    }
+
+
+    /**
+     * Sets up all the information needed to properly show the calendar page
+     * 
+     * TO BE CALLED: line before moving onto calendar page (both button and nav)
+     * 
+     * @param month the month being displayed in the calendar (string in format "mm")  
+     * @return      the hashmap of 31 elements (date-arraylist of ids) to be sorted in the JS
+     */
+    public HashMap<String, ArrayList<String>> showCalendarHashMap(String month){
+        HashMap<String, ArrayList<String>> result = new HashMap<>();
+        
+        // if state is home
+        if (this.currentNode.stateName != TreeState.HOME) {
+            System.out.println("Tree error: incorrect state");
+            return result;
+        }
+        // else
+
+        this.calendar = this.calController.getCalFromId(this.calendarId).getYearCal();
+
+        if (month == null){
+            // default case starts at current month, so return specific info corresponding to this month
+            String monthToDisplay = LocalDate.now().toString().split("-")[1];
+            
+            for (String date: this.calendar.keySet()){
+                if (date.contains(monthToDisplay + "-")){  // when month matches
+                    // append to result array the string version of all bdIds related to this date
+                    result.put(date, this.calendar.get(date)); 
+                }
+            }
+        } else {
+            // month to display is specified
+            for (String date: this.calendar.keySet()){
+                if (date.contains(month + "-")){  // when month matches
+                    // append to result array the string version of all bdIds related to this date
+                    result.put(date, this.calendar.get(date)); 
+                }
+            }
+        }
+
+        // move tree position to second stage calendar
+        this.moveToChild(TreeState.CALENDAR);
+        return result;
+
+    }
+
 
 
     /**

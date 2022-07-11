@@ -178,15 +178,24 @@ public class CommandLineAndy {
         System.out.print("Would you like to go over to the calendar page? [y/n] (single character): ");
         char calPage = inputScanner.next().charAt(0);
         if (calPage == 'y'){
-            // get current month
-            String thisMonth = LocalDate.now().toString().split("-")[1];
-            this.treeManagerClass.showCalendar(thisMonth);
+            
             // move onto calendar page
             this.calendarPageLoop();
         }
         // else move on to next loop option
         CommandLineAndy.printSeparator();
 
+    }
+
+    public void offerAccountView(){
+        System.out.print("Would you like to go over to the account page? [y/n] (single character): ");
+        char accPage = inputScanner.next().charAt(0);
+        if (accPage == 'y'){            
+            // move onto account page
+            this.accountPageLoop();
+        }
+        // else move on to next loop option
+        CommandLineAndy.printSeparator();
     }
 
     public void offerShareSurvey(){
@@ -248,8 +257,8 @@ public class CommandLineAndy {
 
     public void offerDateView(){
         // show calendar and ask for specific date
-        System.out.println("This is your calendar view: \n\n");
-        CmdLCalDrawer.printCalendar();
+        System.out.println("This is your calendar view [we apologize if it looks buggy, our CMDLine app cannot handle having too many birthday ids in a single date :()]: \n\n");
+        CmdLCalDrawer.printIdCalendar(this.treeManagerClass.showCalendarHashMap(null));
         CommandLineAndy.printSeparator();
 
         System.out.print("Would you like to look at a specific date's birthdays? [y/n] (single character): ");
@@ -275,9 +284,9 @@ public class CommandLineAndy {
     }
 
     public void goMainFromCalendar(){
-        System.out.println("Would you like to go back to the Main page? [y/n] (single character): ");
-        char main = inputScanner.next().charAt(0);
-        if(main == 'y'){
+        System.out.print("Would you like to go back to the Main page? [y/n] (single character): ");
+        char calToMain = inputScanner.next().charAt(0);
+        if(calToMain == 'y'){
             this.currLoopVar = false;
             System.out.println("Going back to the main page :)");
             CommandLineAndy.printSeparator();
@@ -304,16 +313,44 @@ public class CommandLineAndy {
 
     //////////////////// ACCOUNT PAGE
 
-    public void offerAccountView(){
-
+    public void showAccountDetails(){
+        System.out.print("Hello there, would you like to go over your account details? [y/n] (single character): ");
+        char accDetails = this.inputScanner.next().charAt(0);
+        if(accDetails == 'y'){
+            System.out.println("The following are your account details: \n\n");
+            ArrayList<String> accDetailsArr = this.treeManagerClass.showAccount();
+            System.out.println("Username: " + accDetailsArr.get(0) + "\n User ID: " + accDetailsArr.get(1) + 
+            "\n Email: " + accDetailsArr.get(2) + "\n Name: " + accDetailsArr.get(3) + "\n Last Name: " + accDetailsArr.get(4) +
+            "\n Birthday: " + accDetailsArr.get(5));
+            CommandLineAndy.printSeparator();
+            return;
+        }
+        CommandLineAndy.printSeparator();
     }
 
     public void goMainFromAccount(){
-
+        System.out.print("Would you like to go back to the Main page? [y/n] (single character): ");
+        char accToMain = inputScanner.next().charAt(0);
+        if(accToMain == 'y'){
+            this.currLoopVar = false;
+            System.out.println("Going back to the main page :)");
+            CommandLineAndy.printSeparator();
+            return;
+        }
+        CommandLineAndy.printSeparator();
     }
     
     public void accountPageLoop(){
+        System.out.println("Welcome to the Account Page of R4F, here you can navigate through your account's details!");
+        CommandLineAndy.printSeparator();
 
+        while(this.currLoopVar){
+            this.showAccountDetails();
+            this.goMainFromAccount();
+        }
+        // once goMainFromAccount is called and we exit the loop, we go back to the main loop
+        // so we set this.currLoopVar to true again for that loop to work
+        this.currLoopVar = true;
     }
 
 

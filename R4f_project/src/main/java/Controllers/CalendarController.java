@@ -65,7 +65,7 @@ public class CalendarController {
     /**
      * Add or remove a birthday to a calendar object at the correct date
      * This method should only be used after this.calendarEventManager is setup
-     * @param date  date whose corresponding value is to be modified
+     * @param date  date whose corresponding value is to be modified yyyy-mm-dd of current year
      * @param bdId  bdId to add/remove from calendar
      */
     public void modifyCalendarEvent(boolean addBd, String date, String bdId){

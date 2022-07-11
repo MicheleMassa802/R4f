@@ -36,7 +36,7 @@ public class CreateCalendarUseCase {
         // fetch current calendar_id count
         String countStr = "1001";
         try {
-            countStr = this.dbConnection.executeRetrieve(U_ID, "0", 2, null).get(1);
+            countStr = this.dbConnection.executeRetrieve(U_ID, "0", 3, null).get(2);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,13 +53,13 @@ public class CreateCalendarUseCase {
     public String runCalendarCreation(){
 
         // initiate calendar object ()
-        CalendarEntity emptyCal = new CalendarEntity(this.userId);
+        this.calendarInstance = new CalendarEntity(this.userId);
 
         // insert row all 365 rows
-        for (String date : emptyCal.getYearCal().keySet()){
+        for (String date : this.calendarInstance.getYearCal().keySet()){
             String realDate = UseCaseDateFormatter.formatMonthlyToYearly(date);
             try {
-                this.dbConnection.executeInsert(this.userId, Integer.toString(this.idCount), realDate, emptyCal.getYearCal().get(date).toString()); 
+                this.dbConnection.executeInsert(this.userId, Integer.toString(this.idCount), realDate, this.calendarInstance.getYearCal().get(date).toString()); 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -97,7 +97,7 @@ public class CreateCalendarUseCase {
             e.printStackTrace();
         }
 
-        // else, begin constructing calendar entity
+        // begin constructing calendar entity
 
         this.calendarInstance = new CalendarEntity(this.userId);
         this.calendarInstance.setCalendarId(calId);

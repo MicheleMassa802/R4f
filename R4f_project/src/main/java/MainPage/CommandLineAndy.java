@@ -33,7 +33,7 @@ public class CommandLineAndy {
     public void welcome(){
         CommandLineAndy.printSeparator();
         System.out.println("\n\nHello, welcome to the R4F command line access point, where you get to " +
-        "experience all of the R4F functionality but throughout the command line.\n\n");
+        "experience all of the R4F functionality but through the command line.\n\n");
         System.out.println("Lets get started then, we will provide prompts and you'll answer with " +
         "y/n standing for yes or no.");
         System.out.println("When we ask for inline input, just type the answer in a single " + 
@@ -65,11 +65,11 @@ public class CommandLineAndy {
             String lName = inputScanner.next();
             System.out.print("Birthday Date (yyyy-mm-dd): ");
             String birthday = inputScanner.next();
-            System.out.print("Instagram @ (String, no spaces): ");
+            System.out.print("Instagram @ (String, no spaces) [print NONE if you dont have one]: ");
             String ig = inputScanner.next();
-            System.out.print("Twitter @ (String, no spaces): ");
+            System.out.print("Twitter @ (String, no spaces) [print NONE if you dont have one]: ");
             String twt = inputScanner.next();
-            System.out.print("Discord Username (String, no spaces): ");
+            System.out.print("Discord Username (String, no spaces) [print NONE if you dont have one]: ");
             String dsc = inputScanner.next();
             System.out.print("How many times would you like to be notified of a birthday? (Single number, 1-3): ");
             String notiType = inputScanner.next();
@@ -97,7 +97,7 @@ public class CommandLineAndy {
             this.treeManagerClass.addCalendar(this.treeManagerClass.userId);
             // if no error comes up in log in
             this.loggedIn = true;
-            System.out.println("Welcome to R4F" + this.treeManagerClass.username + ":3");
+            System.out.println("Welcome to R4F " + this.treeManagerClass.username + " :3");
 
         }
         // else move on to next loop option
@@ -105,6 +105,7 @@ public class CommandLineAndy {
     }
 
     public void welcomeLoop(){
+        CommandLineAndy.printSeparator();
         this.welcome();
         while (this.currLoopVar) {
             this.offerUserCreation();
@@ -112,14 +113,18 @@ public class CommandLineAndy {
 
             // after possible login attempt, check tree state to see if we break and move onto the home loop
             if (this.treeManagerClass.currentNode.stateName == TreeState.HOME){
-                // break out of loop
-                break;
+                // send to main page
+                CommandLineAndy.printSeparator();
+
+                if (this.loggedIn){
+                    this.mainPageLoop();
+                }
             }
 
             this.offerSubmitSurvey();
             this.offerExitProgram();
         }
-        CommandLineAndy.printSeparator();
+        
     }
 
 
@@ -142,11 +147,11 @@ public class CommandLineAndy {
             String lName = inputScanner.next();
             System.out.print("Birthday Date (yyyy-mm-dd): ");
             String birthday = inputScanner.next();
-            System.out.print("What is your instagram @? (String, no spaces): ");
+            System.out.print("What is your instagram @? (String, no spaces) [print NONE if you dont have one]: ");
             String ig = inputScanner.next();
-            System.out.print("What is your twitter @? (String, no spaces): ");
+            System.out.print("What is your twitter @? (String, no spaces) [print NONE if you dont have one]: ");
             String twt = inputScanner.next();
-            System.out.print("What is your discord username? (String, no spaces): ");
+            System.out.print("What is your discord username? (String, no spaces) [print NONE if you dont have one]: ");
             String dsc = inputScanner.next();
 
             this.treeManagerClass.submitVisitorSurvey(userId, calId, name, lName, birthday, ig, twt, dsc);
@@ -203,7 +208,7 @@ public class CommandLineAndy {
         char survey = inputScanner.next().charAt(0);
         if (survey == 'y'){
             System.out.println("Okay, since this is the command line app, for your friend to access the survey they'll have to download it from our github repo: https://github.com/MicheleMassa802/R4f");
-            System.out.println("The reference ids your friends will need to complete the survey are the following... \n Your calendar ID: " + this.treeManagerClass.calendarId + ", and your user ID: " + this.treeManagerClass.userId);
+            System.out.println("The reference ids your friends will need to complete the survey are the following... \nYour calendar ID: " + this.treeManagerClass.calendarId + ", and your user ID: " + this.treeManagerClass.userId);
             System.out.println("Be sure to communicate those two pieces of information to whoever is filling out the survey and if you like R4F, maybe even recommend it :)))");
         }
         // no matter the answer, move on to next loop option
@@ -233,12 +238,14 @@ public class CommandLineAndy {
             this.currLoopVar = false;
             System.out.println("Logging you out of your account, hope to see you back soon :)");
             CommandLineAndy.printSeparator();
+            this.treeManagerClass.moveToParent();  // move to parent state upon logout
             return;
         }
         CommandLineAndy.printSeparator();
     }
 
     public void mainPageLoop(){
+        CommandLineAndy.printSeparator();
         System.out.println("Welcome to the Main Page of R4F, here you can navigate through your account and calendar!");
         CommandLineAndy.printSeparator();
 
@@ -249,6 +256,9 @@ public class CommandLineAndy {
             this.offerAccountView();
             this.offerLogOut();
         }
+
+        // once logged out, set this.currLoopVar to true to run welcome loop
+        this.currLoopVar = true;
     }
 
 
@@ -257,20 +267,20 @@ public class CommandLineAndy {
 
     public void offerDateView(){
         // show calendar and ask for specific date
-        System.out.println("This is your calendar view [we apologize if it looks buggy, our CMDLine app cannot handle having too many birthday ids in a single date :()]: \n\n");
+        System.out.println("This is your calendar view [we apologize if it looks buggy, our CMDLine app cannot handle having too many birthday ids in a single date :(]: \n\n");
         CmdLCalDrawer.printIdCalendar(this.treeManagerClass.showCalendarHashMap(null));
         CommandLineAndy.printSeparator();
 
         System.out.print("Would you like to look at a specific date's birthdays? [y/n] (single character): ");
         char showSpecBd = inputScanner.next().charAt(0);
         if(showSpecBd == 'y'){
-            System.out.print("Please enter the date you want to look at in the following prompts...");
-            System.out.print("Enter the month you want to look at: [mm] (two digits, a number from 1-12)");
+            System.out.println("Please enter the date you want to look at in the following prompts...");
+            System.out.print("Enter the month you want to look at [mm] (two digits, a number from 1-12): ");
             String month = inputScanner.next();
-            System.out.print("Enter the day you want to look at: [dd] (two digits, a number from 1-31)");
+            System.out.print("Enter the day you want to look at [dd] (two digits, a number from 1-31): ");
             String day = inputScanner.next();
             // make up date from inputs
-            String date = month + "-" + day;
+            String date = day + "-" + month;
             System.out.println("The birthdays for that date are the following: ");
             ArrayList<String> todaysBds = this.treeManagerClass.showDateBirthdays(date);
             System.out.println(todaysBds.toString());
@@ -290,12 +300,14 @@ public class CommandLineAndy {
             this.currLoopVar = false;
             System.out.println("Going back to the main page :)");
             CommandLineAndy.printSeparator();
+            this.treeManagerClass.moveToParent();  // move to parent state upon going main
             return;
         }
         CommandLineAndy.printSeparator();
     }
 
     public void calendarPageLoop(){
+        CommandLineAndy.printSeparator();
         System.out.println("Welcome to the Calendar Page of R4F, here you can navigate through your entire calendar!");
         CommandLineAndy.printSeparator();
 
@@ -319,9 +331,9 @@ public class CommandLineAndy {
         if(accDetails == 'y'){
             System.out.println("The following are your account details: \n\n");
             ArrayList<String> accDetailsArr = this.treeManagerClass.showAccount();
-            System.out.println("Username: " + accDetailsArr.get(0) + "\n User ID: " + accDetailsArr.get(1) + 
-            "\n Email: " + accDetailsArr.get(2) + "\n Name: " + accDetailsArr.get(3) + "\n Last Name: " + accDetailsArr.get(4) +
-            "\n Birthday: " + accDetailsArr.get(5));
+            System.out.println("Username: " + accDetailsArr.get(0) + "\nUser ID: " + accDetailsArr.get(1) + 
+            "\nEmail: " + accDetailsArr.get(2) + "\nName: " + accDetailsArr.get(3) + "\nLast Name: " + accDetailsArr.get(4) +
+            "\nBirthday: " + accDetailsArr.get(5));
             CommandLineAndy.printSeparator();
             return;
         }
@@ -335,12 +347,14 @@ public class CommandLineAndy {
             this.currLoopVar = false;
             System.out.println("Going back to the main page :)");
             CommandLineAndy.printSeparator();
+            this.treeManagerClass.moveToParent();  // move to parent state upon going main
             return;
         }
         CommandLineAndy.printSeparator();
     }
     
     public void accountPageLoop(){
+        CommandLineAndy.printSeparator();
         System.out.println("Welcome to the Account Page of R4F, here you can navigate through your account's details!");
         CommandLineAndy.printSeparator();
 

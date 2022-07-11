@@ -39,6 +39,7 @@ public class Tree{
         this.parent = parent;  // for the root of a tree set to NULL
         this.stateName = state;  // should not be null
         this.subtrees = new ArrayList<Tree>();  // tree has no subtrees by default
+        this.currPageName = pageName;
     }
 
     

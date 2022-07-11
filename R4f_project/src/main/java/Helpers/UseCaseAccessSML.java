@@ -11,6 +11,7 @@ public class UseCaseAccessSML {
 
     // db constants (table name and columns)
     private final String DB_TABLE = "sml_table";
+    private final String ROW = "sml_row";
     private final String ID = "sml_id";
     private final String TYPE = "sml_type";
     private final String LINK = "sml";
@@ -33,7 +34,7 @@ public class UseCaseAccessSML {
         
         String countStr = "1001";
         try {
-            countStr = this.dbConnection.executeRetrieve(ID, "0", 3, null).get(2);
+            countStr = this.dbConnection.executeRetrieve(ROW, "1", 4, null).get(3);
         } catch (SQLException e) {
             e.printStackTrace();
         }

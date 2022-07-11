@@ -31,13 +31,13 @@ public class CalendarEntity {
                 String date;
                 // fill in zeros
                 if (j < 10 && i < 10){
-                    date = "0" + Integer.toString(i) + "-"  + "0" + Integer.toString(j);  // "<i>-<j>" = "mm-dd"
+                    date = "0" + Integer.toString(j) + "-" + "0" + Integer.toString(i);  // "<j>-<i>" = "dd-mm"
                 } else if (j < 10){
-                    date =  Integer.toString(i) + "-" + "0" +  Integer.toString(j);
+                    date = "0" +  Integer.toString(j) + "-" + Integer.toString(i);
                 } else if (i < 10){
-                    date = "0" + Integer.toString(i) + "-" + Integer.toString(j);
+                    date = Integer.toString(j) + "-" + "0" + Integer.toString(i);
                 } else {
-                    date = Integer.toString(i) + "-" + Integer.toString(j);
+                    date = Integer.toString(j) + "-" + Integer.toString(i);
                 }
 
 
@@ -46,7 +46,8 @@ public class CalendarEntity {
         }
 
         // after its filled we manually remove the dates that dont exist
-        // feb 30 and 31
+        // feb 29, feb 30 and 31
+        this.year.remove("29-02");
         this.year.remove("30-02");
         this.year.remove("31-02");
         // apr, jun, sep, nov 31
@@ -54,7 +55,7 @@ public class CalendarEntity {
         this.year.remove("31-06");
         this.year.remove("31-09");
         this.year.remove("31-11");
-        // at this point, this.year has all valid days for a leap year with no birthday ids associated
+        // at this point, this.year has all valid days for a non-leap year with no birthday ids associated
 
         // other attributes built alongside and set through setter functions
 

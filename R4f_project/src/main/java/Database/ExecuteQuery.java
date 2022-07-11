@@ -85,26 +85,35 @@ public class ExecuteQuery implements IDBConnectionPoint {
         // connect to db
         try {
             Connection connection = DriverManager.getConnection(URL, USERNAME, PSWD);
-            System.out.println("Connection to database successful!");
+            //System.out.println("Connection to database successful!");
 
             // setup statement with its parameters (values)
             PreparedStatement statement = connection.prepareStatement(query);
             
             int i = 1;
             for (String value : values){
-                statement.setString(i, value);
+                if(value == ""){
+                    // set it as int default 0 (to be overwritten)
+                    statement.setInt(i, 0);
+                } else {
+                    // set it as string
+                    statement.setString(i, value);
+                }
+                
                 i++;
+
             }
 
-            System.out.println("Statement to execute: " + statement.toString());
+            //System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated == this.columns.size()){
-                System.out.println("All rows have been successfully inserted");
-            } else {
-                System.out.println("Not all rows have been updated, check database. Class: DBConnect.java");
-            }
+            statement.executeUpdate();
+            // int rowsUpdated = statement.executeUpdate();
+            // if (rowsUpdated == this.columns.size()){
+            //     System.out.println("All rows have been successfully inserted");
+            // } else {
+            //     System.out.println("Not all rows have been updated, check database. Class: DBConnect.java");
+            // }
 
             // close statement and connection to DB
             statement.close();
@@ -150,12 +159,12 @@ public class ExecuteQuery implements IDBConnectionPoint {
         // connect to db
         try {
             Connection connection = DriverManager.getConnection(URL, USERNAME, PSWD);
-            System.out.println("Connection to database successful!");
+            //System.out.println("Connection to database successful!");
 
             // setup statement with its parameters (values)
             PreparedStatement statement = connection.prepareStatement(query.toString());
 
-            System.out.println("Statement to execute: " + statement.toString());
+            //System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             ResultSet result = statement.executeQuery();
@@ -168,7 +177,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
                 }
             }
 
-            System.out.println("Row has been successfully retrieved: " + row.toString());
+            //System.out.println("Row has been successfully retrieved: " + row.toString());
 
             // close statement and connection to DB
             statement.close();
@@ -221,12 +230,12 @@ public class ExecuteQuery implements IDBConnectionPoint {
         // connect to db
         try {
             Connection connection = DriverManager.getConnection(URL, USERNAME, PSWD);
-            System.out.println("Connection to database successful!");
+            //System.out.println("Connection to database successful!");
 
             // setup statement with its parameters (values)
             PreparedStatement statement = connection.prepareStatement(query.toString());
 
-            System.out.println("Statement to execute: " + statement.toString());
+            //System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             ResultSet result = statement.executeQuery();
@@ -239,7 +248,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
                 }
             }
 
-            System.out.println("Row has been successfully retrieved: " + row.toString());
+            //System.out.println("Row has been successfully retrieved: " + row.toString());
 
             // close statement and connection to DB
             statement.close();
@@ -271,22 +280,24 @@ public class ExecuteQuery implements IDBConnectionPoint {
         // connect to db
         try {
             Connection connection = DriverManager.getConnection(URL, USERNAME, PSWD);
-            System.out.println("Connection to database successful!");
+            //System.out.println("Connection to database successful!");
 
             // setup statement with its parameters (values)
             PreparedStatement statement = connection.prepareStatement(query.toString());
             
             //statement.setString(1, objectId);
 
-            System.out.println("Statement to execute: " + statement.toString());
+            //System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated == 1){
-                System.out.println("Rows value successfully replaced");
-            } else {
-                System.out.println("Error in replacing of row value, check database. Class: DBConnect.java");
-            }
+            statement.executeUpdate();
+            
+            // int rowsUpdated = statement.executeUpdate();
+            // if (rowsUpdated == 1){
+            //     System.out.println("Rows value successfully replaced");
+            // } else {
+            //     System.out.println("Error in replacing of row value, check database. Class: DBConnect.java");
+            // }
 
             // close statement and connection to DB
             statement.close();
@@ -325,15 +336,17 @@ public class ExecuteQuery implements IDBConnectionPoint {
             
             //statement.setString(1, objectId);
 
-            System.out.println("Statement to execute: " + statement.toString());
+            //System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated == 1){
-                System.out.println("Rows value successfully replaced");
-            } else {
-                System.out.println("Error in replacing of row value, check database. Class: DBConnect.java");
-            }
+            statement.executeUpdate();
+
+            // int rowsUpdated = statement.executeUpdate();
+            // if (rowsUpdated == 1){
+            //     System.out.println("Rows value successfully replaced");
+            // } else {
+            //     System.out.println("Error in replacing of row value, check database. Class: DBConnect.java");
+            // }
 
             // close statement and connection to DB
             statement.close();

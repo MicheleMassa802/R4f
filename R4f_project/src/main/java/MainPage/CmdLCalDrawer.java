@@ -224,6 +224,9 @@ public class CmdLCalDrawer {
     
         // given a month calendar in the form of a hashmap of days-arrayList of ids we print the calendar with those ids
         public static void printIdCalendar(HashMap<String, ArrayList<String>> monthCalendar){
+            // get hashmap length
+            int hashmapLen = monthCalendar.keySet().size();
+            
             ArrayList<Character> result = new ArrayList<>();
             
             String dateStr = "";
@@ -250,7 +253,7 @@ public class CmdLCalDrawer {
                 // for each starting day, get ROW_WIDTH # of arrayLists of ids from the idsArrayListArr
                 ArrayList<ArrayList<String>> sevenDayIds = new ArrayList<>();
                 for (int i = j; i < j + ROW_WIDTH; i++){
-                    if (i < 31){
+                    if (i < hashmapLen){
                         sevenDayIds.add(idsArrayListArr.get(i));  // can only get up to index 30 for 31 days total
                     } else {
                         // add empty arrayList

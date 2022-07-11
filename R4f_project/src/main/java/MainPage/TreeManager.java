@@ -13,7 +13,7 @@ public class TreeManager {
 
     // Page name constants
     static final String WELCOME = "welcome.html";
-    static final String MAIN = "index.html";
+    static final String HOME = "index.html";
     static final String ACCOUNT = "account.html";
     static final String CALENDAR = "calendar.html";
     static final String ABOUT = "about.html";
@@ -43,7 +43,7 @@ public class TreeManager {
     /** Constructor which starts off the controllers to be used throughout the lifespan of the session */
     public TreeManager(){
         // start off the default build of the tree
-        this.currentNode = buildR4fDefault();  // starts off at the welcome parent
+        this.currentNode = TreeManager.buildR4fDefault();  // starts off at the welcome parent
         // build the controllers
         this.bdController = new BirthdayController();
         this.userController = new UserController();
@@ -65,8 +65,10 @@ public class TreeManager {
     public static Tree buildR4fDefault(){
         // stage 0, start
         Tree parent = new Tree(null, TreeState.WELCOME, WELCOME);
+        
         // 1st stage (main, first about us, and survey filling)
-        Tree mainPage = parent.addSub(TreeState.HOME, MAIN);
+        Tree mainPage = parent.addSub(TreeState.HOME, HOME);
+        
         parent.addSub(TreeState.ABOUT, ABOUT_NO_NAV);  // aboutNoNav
         parent.addSub(TreeState.SURVEY, SURVEY);
         // 2nd stage (after mainPage: calendar, account, about us)
@@ -100,7 +102,7 @@ public class TreeManager {
             System.out.println("Tree error: incorrect state");
             return;
         }
-
+        
         // else
 
         // login user 
@@ -111,7 +113,6 @@ public class TreeManager {
         // calendar and bd info setup along with login, as registration process already finished the account creation process
         this.bdId = this.userController.userBdId;
         this.calendarId = this.userController.userCalendarId;
-
 
         // move tree to first stage mainPage
         this.moveToChild(TreeState.HOME);
@@ -147,7 +148,7 @@ public class TreeManager {
         // else
 
         // register user
-        this.userController.executeCreateUser(username, pswd, name, lName, notiType);
+        this.userController.executeCreateUser(username, email, pswd, name, lName, notiType);
         this.userId = this.userController.userId;
         
         // create birthday
@@ -186,7 +187,11 @@ public class TreeManager {
      * @param dsc
      */
     public void submitVisitorSurvey(String userId, String calId, String name, String lName, String birthday, String ig, String twt, String dsc){    
-        this.moveToChild(TreeState.SURVEY);
+        if (this.currentNode.stateName == TreeState.WELCOME){
+            // in case of survey page looping
+            this.moveToChild(TreeState.SURVEY);
+        }
+        
         // if state is survey
         if (this.currentNode.stateName != TreeState.SURVEY) {
             System.out.println("Tree error: incorrect state");
@@ -205,10 +210,13 @@ public class TreeManager {
         // create calendar object from ids provided
         this.visitorCalController.setCalendarEventManager(calId);
         
-        // add bdid to calendar
+        // get date in correct format for curr year
         String dateArray[] = birthday.split("-");
-        String monthDayDate = dateArray[1] + "-" + dateArray[2];
-        this.visitorCalController.modifyCalendarEvent(true, monthDayDate, this.visitorBdController.bdId);
+        String currYear = LocalDate.now().toString().split("-")[0];
+        String yearDate = currYear + "-" + dateArray[1] + "-" + dateArray[2];
+
+        // add bdid to calendar
+        this.visitorCalController.modifyCalendarEvent(true, yearDate, this.visitorBdController.bdId);
 
     }
 
@@ -219,13 +227,16 @@ public class TreeManager {
      */
     public void moveToAboutUsNoNav(){
         // if state is welcome
-        if (this.currentNode.stateName != TreeState.WELCOME) {
+        if (this.currentNode.stateName != TreeState.WELCOME && this.currentNode.stateName != TreeState.ABOUT) {
             System.out.println("Tree error: incorrect state");
             return;
         }
 
         // move tree position to first stage about us
-        this.moveToChild(TreeState.ABOUT);
+        if (this.currentNode.stateName == TreeState.WELCOME){
+            // in case of about page looping
+            this.moveToChild(TreeState.ABOUT);
+        }
     }
 
 
@@ -266,7 +277,7 @@ public class TreeManager {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         
         // if state is home
-        if (this.currentNode.stateName != TreeState.HOME) {
+        if (this.currentNode.stateName != TreeState.HOME && this.currentNode.stateName != TreeState.CALENDAR) {
             System.out.println("Tree error: incorrect state");
             return result;
         }
@@ -295,7 +306,10 @@ public class TreeManager {
         }
 
         // move tree position to second stage calendar
-        this.moveToChild(TreeState.CALENDAR);
+        if (this.currentNode.stateName == TreeState.HOME){
+            // in case of calendar page looping
+            this.moveToChild(TreeState.CALENDAR);
+        }
         return result;
 
     }
@@ -313,7 +327,7 @@ public class TreeManager {
         HashMap<String, ArrayList<String>> result = new HashMap<>();
         
         // if state is home
-        if (this.currentNode.stateName != TreeState.HOME) {
+        if (this.currentNode.stateName != TreeState.HOME && this.currentNode.stateName != TreeState.CALENDAR) {
             System.out.println("Tree error: incorrect state");
             return result;
         }
@@ -341,8 +355,12 @@ public class TreeManager {
             }
         }
 
-        // move tree position to second stage calendar
-        this.moveToChild(TreeState.CALENDAR);
+        // move tree position to second stage calendar if not already there
+        if (this.currentNode.stateName == TreeState.HOME){
+            // in case of calendar page looping
+            this.moveToChild(TreeState.CALENDAR);
+        }
+        
         return result;
 
     }
@@ -466,7 +484,7 @@ public class TreeManager {
     public ArrayList<String> showAccount(){
         ArrayList<String> result = new ArrayList<>();
         // if state is home
-        if (this.currentNode.stateName != TreeState.HOME) {
+        if (this.currentNode.stateName != TreeState.HOME && this.currentNode.stateName != TreeState.ACCOUNT) {
             System.out.println("Tree error: incorrect state");
             return result;
         }
@@ -485,7 +503,11 @@ public class TreeManager {
         result.add(bd);  // birthday
 
         // move tree position to second stage account
-        this.moveToChild(TreeState.ACCOUNT);
+        
+        if (this.currentNode.stateName == TreeState.HOME){
+            // in case of account page looping
+            this.moveToChild(TreeState.ACCOUNT);
+        }
 
         return result;
     }  
@@ -498,7 +520,7 @@ public class TreeManager {
      */
     public void moveToAboutUs(){
         // if state is home
-        if (this.currentNode.stateName != TreeState.HOME) {
+        if (this.currentNode.stateName != TreeState.HOME && this.currentNode.stateName != TreeState.ABOUT) {
             System.out.println("Tree error: incorrect state");
             return;
         }
@@ -506,7 +528,10 @@ public class TreeManager {
         
 
         // move tree position to second stage about us
-        this.moveToChild(TreeState.ABOUT);
+        if (this.currentNode.stateName == TreeState.HOME){
+            // in case of about page looping
+            this.moveToChild(TreeState.ABOUT);
+        }
     } 
 
 
@@ -516,13 +541,16 @@ public class TreeManager {
      * @param childToMoveTo     the child state to move to 
      */
     public void moveToChild(TreeState childToMoveTo){
+
         for (Tree subtree: this.currentNode.subtrees){
             if (subtree.stateName == childToMoveTo){
+                System.out.println("Moving to state: " + subtree.stateName);
                 this.currentNode = subtree;
+                return;
             }
         }
         // child not valid
-        System.out.println("State to move to is not a valid child of the current state.");
+        System.out.println("State to move to: " + childToMoveTo +  " is not a valid child of the current state: " + this.currentNode.stateName);
     }
 
 
@@ -532,11 +560,32 @@ public class TreeManager {
      * @param siblingToMoveTo     the sibling state to move to 
      */
     public void moveToSibling(TreeState siblingToMoveTo){
+        //System.out.println("\n\n###### Your current state is: " + this.currentNode.currPageName + "######\n\n");
         for (Tree subtree: this.currentNode.parent.subtrees){
             if (subtree.stateName == siblingToMoveTo){
+                System.out.println("Moving to state: " + subtree.stateName);
                 this.currentNode = subtree;
+                return;
             }
         }
+        // sibling not valid
+        System.out.println("State to move to: " + siblingToMoveTo +  " is not a valid sibling of the current state: " + this.currentNode.stateName);
+
+    }
+
+    /**
+     * Assuming the this.currentNode attribute is accurate, this function allows you to move throughout the tree to a
+     * parent node, like when going back to a previous state 
+     */
+    public void moveToParent(){
+        //System.out.println("\n\n###### Your current state is: " + this.currentNode.currPageName + "######\n\n");
+        if (this.currentNode.parent != null){
+            System.out.println("Moving to state: " + this.currentNode.parent.stateName);
+            this.currentNode = this.currentNode.parent;
+            return;
+        }
+        // sibling not valid
+        System.out.println("State to move to: " + this.currentNode.parent.stateName +  " is not a valid parent of the current state: " + this.currentNode.stateName);
 
     }
 

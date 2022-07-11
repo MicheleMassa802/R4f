@@ -31,13 +31,14 @@ public class UserController {
     /**
      * Feeds user creation information to use case, and executes user creation steps
      * @param username  username of user
+     * @param email     user's email
      * @param pswd      corresponding password
      * @param name      name of user
      * @param lName     last name of user
      * @param notiType  type of notification to be sent to user
      */
-    public void executeCreateUser(String username, String pswd, String name, String lName, int notiType){
-        this.userId = this.userCreator.runUserCreation(username, pswd, name, lName, notiType);
+    public void executeCreateUser(String username, String email, String pswd, String name, String lName, int notiType){
+        this.userId = this.userCreator.runUserCreation(username, email, pswd, name, lName, notiType);
     }
 
 

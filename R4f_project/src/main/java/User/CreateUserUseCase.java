@@ -20,6 +20,7 @@ public class CreateUserUseCase {
     private final String NOTI_TYPE = "notification_type";
     private final String BD_ID = "birthday_id";
     private final String CAL_ID = "calendar_id";
+    private final String EMAIL = "email";
 
     private IDBConnectionPoint dbConnection;
 
@@ -29,26 +30,27 @@ public class CreateUserUseCase {
      */
     public CreateUserUseCase(){
         // table name and columns where we'll insert info
-        this.dbConnection = new ExecuteQuery(DB_TABLE, USERNAME, PASSWORD, NAME, LAST_NAME, SML_ID, NOTI_TYPE, BD_ID, CAL_ID);
+        this.dbConnection = new ExecuteQuery(DB_TABLE, USERNAME, PASSWORD, NAME, LAST_NAME, SML_ID, NOTI_TYPE, BD_ID, CAL_ID, EMAIL);
     }
 
     /**
      * Stores information in the database, the columns not provided are set to null, and then replaced upon creation (such as ids of other entities)
      * @param username  username of user
+     * @param email     the user's email
      * @param pswd      corresponding password
      * @param name      name of user
      * @param lName     last name of user
      * @param notiType  type of notification to be sent to user
      * @return          return the userId of the user that was just created or null
      */
-    public String runUserCreation(String username, String pswd, String name, String lName, int notiType){
+    public String runUserCreation(String username, String email, String pswd, String name, String lName, int notiType){
         
         String userId = "";
 
         if (this.checkUniqueUsername(username)){
             // upload info to db
             try {
-                dbConnection.executeInsert(username, pswd, name, lName, "", Integer.toString(notiType), "", "");
+                dbConnection.executeInsert(username, pswd, name, lName, "", Integer.toString(notiType), "", "", email);
                 userId = dbConnection.executeRetrieve(USERNAME, username, 1, null).get(0);
             } catch (SQLException e) {
                 e.printStackTrace();

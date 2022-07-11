@@ -39,14 +39,19 @@ public class ManageEventsUseCase {
 
     /**
      * Method in charge of adding a birthday to the calendar object at the given date
-     * @param date  value at which we'll modify the bdId arrayList mm-dd
+     * @param date  value at which we'll modify the bdId arrayList yyyy-mm-dd
      * @param bdId  value to add to the bdId arrayList
      */
     public void addBirthday(String date, String bdId){
         ArrayList<String> bdIdsList = new ArrayList<>();
-        
-        if (this.calendarToMod.getYearCal().containsKey(date)){
-            bdIdsList = this.calendarToMod.getYearCal().get(date);
+        // System.out.println("DATE: " + date);
+        // System.out.println(this.calendarToMod.getYearCal().toString());
+
+        String[] dateArr = date.split("-");
+        String ddmmDate = dateArr[2] + "-" + dateArr[1];
+
+        if (this.calendarToMod.getYearCal().containsKey(ddmmDate)){
+            bdIdsList = this.calendarToMod.getYearCal().get(ddmmDate);
             bdIdsList.add(bdId);  // bdId added to arraylist
         } else {
             System.out.println("Birthday couldn't be successfully added. Class: ManageEventsUseCase.java");

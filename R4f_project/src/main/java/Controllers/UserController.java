@@ -51,6 +51,12 @@ public class UserController {
     public void executeLoginUser(String username, String pswd, boolean firstTime){
         // user id and username now setup, now must setup calendar id and bd id upon creation of those entities
         this.userId = this.userLogger.login(username, pswd, firstTime);
+        
+        if (this.userId == null){
+            // in case of bad login
+            return;  // return until higher level class calls for process to restart
+        }
+
         this.username = this.userLogger.userInstance.getUsername();
 
         if (!firstTime){

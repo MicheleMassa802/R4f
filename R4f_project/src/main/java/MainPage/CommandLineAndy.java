@@ -3,7 +3,9 @@ package main.java.MainPage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.spi.ToolProvider;
 
+import main.java.Helpers.InputChecker;
 import main.java.MainPage.TreeManager;
 import main.java.MainPage.Tree.TreeState;
 
@@ -38,9 +40,10 @@ public class CommandLineAndy {
         "y/n standing for yes or no.");
         System.out.println("When we ask for inline input, just type the answer in a single " + 
         "line in the format that is requested.");
-        System.out.print("Are you ready to start? [y/n] (single character): ");
-        char start = inputScanner.next().charAt(0);
-        if(start != 'y'){
+        
+        // check input
+        String start = InputChecker.ynPrompt("Are you ready to start? [y/n] (single character): ", inputScanner);
+        if(start.charAt(0) != 'y'){
             this.offerExitProgram();
         }
         // else, continue according to loop function
@@ -49,30 +52,23 @@ public class CommandLineAndy {
     }
 
     public void offerUserCreation(){
-        System.out.print("Would you like to create a R4F account (necessary to access R4F features)? [y/n] (single character): ");
-        char create = inputScanner.next().charAt(0);
-        if(create == 'y'){
+        // check input
+        String create = InputChecker.ynPrompt("Would you like to create a R4F account (necessary to access R4F features)? [y/n] (single character): ", inputScanner);
+        
+        if(create.charAt(0) == 'y'){
             System.out.println("Okay, to register an account we'll have to ask for some information first, answer all the questions and sit tight :)\n\n");
-            System.out.print("Username (String, no spaces): ");
-            String username = inputScanner.next();
-            System.out.print("Email (String, no spaces): ");
-            String email = inputScanner.next();
-            System.out.print("Password (String, no spaces): ");
-            String pswd = inputScanner.next();
-            System.out.print("Name (String, no spaces): ");
-            String name = inputScanner.next();
-            System.out.print("Last name (String, no spaces): ");
-            String lName = inputScanner.next();
-            System.out.print("Birthday Date (yyyy-mm-dd): ");
-            String birthday = inputScanner.next();
-            System.out.print("Instagram @ (String, no spaces) [print NONE if you dont have one]: ");
-            String ig = inputScanner.next();
-            System.out.print("Twitter @ (String, no spaces) [print NONE if you dont have one]: ");
-            String twt = inputScanner.next();
-            System.out.print("Discord Username (String, no spaces) [print NONE if you dont have one]: ");
-            String dsc = inputScanner.next();
-            System.out.print("How many times would you like to be notified of a birthday? (Single number, 1-3): ");
-            String notiType = inputScanner.next();
+
+            // check answers
+            String username = InputChecker.accountDetailPrompt(".+", "Username (String, no spaces): ", inputScanner);
+            String email = InputChecker.accountDetailPrompt(".+[@].+", "Email (String, no spaces): ", inputScanner);
+            String pswd = InputChecker.accountDetailPrompt(".+", "Password (String, no spaces): ", inputScanner);
+            String name = InputChecker.accountDetailPrompt(".+", "Name (String, no spaces): ", inputScanner);
+            String lName = InputChecker.accountDetailPrompt(".+", "Last name (String, no spaces): ", inputScanner);
+            String birthday = InputChecker.accountDetailPrompt("\\d\\d\\d\\d[-]\\d\\d[-]\\d\\d", "Birthday Date (yyyy-mm-dd): ", inputScanner);
+            String ig = InputChecker.accountDetailPrompt(".+", "Instagram @ (String, no spaces) [print NONE if you dont have one]: ", inputScanner);
+            String twt = InputChecker.accountDetailPrompt(".+", "Twitter @ (String, no spaces) [print NONE if you dont have one]: ", inputScanner);
+            String dsc = InputChecker.accountDetailPrompt(".+", "Discord Username (String, no spaces) [print NONE if you dont have one]: ", inputScanner);
+            String notiType = InputChecker.accountDetailPrompt("[123]", "How many times would you like to be notified of a birthday? (Single number, 1-3): ", inputScanner);
            
            this.treeManagerClass.registerUser(username, email, pswd, name, lName, birthday, ig, twt, dsc, Integer.parseInt(notiType));
         }
@@ -81,21 +77,28 @@ public class CommandLineAndy {
     }
 
     public void offerUserLogIn(){
-        System.out.print("Would you like to log into your R4F account (necessary to access R4F features)? [y/n] (single character): ");
-        char log = inputScanner.next().charAt(0);
-        if(log == 'y'){
+        // check input
+        String log = InputChecker.ynPrompt("Would you like to log into your R4F account (necessary to access R4F features)? [y/n] (single character): ", inputScanner);
+        
+        if(log.charAt(0) == 'y'){
             System.out.println("Okay, to log in we'll have to verify your credentials first, fill in the information and sit tight :)\n\n");
-            System.out.print("Username (String, no spaces): ");
-            String username = inputScanner.next();
-            System.out.print("Password (String, no spaces): ");
-            String pswd = inputScanner.next();
-            System.out.print("Is this your first time logging in? [y/n] (single character): ");
-            char firstTimeString = inputScanner.next().charAt(0);
+            
+            while (this.treeManagerClass.userId == null){
+                // check answers
+                String username = InputChecker.accountDetailPrompt(".+", "Username (String, no spaces): ", inputScanner);
+                String pswd = InputChecker.accountDetailPrompt(".+", "Password (String, no spaces): ", inputScanner);
+                String firstTimeString = InputChecker.ynPrompt("Is this your first time logging in? [y/n] (single character): ", inputScanner);
 
-            boolean firstTime = firstTimeString == 'y';
-            this.treeManagerClass.logUserIn(username, pswd, firstTime);
+                boolean firstTime = firstTimeString.charAt(0) == 'y';
+                this.treeManagerClass.logUserIn(username, pswd, firstTime);
+                // if success, userId should be set to not null
+                if(this.treeManagerClass.userId == null){
+                    System.out.println("The credentials provided failed the check, please re-enter your account information!");
+                }
+            }
+
+            // else keep going
             this.treeManagerClass.addCalendar(this.treeManagerClass.userId);
-            // if no error comes up in log in
             this.loggedIn = true;
             System.out.println("Welcome to R4F " + this.treeManagerClass.username + " :3");
 
@@ -133,27 +136,21 @@ public class CommandLineAndy {
 
 
     public void offerSubmitSurvey(){
-        System.out.print("Would you like to submit a birthday survey? [y/n] (single character): ");
-        char submit = inputScanner.next().charAt(0);
-        if(submit == 'y'){
-            System.out.println("Okay, here are the questions you'll have to answer\n\n");
-            System.out.print("What is the user ID of the person inviting you to fill out this survey? (String, no spaces): ");
-            String userId = inputScanner.next();
-            System.out.print("What is the calendar ID of the person inviting you to fill out this survey? (String, no spaces): ");
-            String calId = inputScanner.next();
-            System.out.print("What is your name? (String, no spaces): ");
-            String name = inputScanner.next();
-            System.out.print("What is your last name? (String, no spaces): ");
-            String lName = inputScanner.next();
-            System.out.print("Birthday Date (yyyy-mm-dd): ");
-            String birthday = inputScanner.next();
-            System.out.print("What is your instagram @? (String, no spaces) [print NONE if you dont have one]: ");
-            String ig = inputScanner.next();
-            System.out.print("What is your twitter @? (String, no spaces) [print NONE if you dont have one]: ");
-            String twt = inputScanner.next();
-            System.out.print("What is your discord username? (String, no spaces) [print NONE if you dont have one]: ");
-            String dsc = inputScanner.next();
+        // check input
+        String submit = InputChecker.ynPrompt("Would you like to submit a birthday survey? [y/n] (single character): ", inputScanner);
 
+        if(submit.charAt(0) == 'y'){
+            System.out.println("Okay, here are the questions you'll have to answer\n\n");
+
+            // check answers
+            String userId = InputChecker.accountDetailPrompt("\\d+", "What is the user ID of the person inviting you to fill out this survey? (String, no spaces): ", inputScanner);
+            String calId = InputChecker.accountDetailPrompt("\\d+", "What is the calendar ID of the person inviting you to fill out this survey? (String, no spaces): ", inputScanner);
+            String name = InputChecker.accountDetailPrompt(".+", "What is your name? (String, no spaces): ", inputScanner);
+            String lName = InputChecker.accountDetailPrompt(".+", "What is your last name? (String, no spaces): ", inputScanner);
+            String birthday = InputChecker.accountDetailPrompt("\\d\\d\\d\\d[-]\\d\\d[-]\\d\\d", "Birthday Date (yyyy-mm-dd): ", inputScanner);
+            String ig = InputChecker.accountDetailPrompt(".+", "What is your instagram @? (String, no spaces) [print NONE if you dont have one]: ", inputScanner);
+            String twt = InputChecker.accountDetailPrompt(".+", "What is your twitter @? (String, no spaces) [print NONE if you dont have one]: ", inputScanner);
+            String dsc = InputChecker.accountDetailPrompt(".+", "What is your discord username? (String, no spaces) [print NONE if you dont have one]: ", inputScanner);
             this.treeManagerClass.submitVisitorSurvey(userId, calId, name, lName, birthday, ig, twt, dsc);
             System.out.println("R4F survey submitted, thank you for your time!");
 
@@ -163,9 +160,10 @@ public class CommandLineAndy {
     }
 
     public void offerExitProgram(){
-        System.out.print("Would you like to exit the program? [y/n] (single character): ");
-        char exit = inputScanner.next().charAt(0);
-        if(exit == 'y'){
+        // check input
+        String exit = InputChecker.ynPrompt("Would you like to exit the program? [y/n] (single character): ", inputScanner);
+
+        if(exit.charAt(0) == 'y'){
             this.currLoopVar = false;
             System.out.println("Goodbye friend :3! Hope you enjoyed using R4F");
             CommandLineAndy.printSeparator();
@@ -180,10 +178,10 @@ public class CommandLineAndy {
     //////////////////// HOME PAGE
 
     public void offerShowCalendar(){
-        System.out.print("Would you like to go over to the calendar page? [y/n] (single character): ");
-        char calPage = inputScanner.next().charAt(0);
-        if (calPage == 'y'){
-            
+        // check input
+        String calPage = InputChecker.ynPrompt("Would you like to go over to the calendar page? [y/n] (single character): ", inputScanner);
+        
+        if (calPage.charAt(0) == 'y'){
             // move onto calendar page
             this.calendarPageLoop();
         }
@@ -193,9 +191,9 @@ public class CommandLineAndy {
     }
 
     public void offerAccountView(){
-        System.out.print("Would you like to go over to the account page? [y/n] (single character): ");
-        char accPage = inputScanner.next().charAt(0);
-        if (accPage == 'y'){            
+        // check input
+        String accPage = InputChecker.ynPrompt("Would you like to go over to the account page? [y/n] (single character): ", inputScanner);
+        if (accPage.charAt(0) == 'y'){            
             // move onto account page
             this.accountPageLoop();
         }
@@ -204,9 +202,10 @@ public class CommandLineAndy {
     }
 
     public void offerShareSurvey(){
-        System.out.print("Would you like to share your birthday survey to a friend? [y/n] (single character): ");
-        char survey = inputScanner.next().charAt(0);
-        if (survey == 'y'){
+        // check input
+        String survey = InputChecker.ynPrompt("Would you like to share your birthday survey to a friend? [y/n] (single character): ", inputScanner);
+
+        if (survey.charAt(0) == 'y'){
             System.out.println("Okay, since this is the command line app, for your friend to access the survey they'll have to download it from our github repo: https://github.com/MicheleMassa802/R4f");
             System.out.println("The reference ids your friends will need to complete the survey are the following... \nYour calendar ID: " + this.treeManagerClass.calendarId + ", and your user ID: " + this.treeManagerClass.userId);
             System.out.println("Be sure to communicate those two pieces of information to whoever is filling out the survey and if you like R4F, maybe even recommend it :)))");
@@ -217,9 +216,10 @@ public class CommandLineAndy {
 
 
     public void offerShowBirthdays(){
-        System.out.print("Would you like to look at the birthdays you have registered for today? [y/n] (single character): ");
-        char bds = inputScanner.next().charAt(0);
-        if (bds == 'y'){
+        // check input
+        String bds = InputChecker.ynPrompt("Would you like to look at the birthdays you have registered for today? [y/n] (single character): ", inputScanner);
+        
+        if (bds.charAt(0) == 'y'){
             System.out.println("Today's birthdays are the following: \n");
             // truncate todays date to only month and day
             String[] todaysDate = LocalDate.now().toString().split("-");
@@ -232,9 +232,10 @@ public class CommandLineAndy {
     }
 
     public void offerLogOut(){
-        System.out.print("Would you like to log out of your account? This will cause you to exit back to the welcome page [y/n] (single character): ");
-        char logout = inputScanner.next().charAt(0);
-        if(logout == 'y'){
+        // check input
+        String logout = InputChecker.ynPrompt("Would you like to log out of your account? This will cause you to exit back to the welcome page [y/n] (single character): ", inputScanner);
+        
+        if(logout.charAt(0) == 'y'){
             this.currLoopVar = false;
             System.out.println("Logging you out of your account, hope to see you back soon :)");
             CommandLineAndy.printSeparator();
@@ -271,19 +272,24 @@ public class CommandLineAndy {
         CmdLCalDrawer.printIdCalendar(this.treeManagerClass.showCalendarHashMap(null));
         CommandLineAndy.printSeparator();
 
-        System.out.print("Would you like to look at a specific date's birthdays? [y/n] (single character): ");
-        char showSpecBd = inputScanner.next().charAt(0);
-        if(showSpecBd == 'y'){
+        // check input
+        String showSpecBd = InputChecker.ynPrompt("Would you like to look at a specific date's birthdays? [y/n] (single character): ", inputScanner);
+
+        if(showSpecBd.charAt(0) == 'y'){
             System.out.println("Please enter the date you want to look at in the following prompts...");
-            System.out.print("Enter the month you want to look at [mm] (two digits, a number from 1-12): ");
-            String month = inputScanner.next();
-            System.out.print("Enter the day you want to look at [dd] (two digits, a number from 1-31): ");
-            String day = inputScanner.next();
+
+            // check answers
+            String month = InputChecker.accountDetailPrompt("\\d\\d", "Enter the month you want to look at [mm] (two digits, a number from 01-12): ", inputScanner);
+            String day = InputChecker.accountDetailPrompt("\\d\\d", "Enter the day you want to look at [dd] (two digits, a number from 01-31): ", inputScanner);
+            
             // make up date from inputs
             String date = day + "-" + month;
             System.out.println("The birthdays for that date are the following: ");
             ArrayList<String> todaysBds = this.treeManagerClass.showDateBirthdays(date);
-            System.out.println(todaysBds.toString());
+            // print all bds
+            for (String birthdayDetails : todaysBds){
+                System.out.println(birthdayDetails + "\n");
+            }
             
             CommandLineAndy.printSeparator();
             return;
@@ -294,9 +300,10 @@ public class CommandLineAndy {
     }
 
     public void goMainFromCalendar(){
-        System.out.print("Would you like to go back to the Main page? [y/n] (single character): ");
-        char calToMain = inputScanner.next().charAt(0);
-        if(calToMain == 'y'){
+        // check input
+        String calToMain = InputChecker.ynPrompt("Would you like to go back to the Main page? [y/n] (single character): ", inputScanner);
+
+        if(calToMain.charAt(0) == 'y'){
             this.currLoopVar = false;
             System.out.println("Going back to the main page :)");
             CommandLineAndy.printSeparator();
@@ -326,9 +333,10 @@ public class CommandLineAndy {
     //////////////////// ACCOUNT PAGE
 
     public void showAccountDetails(){
-        System.out.print("Hello there, would you like to go over your account details? [y/n] (single character): ");
-        char accDetails = this.inputScanner.next().charAt(0);
-        if(accDetails == 'y'){
+        // check input
+        String accDetails = InputChecker.ynPrompt("Hello there, would you like to go over your account details? [y/n] (single character): ", inputScanner);
+
+        if(accDetails.charAt(0) == 'y'){
             System.out.println("The following are your account details: \n\n");
             ArrayList<String> accDetailsArr = this.treeManagerClass.showAccount();
             System.out.println("Username: " + accDetailsArr.get(0) + "\nUser ID: " + accDetailsArr.get(1) + 
@@ -341,9 +349,10 @@ public class CommandLineAndy {
     }
 
     public void goMainFromAccount(){
-        System.out.print("Would you like to go back to the Main page? [y/n] (single character): ");
-        char accToMain = inputScanner.next().charAt(0);
-        if(accToMain == 'y'){
+        // check input
+        String accToMain = InputChecker.ynPrompt("Would you like to go back to the Main page? [y/n] (single character): ", inputScanner);
+
+        if(accToMain.charAt(0) == 'y'){
             this.currLoopVar = false;
             System.out.println("Going back to the main page :)");
             CommandLineAndy.printSeparator();
@@ -373,7 +382,7 @@ public class CommandLineAndy {
 
 
     public static void printSeparator(){
-        System.out.println("\n--------------------------------------------------------------------\n");
+        System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
 }

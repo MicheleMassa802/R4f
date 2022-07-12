@@ -102,21 +102,23 @@ public class CreateCalendarUseCase {
         this.calendarInstance = new CalendarEntity(this.userId);
         this.calendarInstance.setCalendarId(calId);
 
-        if (dates.size() != bdIds.size() && dates.size() != this.calendarInstance.getYearCal().keySet().size()){
+        if (dates.size() != bdIds.size() || dates.size() != this.calendarInstance.getYearCal().keySet().size()){
             // check correct # of rows retrieved
             System.out.println("Error in retrieval, number of date and bdIds rows doesn't match");
         }
 
         int i;
         for (i = 0; i < dates.size(); i++){
-            if (this.calendarInstance.getYearCal().containsKey(dates.get(i))){  // if date at i is contained in hashmap, then fill in the bdIds
+            // format each date
+            String formattedDate = UseCaseDateFormatter.formatYearlyToMonthly(dates.get(i));
+            if (this.calendarInstance.getYearCal().containsKey(formattedDate)){  // if date at i is contained in hashmap, then fill in the bdIds
                 // convert each bdIds string ("[..., ..., ...]") into ArrayList<String>
                 // trim '[', ']', then split based on ','
                 String currBdIds = bdIds.get(i);
-                currBdIds.substring(1, currBdIds.length() - 1);
+                currBdIds = currBdIds.substring(1, currBdIds.length() - 1);
                 String[] bdIdArray = currBdIds.split(",");
                 ArrayList<String> bdIdsList = new ArrayList<String>(Arrays.asList(bdIdArray));
-                this.calendarInstance.getYearCal().put(dates.get(i), bdIdsList);
+                this.calendarInstance.getYearCal().put(formattedDate, bdIdsList);
             }
         }
 

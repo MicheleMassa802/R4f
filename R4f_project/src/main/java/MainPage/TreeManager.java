@@ -108,6 +108,11 @@ public class TreeManager {
         // login user 
         this.userController.executeLoginUser(username, pswd, false);
         this.userId = this.userController.userId;
+        if (this.userId == null){
+            // in case of bad login
+            return;  // return until higher level class calls for process to restart
+        }
+
         this.username = this.userController.username;
             
         // calendar and bd info setup along with login, as registration process already finished the account creation process
@@ -338,9 +343,8 @@ public class TreeManager {
         if (month == null){
             // default case starts at current month, so return specific info corresponding to this month
             String monthToDisplay = LocalDate.now().toString().split("-")[1];
-            
             for (String date: this.calendar.keySet()){
-                if (date.contains(monthToDisplay + "-")){  // when month matches
+                if (date.contains("-" + monthToDisplay)){  // when month matches
                     // append to result array the string version of all bdIds related to this date
                     result.put(date, this.calendar.get(date)); 
                 }
@@ -373,7 +377,7 @@ public class TreeManager {
      * 
      * TO BE CALLED: upon the users press to view the information corresponding to a birthday cell
      * 
-     * @param date  the String corresponding to the date the user wants to check birthdays for
+     * @param date  the String corresponding to the date the user wants to check birthdays for dd-mm
      * @return      the arrayList of strings where each element is a string containing the info for one of the
      *              bd objects present at that date
      */

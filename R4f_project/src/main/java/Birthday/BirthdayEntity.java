@@ -59,17 +59,16 @@ public class BirthdayEntity {
      * @return the string with the birthday information to be displayed on the R4F website
      */
     public String toStringWS() {
-        String info = this.name + " " + this.lastname;
-        
+        String info = "\n#####################################################\nBirthday person: " + this.name + " " + this.lastname;
         StringBuilder smLinks = new StringBuilder();
     
         int i = 1;
         for (String link : this.socialMediaLinks.keySet()){
-            smLinks.append("[Link ").append(i).append("] ").append(link).append("\n");
+            smLinks.append("[Link ").append(i).append("] ").append(link).append(": ").append(this.socialMediaLinks.get(link)).append("\n");
             i += 1;
         }
 
-        return info + " ||| " + smLinks;
+        return info + " \n" + smLinks + "\n#####################################################\n";
     }
 
 

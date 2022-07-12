@@ -65,7 +65,7 @@ public class LoginUserUseCase {
             }
             
         }
-        // else
+        // else (pswd and username check failed)
         System.out.println("Credentials didn't match, please re-enter your username and password");
         return null;
 
@@ -90,11 +90,17 @@ public class LoginUserUseCase {
             return false;
         }
 
+        // check if username existed
+        if (data.size() == 0){
+            // username entered invalid
+            return false;
+        }
+
         if (data.get(2).equals(pswd)){
             // passwords match
             return true;
         }
-        // else
+        // else username exists but pswd doesnt match
         return false;
 
     }

@@ -236,16 +236,27 @@ public class CmdLCalDrawer {
                 // break out of this loop in the first iteration after getting the date
                 break keyLoop;
             }
-            String month = dateStr.split("-")[0];
+            String month = dateStr.split("-")[1];
 
             
             // add month row 
             result.addAll(CmdLCalDrawer.printMonthRow(Integer.parseInt(month)));
 
-            // create an arraylist all corresponding values
+            // create an arraylist of all corresponding values in order (sort hashmap contents based on key)
             ArrayList<ArrayList<String>> idsArrayListArr = new ArrayList<>();
-            for (ArrayList<String> dateIdList : monthCalendar.values()){
-                idsArrayListArr.add(dateIdList);
+            
+            
+            String date;
+            int day;
+
+            for (day = 1; day < 32; day++){
+                if (day < 10){
+                    date = "0" + Integer.toString(day) + "-" + month;
+                } else {
+                    date = Integer.toString(day) + "-" + month;
+                }
+                idsArrayListArr.add(monthCalendar.get(date));  // in order
+
             }
 
             int j = 0;

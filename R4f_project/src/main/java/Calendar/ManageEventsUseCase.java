@@ -3,6 +3,8 @@ package main.java.Calendar;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.SpinnerDateModel;
+
 import main.java.Database.ExecuteQuery;
 import main.java.Database.IDBConnectionPoint;
 
@@ -44,15 +46,17 @@ public class ManageEventsUseCase {
      */
     public void addBirthday(String date, String bdId){
         ArrayList<String> bdIdsList = new ArrayList<>();
-        // System.out.println("DATE: " + date);
-        // System.out.println(this.calendarToMod.getYearCal().toString());
 
         String[] dateArr = date.split("-");
         String ddmmDate = dateArr[2] + "-" + dateArr[1];
 
         if (this.calendarToMod.getYearCal().containsKey(ddmmDate)){
-            bdIdsList = this.calendarToMod.getYearCal().get(ddmmDate);
-            bdIdsList.add(bdId);  // bdId added to arraylist
+            bdIdsList = this.calendarToMod.getYearCal().get(ddmmDate); 
+            System.out.println("BD IDS AT START: " + bdIdsList.toString());
+            bdIdsList.add(bdId);
+            System.out.println("BD IDS AT END: " + bdIdsList.toString());
+            
+
         } else {
             System.out.println("Birthday couldn't be successfully added. Class: ManageEventsUseCase.java");
             return;

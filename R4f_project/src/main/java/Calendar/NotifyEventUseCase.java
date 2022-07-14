@@ -46,8 +46,10 @@ public class NotifyEventUseCase {
 
         // convert bdIdsString ("[..., ..., ...]") into ArrayList<String>
         // trim '[', ']', then split based on ','
-        bdIdsString.substring(1, bdIdsString.length() - 1);
+        bdIdsString = bdIdsString.substring(1, bdIdsString.length() - 1);
         
+        // check until number is found
+
         // check trimmed string length is not 0
         if (bdIdsString.length() == 0){
             return new ArrayList<>();  // empty arraylist case

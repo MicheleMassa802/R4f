@@ -47,7 +47,7 @@ public class BirthdayEntity {
     
         int i = 1;
         for (String link : this.socialMediaLinks.keySet()){
-            smLinks.append("[Link ").append(i).append("] ").append(link).append("\n");
+            smLinks.append("[Link ").append(i).append("] ").append(link).append(": ").append(this.socialMediaLinks.get(link)).append("\n");
             i += 1;
         }
 

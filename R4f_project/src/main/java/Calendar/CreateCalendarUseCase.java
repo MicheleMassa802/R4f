@@ -115,9 +115,22 @@ public class CreateCalendarUseCase {
                 // convert each bdIds string ("[..., ..., ...]") into ArrayList<String>
                 // trim '[', ']', then split based on ','
                 String currBdIds = bdIds.get(i);
+                ArrayList<String> bdIdsList = new ArrayList<>();
                 currBdIds = currBdIds.substring(1, currBdIds.length() - 1);
-                String[] bdIdArray = currBdIds.split(",");
-                ArrayList<String> bdIdsList = new ArrayList<String>(Arrays.asList(bdIdArray));
+                // copy over values
+                String[] bdIdArray = currBdIds.split(", ");
+
+                for (int j = 0; j < bdIdArray.length; j++){
+                    if (bdIdArray[j] != "" && bdIdArray[j] != " "){
+                        bdIdsList.add(bdIdArray[j]);
+                        //System.out.println("CAUGHT YOU");
+                    }
+                    // else dont add it
+                    
+                }
+
+                // bdIdsList = new ArrayList<String>(Arrays.asList(bdIdArray));
+                
                 this.calendarInstance.getYearCal().put(formattedDate, bdIdsList);
             }
         }

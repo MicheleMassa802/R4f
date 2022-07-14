@@ -3,6 +3,12 @@
         "lib/**/*.jar",
         "c:\\Users\\miche\\Documents\\Java LIB JARS\\mysql-connector-java-8.0.29.jar",
         "c:\\Users\\miche\\Documents\\Java LIB JARS\\javax.mail.jar",
-        "c:\\Users\\miche\\Documents\\Java LIB JARS\\activation.jar\\activation.jar"
+        "c:\\Users\\miche\\Documents\\Java LIB JARS\\activation.jar\\activation.jar",
+        "c:\\Users\\miche\\Documents\\Java LIB JARS\\quartz-2.3.0-distribution\\quartz-2.3.0-SNAPSHOT\\lib\\c3p0-0.9.5.2.jar",
+        "c:\\Users\\miche\\Documents\\Java LIB JARS\\quartz-2.3.0-distribution\\quartz-2.3.0-SNAPSHOT\\lib\\log4j-1.2.16.jar",
+        "c:\\Users\\miche\\Documents\\Java LIB JARS\\quartz-2.3.0-distribution\\quartz-2.3.0-SNAPSHOT\\lib\\quartz-2.3.0-SNAPSHOT.jar",
+        "c:\\Users\\miche\\Documents\\Java LIB JARS\\quartz-2.3.0-distribution\\quartz-2.3.0-SNAPSHOT\\lib\\quartz-jobs-2.3.0-SNAPSHOT.jar",
+        "c:\\Users\\miche\\Documents\\Java LIB JARS\\quartz-2.3.0-distribution\\quartz-2.3.0-SNAPSHOT\\lib\\slf4j-api-1.7.7.jar",
+        "c:\\Users\\miche\\Documents\\Java LIB JARS\\quartz-2.3.0-distribution\\quartz-2.3.0-SNAPSHOT\\lib\\slf4j-log4j12-1.7.7.jar"
     ]
 }

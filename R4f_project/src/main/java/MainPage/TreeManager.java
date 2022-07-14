@@ -410,7 +410,6 @@ public class TreeManager {
      * @return          the string value corresponding to the month index
      */
     public static String convertIntToMonth(int month) {
-        // this warning does not work in some versions of java, so we've kept it
         switch (month) {
             case 1:
                 return "January";
@@ -448,7 +447,6 @@ public class TreeManager {
      * @return          the string value corresponding to the month index
      */
     public static String convertMonthIntToMM(int month) {
-        // this warning does not work in some versions of java, so we've kept it
         switch (month) {
             case 1:
                 return "01";

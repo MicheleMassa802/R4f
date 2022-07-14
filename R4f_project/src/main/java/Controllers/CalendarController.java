@@ -95,6 +95,9 @@ public class CalendarController {
  
     }
 
+    // setters and getters
+    public void setCalendarId(String calId){this.calendarId = calId;}
+
 
 
 }

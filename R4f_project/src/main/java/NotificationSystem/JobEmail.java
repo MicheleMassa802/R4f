@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
@@ -26,7 +27,7 @@ public class JobEmail  implements Job{
     // the class invoked to send notification emails the second someones opens up a R4F session
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        System.out.println("Email job --->>> Time is: " + LocalDate.now().toString());
+        System.out.println("Email job --->>> Date and Time is: " + new Date());
 
         // get information here for emails to be sent
         // for user id in user table, get each of 

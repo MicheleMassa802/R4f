@@ -1,0 +1,1 @@
+This build folder is here for the sole purpose of storing compiled bytecode as the MainScheduler is ran from runScheduler.sh

@@ -1,7 +1,9 @@
 package main.java.NotificationSystem;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
@@ -19,6 +21,11 @@ import main.java.Database.IDBConnectionPoint;
 
 public class BirthdayNotifier {
     
+    private static final int START_HOUR = 7;
+    private static final int START_MINUTE = 45;
+    private static final int START_SECOND = 0;
+    private static final int DFLT_GAP = 30;
+
     // the class invoked to send birthday emails to everyone who should receive a notification on todays date
 
     public BirthdayNotifier(){
@@ -30,34 +37,58 @@ public class BirthdayNotifier {
      * The function in charge of scheduling the emails for the day
      */
     public void scheduleDailyEmails(){
-        try {
+        Date currentTime = new Date();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");  
+        String[] timeArray = timeFormat.format(currentTime).toString().split(":");
+        int hour = Integer.parseInt(timeArray[0]);
+        int minute = Integer.parseInt(timeArray[1]);
+        int seconds = Integer.parseInt(timeArray[2]);
 
-            JobDetail emailJob = JobBuilder.newJob(JobEmail.class)
-            .withIdentity("emailJob", "group").build();
+        if (hour < START_HOUR || ((hour == START_HOUR) && (minute < START_MINUTE))){
+            // try to schedule job
+            
+            try {
+                JobDetail emailJob = JobBuilder.newJob(JobEmail.class)
+                .withIdentity("emailJob", "group").build();
 
-            // build cron date expression for 8am of the date the notifications are to be sent
-            String[] bdDateArr = LocalDate.now().toString().split("-");
-            String currDay = bdDateArr[2];
-            String currMonth = bdDateArr[1];
-            String currYear = bdDateArr[0];
-            String cronDate = "0 45 7 " + currDay + " " + BirthdayNotifier.convertStrToMonth(currMonth) + " ? " + currYear;
-            // test
-            // String cronDate = "0/30 * * * * ?";
-            Trigger trigger = TriggerBuilder.newTrigger()
-            .withIdentity("cronTrigger", "group")
-            .withSchedule(CronScheduleBuilder.cronSchedule(new CronExpression(cronDate)))
-            .build();
+                // build cron date expression for 8am of the date the notifications are to be sent
+                String[] bdDateArr = LocalDate.now().toString().split("-");
+                String currDay = bdDateArr[2];
+                String currMonth = bdDateArr[1];
+                String currYear = bdDateArr[0];
+                // program must be open and start running before the default start time so that cron trigger works, runnning program after => error 
+                String cronDate = START_SECOND + " " + START_MINUTE + " " + START_HOUR + " " + currDay + " " + BirthdayNotifier.convertStrToMonth(currMonth) + " ? " + currYear;
+                Trigger trigger = TriggerBuilder.newTrigger()
+                .withIdentity("cronTrigger", "group")
+                .withSchedule(CronScheduleBuilder.cronSchedule(new CronExpression(cronDate)))
+                .build();
 
-            Scheduler scheduler = new StdSchedulerFactory().getScheduler();
-            scheduler.start();
-            scheduler.scheduleJob(emailJob, trigger);
+                Scheduler scheduler = new StdSchedulerFactory().getScheduler();
+                scheduler.scheduleJob(emailJob, trigger);  // schedule job with trigger
+                scheduler.start();  // start scheduler to run notification system
 
-            Thread.sleep(1000000);
-            scheduler.shutdown();
+                // wait long enough to let scheduler run job which starts at start time + give it default gap extra seconds
 
-        } catch (Exception e){
-            System.out.println("Error in scheduling of email");
-            e.printStackTrace();
+                // figure out # of seconds to sleep for ((Start time - current Time)[in secs] + default gap secs)
+                int secondsToWait = DFLT_GAP + ((START_HOUR - hour) * 3600) + ((START_MINUTE - minute) * 60) + (START_SECOND - seconds);  // default gap + hour intv + min intv + sec intv
+
+                try {
+                    // sleep for necessary time
+                    System.out.println("Waiting for " + secondsToWait + " seconds...");
+                    Thread.sleep(secondsToWait * 1000);
+                    
+                } catch (Exception e) {}
+
+                // shutdown after wait is over
+                scheduler.shutdown(true);
+                    
+            } catch (Exception e){
+                System.out.println("Error in scheduling of email");
+                e.printStackTrace();
+            }
+        } else {
+            // else, made it too late to the window
+            System.out.println("Start time has already passed, emails for today can no longer be scheduled.");
         }
 
     }

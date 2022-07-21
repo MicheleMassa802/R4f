@@ -3,13 +3,52 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>R4F Web Application</display-name>
+  <description>The UI for the web application of the R4F birthday manager </description>
+
+  <session-config>
+    <session-timeout>10</session-timeout> <!-- 10 minutes until timeout -->
+  </session-config>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- Forms servlets -->
+
   <servlet>
-    <servlet-name>servlet</servlet-name>
-    <servlet-class>com.server4.Servlet.servlet</servlet-class>
+    <servlet-name>login-servlet</servlet-name>
+    <servlet-class>com.server4.Servlet.LoginServlet</servlet-class>
+    <description> A servlet used for logging into R4F</description>
   </servlet>
+
   <servlet-mapping>
-    <servlet-name>servlet</servlet-name>
-    <url-pattern>/api</url-pattern>
+    <servlet-name>login-servlet</servlet-name>
+    <url-pattern>/submit-login</url-pattern>
   </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>reg-servlet</servlet-name>
+    <servlet-class>com.server4.Servlet.RegisterServlet</servlet-class>
+    <description> A servlet used for logging into R4F</description>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>teg-servlet</servlet-name>
+    <url-pattern>/submit-reg</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>survey-servlet</servlet-name>
+    <servlet-class>com.server4.Servlet.SubmitSurveyServlet</servlet-class>
+    <description> A servlet used for logging into R4F</description>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>survey-servlet</servlet-name>
+    <url-pattern>/submit-survey</url-pattern>
+  </servlet-mapping>
+
 </web-app>

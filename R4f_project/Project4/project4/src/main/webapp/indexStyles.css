@@ -1,0 +1,109 @@
+/* The css file responsible for all styling elements of the index Page of the R4F website*/
+
+.three-column-wrapper {
+    display: grid;  /* grid of the 3 columns spanning the whole page */
+    grid-template-columns: 1fr 1fr;  /* set as two since the forms are in one single div */
+    padding: 15px;
+    padding-top: 0px;
+}
+
+
+.buttons-content-wrapper {  /* grid of the buttons on the left side */
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+/* button images on the left side */
+
+.button-content-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.button-img-background {
+    height: 300px;
+    width: 100%;
+    background-size: cover;  /* for imgs of different sizes, auto crops to fit perfectly*/
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 4px #292929;
+}
+/* Adjusting image captions to lay on top of the images */
+.img-text-wrapper {
+    /* img text wrapper positioned at the very top */
+    position: absolute;
+    bottom: 0;
+    /* items inside this div positioned at the top use flex box */
+    
+    height: 100%; /* takes full height */
+}
+.logo-wrapper img{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* new classes not in html for the fading effect of buttons */
+.img-darken {
+    transition: 1s;
+    filter: brightness(2%);
+}
+.img-lighten {
+    transition: 1s;
+    filter: brightness(100%);
+}
+
+
+/* forms */
+
+/* form IO */
+.question {
+    padding: 6px;
+    padding-bottom: 5px;
+}
+.survey-answer-box{
+    padding-top: 10px;
+}
+input {
+    background-color: #F9EAE6;
+    padding: 5px;
+    border-color: #292929;
+    border-radius: 6px;
+    border-width: 2px;
+}
+button {
+    background-color: #E9FFFE;
+    padding: 5px;
+    border-color: #292929;
+    border-radius: 6px;
+    border-width: 2px;
+}
+
+.buttons-content-wrapper, .forms-content-wrapper {
+    padding: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.submit-reg-button, .submit-login-button {
+    padding-top: 15px;
+}
+
+.right-form-content-wrapper, .left-form-content-wrapper {
+    opacity: 0%;
+}
+
+/* double form grid */
+.forms-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* set as two since the forms are in one single div */
+    padding: 15px;
+    padding-top: 0px;
+}
+
+
+

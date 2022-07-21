@@ -3,13 +3,15 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>R4F Web Application</display-name>
+
+  <session-config>
+    <session-timeout>10</session-timeout> <!-- 10 minutes until timeout -->
+  </session-config>
+
   <servlet>
     <servlet-name>servlet</servlet-name>
     <servlet-class>com.server4.Servlet.servlet</servlet-class>
+    <description> A servlet used for testing </description>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>servlet</servlet-name>
-    <url-pattern>/api</url-pattern>
-  </servlet-mapping>
 </web-app>

@@ -1,0 +1,4 @@
+[INFO] Using property: groupId = com.project4
+[INFO] Using property: artifactId = project4
+
+Other info in pom.xml

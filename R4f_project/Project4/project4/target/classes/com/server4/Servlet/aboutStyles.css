@@ -1,0 +1,33 @@
+/* The css file responsible for all styling elements of the Welcome Page of the R4F website*/
+
+.two-column-wrapper {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+}
+
+.profile-image-wrapper {
+    display: flex;
+    width: 90%;  /* 90% of one of the 2 grid columns */
+    height: 80%;
+    justify-content: center;
+    align-items:stretch;
+}
+
+.profile-content-wrapper {
+    padding: 30px;
+}
+
+.profile-content-wrapper h1{
+    color: #292929;
+}
+
+.profile-content-wrapper a{
+    color: #292929;
+    text-decoration: none;
+    font-weight: 600;   
+}
+
+.profile-image-wrapper img {
+    padding: 30px;
+    width: 90%;
+}

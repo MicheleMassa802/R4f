@@ -1,4 +1,4 @@
-package com.server4;
+package com.server4.Servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class servlet extends HttpServlet {
@@ -15,9 +14,12 @@ public class servlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
+        // to get input from forms do:
+        // request.getParameter(<nameOfHtmlElementDiv>) and parse them if they are ints, or take them as strings
+
         try {
             out.println("<html>");
-            out.println("<h1>Hello all from servlet</h1>");
+            out.println("<h1>HOWDY all from servlet</h1>");
             out.println("<h1> Servlet NewServlet at " + request.getContextPath() + "</h1>");
             String user = request.getParameter("user");
             out.println("<h2> Welcome " + user + "</h2>");

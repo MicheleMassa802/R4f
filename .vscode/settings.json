@@ -10,5 +10,9 @@
         "c:\\Users\\miche\\Documents\\Java LIB JARS\\quartz-2.3.0-distribution\\quartz-2.3.0-SNAPSHOT\\lib\\quartz-jobs-2.3.0-SNAPSHOT.jar",
         "c:\\Users\\miche\\Documents\\Java LIB JARS\\quartz-2.3.0-distribution\\quartz-2.3.0-SNAPSHOT\\lib\\slf4j-api-1.7.7.jar",
         "c:\\Users\\miche\\Documents\\Java LIB JARS\\quartz-2.3.0-distribution\\quartz-2.3.0-SNAPSHOT\\lib\\slf4j-log4j12-1.7.7.jar"
-    ]
+    ],
+    "files.associations": {
+        "javatoc.h": "c",
+        "stdio.h": "c"
+    }
 }

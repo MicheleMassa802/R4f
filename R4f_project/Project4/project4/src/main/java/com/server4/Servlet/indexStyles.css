@@ -1,0 +1,63 @@
+/* The css file responsible for all styling elements of the index Page of the R4F website*/
+
+.buttons-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.hover-content-wrapper {
+    position: relative;
+    
+}
+
+.hover-img-background {
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.logo-wrapper img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%; /* takes full height */
+}
+
+.survey-subtitle {
+    padding: 15px;
+    position: absolute;
+    top: 215px;
+    height: 100%; /* takes full height */
+}
+
+.bd-subtitle {
+    padding: 15px;
+    position: absolute;
+    top: 135px;
+    height: 100%; /* takes full height */
+}
+
+/* start and hover state for captions for share survey and birthday */
+.hover-content-wrapper .survey-subtitle, .hover-content-wrapper .bd-subtitle{
+    transition: 1s;
+    font-weight: 600;
+    color: transparent;
+}
+
+.hover-content-wrapper:hover .survey-subtitle, .hover-content-wrapper:hover .bd-subtitle  {
+    /* applied to .subtitle when the txt wrapper is hovered */
+    font-weight: 600; 
+    color: whitesmoke;
+}
+
+/* new classes not in html for the fading effect of images */
+.img-darken {
+    transition: 1s;
+    filter: brightness(10%);
+}
+.img-lighten {
+    transition: 1s;
+    filter: brightness(100%);
+}

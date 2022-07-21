@@ -1,0 +1,96 @@
+/* The css file responsible for all global styling elements accross multiple pages of the R4F website */
+
+/* GLOBAL */
+
+body {
+    /* setting all divs to have no margin/padding, set these attributes within each specific div if needed */
+    padding: 0px;
+    margin: 0px;
+    background-color: #dcdcdc;
+    font-family: "Kdam Thmor Pro", sans-serif;
+}
+
+.container {
+    height: 100%;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+header {
+    position: absolute;
+    background-color: #ff400f;
+    width: 100%;
+    height: 150px;
+}
+footer {
+    position: absolute;
+    background-color: #292929;
+    width: 100%;
+    height: 150px;
+    bottom: 0;
+}
+.header-center-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.footer-center-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+/* NAV BAR */
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}
+.left-side, .right-side {
+    display: flex;
+}
+.nav-wrapper > .left-side > div{
+    margin-right: 20px;  /* adds 20px to the right of each div of the right side (separating home and about)*/
+    font-size: 1em;
+    text-transform: uppercase;
+}
+.nav-wrapper > .right-side > div{
+    margin-right: 20px;  /* adds 20px to the right of each div of the right side (separating home and about)*/
+    font-size: 1em;
+    text-transform: uppercase;
+}
+
+/* the 2 following classes dictate the transitions of underline (1px) when hovering over the div nav-link-wrapper*/
+.nav-link-wrapper {
+    height: 22px;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.5s;
+}
+.nav-link-wrapper:hover {
+    /*specific to when a subdiv under new-link-wrapper is being hovered over. :hover is a pseudo state*/
+    border-bottom: 1px solid black;
+}
+
+/* the 4 following classes dictate the transition of color from grey to black when hovering over an a-link in nav-link-wrapper*/
+.nav-link-wrapper a {
+    /* specific to the a-links within the nav-link-wrapper*/
+    color: #8a8a8a;
+    text-decoration: none; /*skips default underline*/
+    transition: color 0.5s;
+}
+.nav-link-wrapper a:hover {
+    /*specific to when an a-link under new-link-wrapper is being hovered over*/
+    color: black;
+}
+.active-nav-link{
+    border-bottom: 1px solid black;
+}
+.active-nav-link a {
+    color: black !important;  /*!important overwrites default color behaviour*/
+}

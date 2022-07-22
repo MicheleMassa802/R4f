@@ -35,7 +35,7 @@
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>teg-servlet</servlet-name>
+    <servlet-name>reg-servlet</servlet-name>
     <url-pattern>/submit-reg</url-pattern>
   </servlet-mapping>
 
@@ -50,5 +50,19 @@
     <servlet-name>survey-servlet</servlet-name>
     <url-pattern>/submit-survey</url-pattern>
   </servlet-mapping>
+
+  <!-- Page servlets -->
+
+  <servlet>
+    <servlet-name>main-servlet</servlet-name>
+    <servlet-class>com.server4.Servlet.MainPageServlet</servlet-class>
+    <description> A servlet used by R4F's main page</description>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>main-servlet</servlet-name>
+    <url-pattern>/main</url-pattern>
+  </servlet-mapping>
+
 
 </web-app>

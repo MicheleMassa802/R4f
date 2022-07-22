@@ -4,8 +4,8 @@
 	<meta charset="utf-8" />
 	<title>Welcome Page</title>
 	<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="indexStyles.css">
-	<link rel="stylesheet" href="globalStyles.css">
+    <link rel="stylesheet" href="css/indexStyles.css">
+	<link rel="stylesheet" href="css/globalStyles.css">
 </head>
 <body>
 	<!-- Header Image -->
@@ -50,7 +50,7 @@
 
 					<div class="img-text-wrapper">
 						<div class="logo-wrapper">
-							<a href="survey.html">
+							<a href="survey.jsp">
 								<img src="Images/miniLogos/fillSurveyLogo.png">
 							</a>  
 						</div>
@@ -62,7 +62,7 @@
 			<div class="forms-content-wrapper">
 				<!-- Login -->
 				<div class="left-form-content-wrapper">
-					<form action="/submit-login" name="login" method="get">
+					<form action="submit-login" name="login" method="get">
 						<div class="left-questions-container">
 							
 							<div class="question">
@@ -92,15 +92,17 @@
 								</label>
 							</div>							
 						</div>
+
+						<div class="submit-login-button">
+							<button type="submit"> Submit Login Form </button>
+						</div>
 					</form>
-					<div class="submit-login-button">
-						<button onclick="loginFunc()"> Submit Login Form </button>
-					</div>
+					
 				</div>
 
 				<!-- Register -->
 				<div class="right-form-content-wrapper">
-					<form action="/submit-reg" name="register" method="get">
+					<form action="submit-reg" name="register" method="get">
 						<div class="right-questions-container">
 							<div class="question">
 								<label> 
@@ -190,10 +192,12 @@
 							</div>
 							
 						</div>
+
+						<div class="submit-reg-button">
+							<button type="submit"> Submit Registration Form </button>
+						</div>
 					</form>
-					<div class="submit-reg-button">
-						<button onclick="regFunc()"> Submit Registration Form </button>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -251,7 +255,5 @@
 		loginContent[0].style.opacity=0;
 	}
 </script>
-
-<script src="treeManager.js"></script>
 
 </html>

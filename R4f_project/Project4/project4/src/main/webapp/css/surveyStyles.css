@@ -1,0 +1,54 @@
+/* The css file responsible for all styling elements of the Survey Page of the R4F website*/
+
+.survey-header {
+    text-align: center;
+    padding: 25px;
+    font-size: larger;
+}
+
+.survey-form {
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+    padding: 25px;
+    padding-top: 0px;
+}
+
+.question {
+    padding: 15px;
+    padding-bottom: 5px;
+}
+
+.survey-answer-box{
+    padding-top: 10px;
+}
+
+input {
+    background-color: #F9EAE6;
+    padding: 5px;
+    border-color: #292929;
+    border-radius: 6px;
+    border-width: 2px;
+}
+
+.submit-reset-buttons{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+
+.reset-button {
+    padding-right: 10px; 
+}
+
+.submit-button{
+    padding-left: 10px;
+}
+
+button {
+    background-color: #E9FFFE;
+    padding: 5px;
+    border-color: #292929;
+    border-radius: 6px;
+    border-width: 2px;
+}

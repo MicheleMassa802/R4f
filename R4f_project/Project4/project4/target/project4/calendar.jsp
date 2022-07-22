@@ -4,8 +4,8 @@
 	<meta charset="utf-8" />
 	<title>Your Birthday Calendar</title>
 	<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="calendarStyles.css">
-	<link rel="stylesheet" href="globalStyles.css">
+    <link rel="stylesheet" href="css/calendarStyles.css">
+	<link rel="stylesheet" href="css/globalStyles.css">
 </head>
 <body>
 	<!-- Header Image -->

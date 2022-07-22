@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/api")
 public class servlet extends HttpServlet {
     
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {

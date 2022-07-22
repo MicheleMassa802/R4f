@@ -84,6 +84,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
         
         // connect to db
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(URL, USERNAME, PSWD);
             //System.out.println("Connection to database successful!");
 
@@ -119,7 +120,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             statement.close();
             connection.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Error in the database! Class: DBConnect.java");
             e.printStackTrace();
         }
@@ -158,6 +159,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
         
         // connect to db
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(URL, USERNAME, PSWD);
             //System.out.println("Connection to database successful!");
 
@@ -183,7 +185,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             statement.close();
             connection.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Connection error in the database! Class: DBConnect.java");
             e.printStackTrace();
         }
@@ -229,6 +231,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
         
         // connect to db
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(URL, USERNAME, PSWD);
             //System.out.println("Connection to database successful!");
 
@@ -254,7 +257,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             statement.close();
             connection.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Connection error in the database! Class: DBConnect.java");
             e.printStackTrace();
         }
@@ -279,6 +282,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
         
         // connect to db
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(URL, USERNAME, PSWD);
             //System.out.println("Connection to database successful!");
 
@@ -303,7 +307,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             statement.close();
             connection.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Exception raised, error in the database! Class: DBConnect.java");
             e.printStackTrace();
         }
@@ -328,6 +332,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
         
         // connect to db
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(URL, USERNAME, PSWD);
             System.out.println("Connection to database successful!");
 
@@ -352,7 +357,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             statement.close();
             connection.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Exception raised, error in the database! Class: DBConnect.java");
             e.printStackTrace();
         }

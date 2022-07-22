@@ -38,6 +38,10 @@ public class TreeManager {
 
     // other attributes
     HashMap<String, ArrayList<String>> calendar;
+    /**
+     * NOTE: the tree manager class is exclusive to the cmdLine UI of R4F, the website doesnt use it as it doesn't need
+     *       its flow to be controlled as extrictly. 
+     */
 
     /** Constructor which starts off the controllers to be used throughout the lifespan of the session */
     public TreeManager(){

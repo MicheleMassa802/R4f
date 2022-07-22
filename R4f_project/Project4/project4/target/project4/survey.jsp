@@ -4,8 +4,8 @@
 	<meta charset="utf-8" />
 	<title>Birthday Survey Page</title>
 	<link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="surveyStyles.css">
-	<link rel="stylesheet" href="globalStyles.css">
+    <link rel="stylesheet" href="css/surveyStyles.css">
+	<link rel="stylesheet" href="css/globalStyles.css">
 </head>
 <body>
 	<!-- Header Image -->
@@ -22,7 +22,7 @@
 
 		<div class="survey-form">
 			<!-- GET allows us to get the submitted answers in the link, and upon submission, user is sent to results page -->
-			<form>
+			<form action="/submit-survey" name="survey" method="get">
 				<div class="questions-container">
 					<div class="question">
 						<label> 

@@ -11,7 +11,8 @@ import com.server4.Controllers.UserController;
 
 public class LoginServlet extends HttpServlet {
 
-    public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {        
+        
         // check inputs for login using TreeManager
         String username = request.getParameter("username");
         String password = request.getParameter("password");

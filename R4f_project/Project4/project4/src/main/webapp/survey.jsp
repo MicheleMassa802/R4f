@@ -22,13 +22,13 @@
 
 		<div class="survey-form">
 			<!-- GET allows us to get the submitted answers in the link, and upon submission, user is sent to results page -->
-			<form action="/submit-survey" name="survey" method="get">
+			<form action="submit-survey" name="survey" method="get">
 				<div class="questions-container">
 					<div class="question">
 						<label> 
 							What is the user ID of the person inviting you to fill this survey?
 							<div class="survey-answer-box">
-								<input type="text" name="q1" id="q1" required>
+								<input type="text" name="user-id" id="q1" required>
 								<!-- the type=text allows us to submit strings, use type "password" to blur the field being entered -->  
 							</div>
 						</label>
@@ -38,7 +38,7 @@
 						<label> 
 							What is the calendar ID of the person inviting you to fill this survey?
 							<div class="survey-answer-box">
-								<input type="text" name="q2" id="q2" required>  
+								<input type="text" name="cal-id" id="q2" required>  
 							</div>
 						</label>
 					</div>
@@ -47,7 +47,7 @@
 						<label> 
 							What is your name?
 							<div class="survey-answer-box">
-								<input type="text" name="q3" id="q3" required>
+								<input type="text" name="name" id="q3" required>
 							</div>
 						</label>
 					</div>
@@ -56,7 +56,7 @@
 						<label> 
 							What is your last name? 
 							<div class="survey-answer-box">
-								<input type="text" name="q4" id="q4" required>
+								<input type="text" name="lastname" id="q4" required>
 							</div>
 						</label>
 					</div>
@@ -65,7 +65,7 @@
 						<label> 
 							What is your date of birth? [yyyy=mm-dd]
 							<div class="survey-answer-box">
-								<input type="date" name="q5" id="q5" required>
+								<input type="date" name="bd" id="q5" required>
 							</div>	
 						</label>
 					</div>
@@ -74,7 +74,7 @@
 						<label> 
 							What is your instagram username?
 							<div class="survey-answer-box">
-								<input type="text" name="q6" id="q6">
+								<input type="text" name="ig" id="q6">
 							</div>
 						</label>
 					</div>
@@ -83,7 +83,7 @@
 						<label> 
 							What is your twitter username?
 							<div class="survey-answer-box">
-								<input type="text" name="q7" id="q7">
+								<input type="text" name="twt" id="q7">
 							</div>
 						</label>
 					</div>
@@ -92,7 +92,7 @@
 						<label> 
 							What is your discord username?
 							<div class="survey-answer-box">
-								<input type="text" name="q8" id="q8">
+								<input type="text" name="dsc" id="q8">
 							</div>
 						</label>
 					</div>

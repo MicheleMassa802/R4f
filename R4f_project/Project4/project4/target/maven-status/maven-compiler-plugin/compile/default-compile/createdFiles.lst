@@ -7,8 +7,8 @@ com\server4\Servlet\servlet.class
 com\server4\Calendar\ManageEventsUseCase.class
 com\server4\Birthday\CreateBirthdayUseCase.class
 com\server4\Helpers\EntityIdGenerator.class
-com\server4\Servlet\SubmitSurveyServelet.class
 com\server4\MainPage\TreeManager.class
+com\server4\Servlet\SubmitSurveyServlet.class
 com\server4\Database\IDBConnectionPoint.class
 com\server4\Helpers\SurveyDS.class
 com\server4\Servlet\MainPageServlet.class

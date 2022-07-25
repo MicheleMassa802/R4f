@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import com.server4.Controllers.BirthdayController;
 import com.server4.Controllers.CalendarController;
-import com.server4.Controllers.UserController;
 import com.server4.Helpers.UseCaseDateFormatter;
 
 public class MainPageServlet extends HttpServlet{
@@ -33,6 +32,7 @@ public class MainPageServlet extends HttpServlet{
         CalendarController calendarController = new CalendarController(userId);
         HashMap<String, ArrayList<String>> calendar = calendarController.getCalFromId(userCalId).getYearCal();
         
+        // get bd info for the day to display upon hover
         String ddmmDate = UseCaseDateFormatter.formatYearlyToMonthly(LocalDate.now().toString());
         ArrayList<String> bdIds = calendar.get(ddmmDate);
         ArrayList<String> bdInfo = new ArrayList<>();
@@ -41,14 +41,12 @@ public class MainPageServlet extends HttpServlet{
             bdInfo.add(birthdayController.getBdFromID(bdId).toString());
         }
 
+        // show main page now that we have the required info
         response.sendRedirect("mainPage.jsp");
-        // get bd info for the day to display upon hover
+        
         // bd info stored in bdInfo, iterate over it to show it in the .jsp list of mainPage.jsp
 
         // use cal and user ids to display when sharing survey
-
-
-
         
     }
 

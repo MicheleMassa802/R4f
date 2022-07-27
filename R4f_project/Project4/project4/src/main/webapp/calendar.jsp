@@ -14,15 +14,39 @@
 	<link rel="stylesheet" href="css/globalStyles.css">
 </head>
 <body>
-	<!-- Function (declared outside of service method) for getting fetching the ordered month calendar hashmap and printing it out -->
-	<%!
-		public void getMonthCalendar(JspWriter out, int monthToDisplay, String userId, String calId) throws Exception {
-			// use the user and cal ids to get the calendar
-			// setup needed controllers
-        	BirthdayController birthdayController = new BirthdayController();
-        	CalendarController calendarController = new CalendarController(userId);
-        	HashMap<String, ArrayList<String>> yearCalendar = calendarController.getCalFromId(calId).getYearCal();
+	
+	<%
+		// catch session variables
+		String username = (String)session.getAttribute("username");
+		String userId = (String)session.getAttribute("userId");
+		String userCalId = (String)session.getAttribute("calendarId");
+		int monthToDisplay;
 
+
+		// create year calendar Hashmap for page to use
+		// use the user and cal ids to get the calendar
+		// setup needed controllers
+		BirthdayController birthdayController = new BirthdayController();
+		CalendarController calendarController = new CalendarController(userId);
+		HashMap<String, ArrayList<String>> yearCalendar = calendarController.getCalFromId(userCalId).getYearCal();
+
+
+		// to determine the month to show, check if a value has been given to the month-to-display attribute
+		// if month-to-display attribute has been set, use that, else, use defaultMonth from session
+		String monthSelected = request.getParameter("month-to-display");
+		if (monthSelected == null){
+			// show calendar with default month
+			monthToDisplay = (Integer)session.getAttribute("defaultMonth");
+		} else {
+			monthToDisplay = Integer.parseInt(monthSelected);
+		}
+		String displayMonthStr = UseCaseDateFormatter.convertIntToMonth(monthToDisplay);
+	%>
+
+	<!-- Function (declared outside of service method) for fetching the ordered month calendar hashmap and printing it out (by filtering the year calendar) -->
+	<%!
+		public void getMonthCalendar(JspWriter out, int monthToDisplay, HashMap<String, ArrayList<String>> yearCalendar) throws Exception {
+			
 			// get the month double digit string
 			String monthNumberStr;
 			if (monthToDisplay < 10){
@@ -41,24 +65,41 @@
 				} else {
 					calDay = Integer.toString(i) + "-" + monthNumberStr;
 				}
-				// get or default from yearCalendar hashmap the list of ids corresponding to the date
-				idList = yearCalendar.getOrDefault(calDay, new ArrayList<>());
-				out.println("<div class='date-cell'>");
-				out.println("	<div class='date-text'>" + calDay.charAt(0) + calDay.charAt(1) + ":</div>");
-				out.println("	<div class='date-content'>" + yearCalendar.get(calDay).toString() + "</div>");
-				out.println("</div>");
+
+				if (yearCalendar.containsKey(calDay)){
+					// only print if date exists within year calendar
+					out.println("<div class='date-cell'>");
+					out.println("	<div class='date-text'>" + calDay.charAt(0) + calDay.charAt(1) + ":</div>");
+					out.println("	<div class='date-content'>");
+					getDateBds(out, calDay, yearCalendar);
+					out.println("	</div>");
+					out.println("</div>");
+				}
+				
 			}
 		}
 	%>
 
-	<!-- catch session variables (needed info setup through function) -->
-	<%
-		String username = (String)session.getAttribute("username");
-		String userId = (String)session.getAttribute("userId");
-		String userCalId = (String)session.getAttribute("calendarId");
-		int displayMonth = (Integer)session.getAttribute("displayMonth");
-		String displayMonthStr = UseCaseDateFormatter.convertIntToMonth(displayMonth);
-		System.out.println("This month: " + displayMonth);
+	<!-- Function (declared outside of service method) for fetching the bd information corresponding to a specific date printing it out (date is dd-mm)-->
+	<%!
+		public void getDateBds(JspWriter out, String dateToDisplay, HashMap<String, ArrayList<String>> yearCalendar) throws Exception {
+			
+			// create a bd controller to fetch bdId information
+			BirthdayController bdController = new BirthdayController();
+
+			// using the calendar, get the bd id list corresponding to the given date
+        	ArrayList<String> bdIdList = yearCalendar.get(dateToDisplay);
+			out.println("<ul>");
+			if (bdIdList.isEmpty()){
+				// print default message
+				out.println("	<li> There are no birthdays for the date you have selected!</li>");
+			} else {
+				for (String bdId : bdIdList){
+				out.println("	<li>" + bdController.getBdFromID(bdId).toString() + "</li>");
+				}
+			}
+			out.println("</ul>");
+		}
 	%>
 
 	<!-- Header Image -->
@@ -98,36 +139,37 @@
 
 			<h1>Calendar View:</h1>
 			Hover over a date on this calendar view to show the details of people with birthdays on that date.
-			<!-- Like a nav bar to switch between months -->
-			<div class="month-scroller-bar">
-				<div class="back-button">
-					<button onclick="window.location.href='decreaseMonth.jsp'"> &lt; </button>
+			<!-- Selector for months (showing current as default) -->
+			<form class="month-form" action="calendar.jsp" method="GET">
+				<div class="month-text">Current Month Displayed:</div>
+				<div class="month-value"> <%=displayMonthStr%> </div>
+				<div class="select-month-text"> Select Month To View:</div>
+				<div class="month-selector">
+					<select name="month-to-display" id="month-to-display">
+						<option value="1"> January </option>
+						<option value="2"> February </option>
+						<option value="3"> March </option>
+						<option value="4"> April </option>
+						<option value="5"> May </option>
+						<option value="6"> June </option>
+						<option value="7"> July </option>
+						<option value="8"> August </option>
+						<option value="9"> September </option>
+						<option value="10"> October </option>
+						<option value="11"> November </option>
+						<option value="12"> December </option>
+					</select>
 				</div>
-				<div class="month-text"><%=displayMonthStr%></div>
-				<div class="forward-button">
-					<button onclick="window.location.href='inc-month'"> &gt; </button>
+				<div class="select-month-button">
+					<button type="submit"> View Month </button>
 				</div>
-			</div>
+			</form>
 
 			<div class="page-content-wrapper">
 				<!-- The actual calendar display being 9x4 to display 31 dates in 36 possible slots -->
 				<div class="calendar-wrapper">
 					<!-- use jsp to create the needed date cell divs for the available days of the month (through the created function) -->
-					<%getMonthCalendar(out, displayMonth, userId, userCalId);%>
-				</div>
-				<!-- Area displaying text containning the basic birthday info for the bds of the date being hovered in the calendar -->
-				<div class="date-bd-displayer-wrapper">
-					<h2>Date View:</h2>
-					<ul>
-						<li>Name, LastName, IG, Twitter, Discord</li>
-						<li>Name, LastName, IG, Twitter, Discord</li>
-						<li>Name, LastName, IG, Twitter, Discord</li>
-						<li>Name, LastName, IG, Twitter, Discord</li>
-						<li>Name, LastName, IG, Twitter, Discord</li>
-						<li>Name, LastName, IG, Twitter, Discord</li>
-						<li>Name, LastName, IG, Twitter, Discord</li>
-						<li>Name, LastName, IG, Twitter, Discord</li>
-					</ul>
+					<%getMonthCalendar(out, monthToDisplay, yearCalendar);	%>
 				</div>
 			</div>
 		</div>
@@ -143,5 +185,5 @@
 
 </body>
 
-<script src="treeManager.js"></script>
+<script src="navBarMover.js"></script>
 </html>

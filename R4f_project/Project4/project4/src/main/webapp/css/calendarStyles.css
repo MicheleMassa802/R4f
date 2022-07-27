@@ -5,41 +5,70 @@ h1 {
     margin-bottom: 10px;
 }
 
-/* month nav bar */
+/* month selector */
 
-.month-scroller-bar {
+.month-form {
     display: flex;
     justify-content:left;
     padding: 30px;
     padding-bottom: 15px;
 }
 
-.back-button, .month-text, .forward-button {
-    display: flex;
+.month-form > div {
+    padding-right: 15px;
 }
 
-.month-text {
+.month-value {
+    margin-right: 35px;
+}
+
+.select-month-button {
+    display: flex;
+    text-transform: uppercase;
+}
+
+.month-text, .select-month-text {
     font-weight: 600;
     text-decoration: underline 3px #ff400f;
 }
 
-.month-scroller-bar > div {
-    margin-right: 20px;  /* adds 20px to the right of each div of the right side (separating home and about)*/
-    font-size: 1em;
-    text-transform: uppercase;
+button {
+    background-color: #E9FFFE;
+    padding: 5px;
+    border-color: #292929;
+    border-radius: 6px;
+    border-width: 2px;
+    cursor: pointer;
 }
+
+option {
+    background-color: #dcdcdc;
+    padding: 5px;
+    border-color: #292929;
+    border-radius: 6px;
+    border-width: 2px;
+}
+
+select {
+    background-color: #fcfcfc;
+    padding: 5px;
+    border-color: #292929;
+    border-radius: 6px;
+    border-width: 2px;
+}
+
 
 /* page content */
 
-.page-content-wrapper {
+/* .page-content-wrapper {
     display: grid;
-    grid-template-columns: 1fr 0.20fr;
-}
+    grid-template-columns: 1fr;
+} */
 
 .calendar-wrapper{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     column-gap: 10px;
     row-gap: 5px;
 }
@@ -49,11 +78,11 @@ h1 {
 .date-cell{
     display: grid;
     grid-template-rows: 0.20fr 1fr;
-    padding: 15px;
+    padding: 7px;
 }
 
 .date-content{
-    font-size: 0.90em;
+    font-size: 1em;
 }
 
 .date-text {
@@ -73,5 +102,9 @@ button {
     padding-left: 20px;
 }
 
+
+li {
+    font-size: 1em;
+}
 
 

@@ -122,6 +122,4 @@
 
 </body>
 
-<!-- Submission function js -->
-<script src="survey.js"></script>
 </html>

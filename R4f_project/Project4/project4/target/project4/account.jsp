@@ -84,5 +84,5 @@
 	</footer>
 </body>
 
-<script src="treeManager.js"></script>
+<script src="navBarMover.js"></script>
 </html>

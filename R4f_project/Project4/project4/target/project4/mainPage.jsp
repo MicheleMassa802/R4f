@@ -126,7 +126,7 @@
 				<div class="hover-content-wrapper">
 					<div class="hover-img-background" style="background-image:url(Images/bg/logout.png)"></div>
 					<div class="logo-wrapper">
-						<a href="welcome.html">
+						<a href="logout.jsp">
 							<img src="Images/logos/logoutLogo.png" width="400" height="200">  <!-- Link to another page -->
 						</a>
 					</div>
@@ -166,6 +166,6 @@
 
 </script>
 
-<script src="treeManager.js"></script>
+<script src="navBarMover.js"></script>
 
 </html>

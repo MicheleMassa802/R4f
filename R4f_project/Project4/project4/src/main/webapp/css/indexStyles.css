@@ -81,6 +81,7 @@ button {
     border-color: #292929;
     border-radius: 6px;
     border-width: 2px;
+    cursor: pointer;
 }
 
 .buttons-content-wrapper, .forms-content-wrapper {

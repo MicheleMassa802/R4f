@@ -39,7 +39,6 @@ public class UseCaseAccessSML {
             e.printStackTrace();
         }
         this.idCount = Integer.parseInt(countStr);
-        System.out.println("Current sml_id available: " + countStr);
         
     }
 

@@ -40,18 +40,15 @@ public class BirthdayEntity {
      */
     @Override
     public String toString() {
-        String info = "Fullname: " + this.name + " " + this.lastname + ".\nBirthday ID: " + this.birthdayId + 
-            ".\nBirthday: " + this.birthday.toString();
+        String info = "Fullname: " + this.name + " " + this.lastname + ".<br>Birthday: " + this.birthday.toString();
         
         StringBuilder smLinks = new StringBuilder();
     
-        int i = 1;
         for (String link : this.socialMediaLinks.keySet()){
-            smLinks.append("[Link ").append(i).append("] ").append(link).append(": ").append(this.socialMediaLinks.get(link)).append(".\n");
-            i += 1;
+            smLinks.append(link).append(": ").append(this.socialMediaLinks.get(link)).append(".<br>");
         }
 
-        return info + ".\nSocial Media Links:\n" + smLinks;
+        return info + ".<br>Social Media Links:<br>" + smLinks;
     }
 
 

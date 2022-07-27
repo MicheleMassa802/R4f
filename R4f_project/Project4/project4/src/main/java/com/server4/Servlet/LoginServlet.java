@@ -4,6 +4,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.time.LocalDate;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -34,9 +36,12 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("userId", userId);
             session.setAttribute("bdId", userController.userBdId);
             session.setAttribute("calendarId", userController.userCalendarId);
+            // pass current month so that calendar page knows where to start
+            String[] today = LocalDate.now().toString().split("-");
+            session.setAttribute("displayMonth", Integer.parseInt(today[1]));  // default to current month
             // move to next page passing information through session
             System.out.println("Redirecting to main!");
-            response.sendRedirect("main");
+            response.sendRedirect("mainPage.jsp");
         }
         
     }

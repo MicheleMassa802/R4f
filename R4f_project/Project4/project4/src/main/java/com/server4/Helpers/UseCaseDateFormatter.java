@@ -30,4 +30,41 @@ public class UseCaseDateFormatter {
 
     }
 
+    /**
+     * Helper to return correct month strings given an int (to display months in calendar page)
+     * 
+     * TO BE CALLED: line before moving onto calendar page (both button and nav)
+     * 
+     * @param month     the int value of a month (index 1-12)
+     * @return          the string value corresponding to the month index
+     */
+    public static String convertIntToMonth(int month) {
+        switch (month) {
+            case 1:
+                return "January";
+            case 2:
+                return "February";
+            case 3:
+                return "March";
+            case 4:
+                return "April";
+            case 5:
+                return "May";
+            case 6:
+                return "June";
+            case 7:
+                return "July";
+            case 8:
+                return "August";
+            case 9:
+                return "September";
+            case 10:
+                return "October";
+            case 11:
+                return "November";
+            default:
+                return "December";
+        }
+    }
+
 }

@@ -78,6 +78,7 @@ public class CreateBirthdayUseCase {
 
         this.bdInstance = new BirthdayEntity(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[0]),
             data.get(2), data.get(3), links.get(0), links.get(1), links.get(2));  
+        this.bdInstance.setBirthdayId(birthdayId);
 
 
     }

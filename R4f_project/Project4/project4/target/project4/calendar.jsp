@@ -1,3 +1,9 @@
+<!-- java imports + session to catch from welcome page-->
+<%@page import="com.server4.Controllers.BirthdayController, com.server4.Controllers.CalendarController, com.server4.Helpers.UseCaseDateFormatter"%>
+<%@page import="java.util.ArrayList, java.util.HashMap, java.time.LocalDate"%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +14,53 @@
 	<link rel="stylesheet" href="css/globalStyles.css">
 </head>
 <body>
+	<!-- Function (declared outside of service method) for getting fetching the ordered month calendar hashmap and printing it out -->
+	<%!
+		public void getMonthCalendar(JspWriter out, int monthToDisplay, String userId, String calId) throws Exception {
+			// use the user and cal ids to get the calendar
+			// setup needed controllers
+        	BirthdayController birthdayController = new BirthdayController();
+        	CalendarController calendarController = new CalendarController(userId);
+        	HashMap<String, ArrayList<String>> yearCalendar = calendarController.getCalFromId(calId).getYearCal();
+
+			// get the month double digit string
+			String monthNumberStr;
+			if (monthToDisplay < 10){
+				monthNumberStr = "0" + Integer.toString(monthToDisplay);
+			} else {
+				monthNumberStr = Integer.toString(monthToDisplay);
+			}
+
+			// print calendar in order for specific month
+			String calDay;
+			ArrayList<String> idList;
+			int i;
+			for (i = 1; i < 32; i++){
+				if (i < 10){
+					calDay = "0" + Integer.toString(i) + "-" + monthNumberStr;
+				} else {
+					calDay = Integer.toString(i) + "-" + monthNumberStr;
+				}
+				// get or default from yearCalendar hashmap the list of ids corresponding to the date
+				idList = yearCalendar.getOrDefault(calDay, new ArrayList<>());
+				out.println("<div class='date-cell'>");
+				out.println("	<div class='date-text'>" + calDay.charAt(0) + calDay.charAt(1) + ":</div>");
+				out.println("	<div class='date-content'>" + yearCalendar.get(calDay).toString() + "</div>");
+				out.println("</div>");
+			}
+		}
+	%>
+
+	<!-- catch session variables (needed info setup through function) -->
+	<%
+		String username = (String)session.getAttribute("username");
+		String userId = (String)session.getAttribute("userId");
+		String userCalId = (String)session.getAttribute("calendarId");
+		int displayMonth = (Integer)session.getAttribute("displayMonth");
+		String displayMonthStr = UseCaseDateFormatter.convertIntToMonth(displayMonth);
+		System.out.println("This month: " + displayMonth);
+	%>
+
 	<!-- Header Image -->
     <header>
 		<div class="header-center-img">
@@ -48,175 +101,20 @@
 			<!-- Like a nav bar to switch between months -->
 			<div class="month-scroller-bar">
 				<div class="back-button">
-					<button> &lt; </button>
+					<button onclick="window.location.href='decreaseMonth.jsp'"> &lt; </button>
 				</div>
-				<div class="month-text">Current Month</div>
+				<div class="month-text"><%=displayMonthStr%></div>
 				<div class="forward-button">
-					<button> &gt; </button>
+					<button onclick="window.location.href='inc-month'"> &gt; </button>
 				</div>
 			</div>
 
 			<div class="page-content-wrapper">
 				<!-- The actual calendar display being 9x4 to display 31 dates in 36 possible slots -->
 				<div class="calendar-wrapper">
-					<!-- The following are the divs for all 36 calendar cell dates (only filled up to 31) -->
-					<div class="date-cell">
-						<div class="date-text">1:</div>
-						<div class="date-content">Content for a date cell (Comma separated Bd ids displayed here)</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">2:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-					
-					<div class="date-cell">
-						<div class="date-text">3:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">4:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">5:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">6:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">7:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">8:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">9:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">10:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">11:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">12:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">13:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">14:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">15:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">16:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">17:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">18:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">19:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">20:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">21:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">22:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">23:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">24:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">25:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">26:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">27:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">28:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">29:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">30:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
-
-					<div class="date-cell">
-						<div class="date-text">31:</div>
-						<div class="date-content">Content for a date cell</div>
-					</div>
+					<!-- use jsp to create the needed date cell divs for the available days of the month (through the created function) -->
+					<%getMonthCalendar(out, displayMonth, userId, userCalId);%>
 				</div>
-			
-
 				<!-- Area displaying text containning the basic birthday info for the bds of the date being hovered in the calendar -->
 				<div class="date-bd-displayer-wrapper">
 					<h2>Date View:</h2>

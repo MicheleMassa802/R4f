@@ -51,18 +51,18 @@
     <url-pattern>/submit-survey</url-pattern>
   </servlet-mapping>
 
-  <!-- Page servlets -->
+
+  <!-- Button servlets -->
 
   <servlet>
-    <servlet-name>main-servlet</servlet-name>
-    <servlet-class>com.server4.Servlet.MainPageServlet</servlet-class>
-    <description> A servlet used by R4F's main page</description>
+    <servlet-name>inc-month-servlet</servlet-name>
+    <servlet-class>com.server4.Servlet.IncreaseMonthServlet</servlet-class>
+    <description> A servlet used to increase the current calendar month </description>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>main-servlet</servlet-name>
-    <url-pattern>/main</url-pattern>
+    <servlet-name>inc-month-servlet</servlet-name>
+    <url-pattern>/inc-month</url-pattern>
   </servlet-mapping>
-
 
 </web-app>

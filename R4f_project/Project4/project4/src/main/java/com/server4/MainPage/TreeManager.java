@@ -355,7 +355,7 @@ public class TreeManager {
         } else {
             // month to display is specified
             for (String date: this.calendar.keySet()){
-                if (date.contains(month + "-")){  // when month matches
+                if (date.contains("-" + month)){  // when month matches
                     // append to result array the string version of all bdIds related to this date
                     result.put(date, this.calendar.get(date)); 
                 }

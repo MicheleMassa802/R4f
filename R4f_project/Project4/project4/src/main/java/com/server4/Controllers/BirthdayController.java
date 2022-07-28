@@ -42,6 +42,7 @@ public class BirthdayController {
      */
     public void executeCreateBirthday(String bd, String name, String lastName){
         this.bdId = this.bdCreator.runBdCreation(bd, name, lastName, this.smlId);
+        // System.out.println("The bdId created is: " + this.bdId);
 
     }
 

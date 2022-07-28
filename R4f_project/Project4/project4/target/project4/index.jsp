@@ -82,7 +82,7 @@
 									</div> 
 								</label>
 							</div>
-
+							<!--
 							<div class="question">
 								<label> 
 									Is this your first time ever logging in? [check if true]
@@ -90,7 +90,8 @@
 										False <input type="range" name="first-time" id="first-time" min="0" max="1" value="true" required> True
 									</div>
 								</label>
-							</div>							
+							</div>	
+							-->						
 						</div>
 
 						<div class="submit-login-button">

@@ -1,0 +1,29 @@
+/* Error pages */
+
+.error-page-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    height: 100%;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    text-align: center;
+}
+
+.error-page-container > div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+button {
+    background-color: #E9FFFE;
+    padding: 5px;
+    border-color: #292929;
+    border-radius: 6px;
+    border-width: 2px;
+    cursor: pointer;
+    width: 200px;
+}

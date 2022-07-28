@@ -4,6 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,9 @@ public class LoginServlet extends HttpServlet {
         if (userId == null){
             // bad login
             System.out.println("Please try logging in again!");
-            // stay in this page
+            // stay in this page and send alert message
+            
+            response.sendRedirect("loginAlert.jsp");
 
         } else {
             // startup TomCat session

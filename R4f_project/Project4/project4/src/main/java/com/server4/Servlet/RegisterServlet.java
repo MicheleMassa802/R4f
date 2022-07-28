@@ -3,13 +3,11 @@ package com.server4.Servlet;
 import javax.servlet.http.HttpServlet;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.server4.Controllers.BirthdayController;
 import com.server4.Controllers.CalendarController;
@@ -46,7 +44,8 @@ public class RegisterServlet extends HttpServlet {
         if (userId == null || userBdId == null || userSmlId == null){
             // bad registration
             System.out.println("Please try registering again, there has been an error!");
-            // stay in this page
+            // stay in this page and alert user of improper registration
+            response.sendRedirect("registerAlert.jsp");
 
         } else {
             // create calendar and return to index.jsp for user to now login
@@ -58,10 +57,6 @@ public class RegisterServlet extends HttpServlet {
             // link related calendar, bd and sml ids to account
             userController.firstLoginFollowUp(username, userBdId, userCalendarId, userSmlId);
 
-            // alert that the user now needs to login and reset current page
-
-            PrintWriter out = response.getWriter();
-            out.println("<html><body onload=\"alert('Now that you have registered, you can proceed to login')\"></body></html>");
             // load index.jsp again for user to login (upon login, login servlet is called)
             response.sendRedirect("index.jsp");
         }

@@ -4,7 +4,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletResponse;
@@ -42,9 +41,6 @@ public class SubmitSurveyServlet extends HttpServlet {
         visitorCalController.setCalendarEventManager(calendarId);
         visitorCalController.modifyCalendarEvent(true, yearDate, visitorBdController.bdId);
 
-        // alert user of successful submission
-        PrintWriter out = response.getWriter();
-        out.println("<html><body onload=\"alert('Now that you have registered, you can proceed to login')\"></body></html>");
         // load index.jsp (send back to welcome menu)
         response.sendRedirect("index.jsp");
     }

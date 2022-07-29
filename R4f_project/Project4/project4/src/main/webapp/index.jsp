@@ -1,3 +1,7 @@
+<!-- java imports-->
+<%@page import="com.server4.MainPage.MainScheduler"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +12,11 @@
 	<link rel="stylesheet" href="css/globalStyles.css">
 </head>
 <body>
+	<!-- Set Scheduler upon launch of page on server -->
+	<% 
+		MainScheduler.setScheduler();
+	%>
+
 	<!-- Header Image -->
     <header>
 		<div class="header-center-img">

@@ -1,5 +1,4 @@
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\NotificationSystem\UseCaseMsgGenerator.java
-c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\NotificationSystem\JobEmail.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\Controllers\CalendarController.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\MainPage\Main.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\Servlet\RegisterServlet.java
@@ -14,12 +13,12 @@ c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\MainPage\TreeManager.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\NotificationSystem\SendEmail.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\MainPage\CmdLCalDrawer.java
-c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\NotificationSystem\BirthdayNotifier.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\Helpers\EntityIdGenerator.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\Calendar\ManageEventsUseCase.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\Helpers\SurveyDS.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\MainPage\ITreeNode.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\Birthday\CreateBirthdayUseCase.java
+c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\NotificationSystem\Notifier.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\Calendar\CalendarEntity.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\Servlet\LoginServlet.java
 c:\Users\miche\Documents\IndependentCoding\R4f\R4f_project\Project4\project4\src\main\java\com\server4\Database\IDBConnectionPoint.java

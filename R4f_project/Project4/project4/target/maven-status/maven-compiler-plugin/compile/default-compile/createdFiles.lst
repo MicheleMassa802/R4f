@@ -1,3 +1,4 @@
+com\server4\NotificationSystem\Notifier.class
 com\server4\Controllers\CalendarController.class
 com\server4\Helpers\InputChecker.class
 com\server4\NotificationSystem\UseCaseMsgGenerator.class
@@ -6,12 +7,14 @@ com\server4\Controllers\BirthdayController.class
 com\server4\Calendar\ManageEventsUseCase.class
 com\server4\Birthday\CreateBirthdayUseCase.class
 com\server4\Helpers\EntityIdGenerator.class
+com\server4\MainPage\MainScheduler.class
 com\server4\MainPage\TreeManager.class
 com\server4\Servlet\SubmitSurveyServlet.class
 com\server4\Database\IDBConnectionPoint.class
 com\server4\Helpers\SurveyDS.class
 com\server4\Helpers\UseCaseDateFormatter.class
 com\server4\MainPage\ITreeNode.class
+com\server4\NotificationSystem\Notifier$1.class
 com\server4\MainPage\CommandLineAndy.class
 com\server4\MainPage\Tree.class
 com\server4\Servlet\RegisterServlet.class

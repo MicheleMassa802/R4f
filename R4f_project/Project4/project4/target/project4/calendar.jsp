@@ -34,7 +34,7 @@
 		// to determine the month to show, check if a value has been given to the month-to-display attribute
 		// if month-to-display attribute has been set, use that, else, use defaultMonth from session
 		String monthSelected = request.getParameter("month-to-display");
-		if (monthSelected == null){
+		if (monthSelected == null || monthSelected.equals("0")) {
 			// show calendar with default month
 			monthToDisplay = (Integer)session.getAttribute("defaultMonth");
 		} else {
@@ -145,7 +145,8 @@
 				<div class="month-value"> <%=displayMonthStr%> </div>
 				<div class="select-month-text"> Select Month To View:</div>
 				<div class="month-selector">
-					<select name="month-to-display" id="month-to-display">
+					<select name="month-to-display" id="month-to-display" >
+						<option selected value="0"> Select a month from here </option>
 						<option value="1"> January </option>
 						<option value="2"> February </option>
 						<option value="3"> March </option>

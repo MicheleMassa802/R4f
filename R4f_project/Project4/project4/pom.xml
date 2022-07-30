@@ -60,7 +60,7 @@
           <configuration>
             <appName>r4f</appName>
           </configuration>
-          <version>7.60.2</version>
+          <version>3.0.4</version>
         </plugin>
       </plugins>
     </pluginManagement>

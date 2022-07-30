@@ -118,8 +118,9 @@ public class CreateCalendarUseCase {
                 // copy over values
                 String[] bdIdArray = currBdIds.split(", ");
 
+                // check if bdids being added contain 0123456789, else, dont add them
                 for (int j = 0; j < bdIdArray.length; j++){
-                    if (bdIdArray[j] != "" && bdIdArray[j] != " "){
+                    if ((bdIdArray[j].matches("\\d+"))){
                         bdIdsList.add(bdIdArray[j]);
                         //System.out.println("CAUGHT YOU");
                     }

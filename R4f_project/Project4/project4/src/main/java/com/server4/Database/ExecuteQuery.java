@@ -105,7 +105,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
 
             }
 
-            //System.out.println("Statement to execute: " + statement.toString());
+            System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             statement.executeUpdate();
@@ -166,7 +166,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             // setup statement with its parameters (values)
             PreparedStatement statement = connection.prepareStatement(query.toString());
 
-            //System.out.println("Statement to execute: " + statement.toString());
+            System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             ResultSet result = statement.executeQuery();
@@ -179,7 +179,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
                 }
             }
 
-            //System.out.println("Row has been successfully retrieved: " + row.toString());
+            System.out.println("Row has been successfully retrieved: " + row.toString());
 
             // close statement and connection to DB
             statement.close();
@@ -251,7 +251,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
                 }
             }
 
-            //System.out.println("Row has been successfully retrieved: " + row.toString());
+            System.out.println("Row has been successfully retrieved: " + row.toString());
 
             // close statement and connection to DB
             statement.close();
@@ -291,7 +291,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             
             //statement.setString(1, objectId);
 
-            //System.out.println("Statement to execute: " + statement.toString());
+            System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             statement.executeUpdate();

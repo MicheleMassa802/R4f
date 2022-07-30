@@ -95,8 +95,9 @@
 					</div>
 					<div class="survey-subtitle">
 						The survey link to share is: <br>
-						Still on the works <br>
-						For now, you can have your friends download the application and use your reference IDs when filling the survey through the command line...<br>
+						https://r4f.herokuapp.com/survey.jsp <br>
+						Or, you can have your friends download the application! <br>
+						Rememeber to send your friends your reference IDs when filling the survey both through the command line or the website...<br>
 						Calendar ID: <%=userCalId%> <br>
 						User ID: <%=userId%> <br>
 					</div>

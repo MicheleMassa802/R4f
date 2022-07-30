@@ -8,12 +8,10 @@ In order to get the notification across, R4f sends you an email on the days of y
 The app is not about caring less about the special occasions by making sure you dont worry too much about them, it is about making sure you can remember to make the special occasions special with the fast paced life we are all stuck in.
 
 
-Current Stage: Maintainance
+Current Stage: Publishing
 Current Version: 1.0
 
 # Where to download, where to use...
-
-I'll leave the usage instructions down here even if the project is still not published, this line will be removed once Im done with setting up the publishing details...
 
 # Downloading R4F
 
@@ -21,11 +19,27 @@ If you are anything like me and appreciate some good old fashioned command line 
 
 This project4 folder is the one that contains the src folder where the actual application code resides, so you can use your IDE of preference to open the folder, navigate into: src -> main -> java -> com -> server4 -> MainPage, and once in the MainPage package, open up the Main.java file, run this file in order to experience R4F through command line prompts, in a very raw fashion.
 
+If your want to look at the website and the much prettier UI this brings, then you can deploy the app using a Tomcat server the way I have been doing it during the testing process of the project.
+
+I'll provide the steps for this TomCat deployment using VSCode, but I'm sure other IDEs will have comparable steps:
+
+Prep: open the project by opening the folder project4, which can be found by navigating your cloned location following: R4F_project -> Project4 -> project4.
+
+1. Install the Community Server Connectors extension on VSCode, this will allow you to download the Tomcat Server where the webapp will be deployed.
+2. Under the servers tab that will appear on your left sidebar, click the + button to add/download a server, click yes, and look for "apache-tomcat-9.0.41" (this is the one I've used and tested, so it will work, but similar ones may work too).
+3. Once installed, right click on the tomcat server icon under the servers tab on your left navigation bar, and start up the server.
+4. Since this is a maven project, now its time to package it up and create the .war file to deploy project4. So go over to the MAVEN tab on your left navigation bar in VSCode, go into: project4 Maven Webapp -> Lifecycle, and under the options, click the run arrow for the "clean" option, and then run the "package" option too.
+5. Now a target folder will have been created within your PROJECT4 folder (the folder on which the project is opened), along with other folders such as the src and .vscode folders which were already there.
+6. Go into this target folder, and right click on the subfolder with the name "project4", then select the option "Debug on Server" -> then select the installed tomcat server -> and then "no" when it asks you to modify optional server parameters.
+7. Lastly, once the project is running on the server, right click the installed server under the servers window, select the "server actions" option -> "show in browser" -> "http://localhost:8080/project4/".
+8. After this, a new tab should be opened in your preferred web browser, where R4F will be fully running with its beautiful UI. From here you have access to all the R4F features, so enjoy if you were able to make it through my terrible instruction process...
+
+
 # Using the R4F website
 
-If you are more normal however and prefer to look at pretty UIs (at least pretty in my opinion hehe), then you would want to visit the website. You don't need to download anything in order to use the website, and to be honest its the best way to interactively experience R4F.
+Sadly, this project was created mostly as a test and as something to be put on my resume rather than as something that actually has a usage in the real world. The concept is what I wanted to bring to life and thats what I did; however, I never wanted to actually host the application as it comes with its difficulties regarding my security, and user information security. Overall, I am not able to afford the hosting of the R4F application both monetarily and from a safety standpoint. 
 
-The link to the website is the following: ########################################
+If you really want to use R4F, you'll have to follow the steps under the "Downloading R4F" section, and even then, you are acknowledging the risks of using a application developed by someone who is not too smart when it comes to information security.
 
 
 # Important Notes:

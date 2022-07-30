@@ -13,9 +13,10 @@
 </head>
 <body>
 	<!-- Set Scheduler upon launch of page on server -->
-	<% 
+	<%-- <% 
+		Still figuring out how to trigger scheduler only once
 		MainScheduler.setScheduler();
-	%>
+	%> --%>
 
 	<!-- Header Image -->
     <header>

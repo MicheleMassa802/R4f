@@ -13,9 +13,9 @@ public class ExecuteQuery implements IDBConnectionPoint {
     // objects modified by the user, the columns attribute is to be filled and used only to execute an insertion
     private String table;
     private ArrayList<String> columns;
-    private final String URL = "jdbc:mysql://localhost:3306/r4f_javadb";
-    private final String USERNAME = "root";
-    private final String PSWD = "Pulpa_rico777";
+    private final String URL = "jdbc:mysql://us-cdbr-east-06.cleardb.net:3306/heroku_9705756df7a34ba";
+    private final String USERNAME = "bbb163473b5824";
+    private final String PSWD = "188ad74b";
     
 
     /**

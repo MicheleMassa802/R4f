@@ -9,7 +9,7 @@ public class UseCaseMsgGenerator {
     // randomly generating 4 congratulations messages from DB table
     private String result;
     private ArrayList<String> messages;  // gotten from the database
-    private final int NUM_OF_ROWS = 41;  // 1 through 41 messages available
+    private final int NUM_OF_ROWS = 39;  // 1 through 39 messages available
 
     /**
      * Constructor for initializing the random message generator, the user of this object doesnt need to 

@@ -73,10 +73,17 @@ public class Notifier {
                     bdIdsToNotify = calController.executeNotificationCheck();
                     System.out.println("BD IDS: " + bdIdsToNotify.toString());
 
+                    // generate random suggestion messages to include in email
+                    UseCaseMsgGenerator msgGen = new UseCaseMsgGenerator();
+                    String suggestionMessage1 = msgGen.generateMessage();
+                    String suggestionMessage2 = msgGen.generateMessage();
+                    String suggestionMessage3 = msgGen.generateMessage();
+
+
                     for (String bdId : bdIdsToNotify){
                         System.out.println("Email sending with: " + bdId);
                         SendEmail emailSender = new SendEmail(userInfo.get(1), userInfo.get(9), bdId);
-                        emailSender.executeSend();
+                        emailSender.executeSend(suggestionMessage1, suggestionMessage2, suggestionMessage3);
                     }
                 }
 

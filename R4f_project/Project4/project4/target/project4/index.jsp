@@ -174,21 +174,21 @@
 								<label> 
 									Instagram @:
 									<div class="survey-answer-box">
-										<input type="text" name="ig" id="ig">
+										<input type="text" name="ig" id="ig" value="none">
 									</div>
 								</label>
 
 								<label> 
 									Twitter @:
 									<div class="survey-answer-box">
-										<input type="text" name="twt" id="twt">
+										<input type="text" name="twt" id="twt" value="none">
 									</div>  
 								</label>
 
 								<label> 
 									Discord Username:
 									<div class="survey-answer-box">
-										<input type="text" name="dsc" id="dsc">
+										<input type="text" name="dsc" id="dsc" value="none">
 									</div>
 								</label>
 							</div>

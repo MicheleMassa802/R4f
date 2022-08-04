@@ -13,6 +13,13 @@ public class ExecuteQuery implements IDBConnectionPoint {
     // objects modified by the user, the columns attribute is to be filled and used only to execute an insertion
     private String table;
     private ArrayList<String> columns;
+
+    // private database
+    // private final String URL = "jdbc:mysql://localhost:3306/r4f_javadb";
+    // private final String USERNAME = "root";
+    // private final String PSWD = "Pulpa_rico777";
+
+    // heroku database
     private final String URL = "jdbc:mysql://us-cdbr-east-06.cleardb.net:3306/heroku_9705756df7a34ba";
     private final String USERNAME = "bbb163473b5824";
     private final String PSWD = "188ad74b";
@@ -105,7 +112,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
 
             }
 
-            System.out.println("Statement to execute: " + statement.toString());
+            // System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             statement.executeUpdate();
@@ -166,7 +173,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             // setup statement with its parameters (values)
             PreparedStatement statement = connection.prepareStatement(query.toString());
 
-            System.out.println("Statement to execute: " + statement.toString());
+            // System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             ResultSet result = statement.executeQuery();
@@ -179,7 +186,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
                 }
             }
 
-            System.out.println("Row has been successfully retrieved: " + row.toString());
+            // System.out.println("Row has been successfully retrieved: " + row.toString());
 
             // close statement and connection to DB
             statement.close();
@@ -238,7 +245,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             // setup statement with its parameters (values)
             PreparedStatement statement = connection.prepareStatement(query.toString());
 
-            //System.out.println("Statement to execute: " + statement.toString());
+            // System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             ResultSet result = statement.executeQuery();
@@ -251,7 +258,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
                 }
             }
 
-            System.out.println("Row has been successfully retrieved: " + row.toString());
+            // System.out.println("Row has been successfully retrieved: " + row.toString());
 
             // close statement and connection to DB
             statement.close();
@@ -291,7 +298,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             
             //statement.setString(1, objectId);
 
-            System.out.println("Statement to execute: " + statement.toString());
+            // System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             statement.executeUpdate();
@@ -341,7 +348,7 @@ public class ExecuteQuery implements IDBConnectionPoint {
             
             //statement.setString(1, objectId);
 
-            //System.out.println("Statement to execute: " + statement.toString());
+            // System.out.println("Statement to execute: " + statement.toString());
 
             // execute statement and check for updating of database
             statement.executeUpdate();

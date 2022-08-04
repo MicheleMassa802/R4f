@@ -23,7 +23,6 @@ public class UseCaseAccessSML {
 
     
     private IDBConnectionPoint dbConnection;
-    private int idCount;
 
 
     /**
@@ -31,15 +30,7 @@ public class UseCaseAccessSML {
      */
     public UseCaseAccessSML(){
         this.dbConnection = new ExecuteQuery(DB_TABLE, ID, TYPE, LINK);
-        
-        String countStr = "1001";
-        try {
-            countStr = this.dbConnection.executeRetrieve(ROW, "1", 4, null).get(3);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        this.idCount = Integer.parseInt(countStr);
-        
+
     }
 
 
@@ -51,23 +42,30 @@ public class UseCaseAccessSML {
      * @return      a string representing the sml_id to access these links through
      */
     public String insertLinks(String ig, String twt, String dsc){
-        String currSmlId = Integer.toString(idCount);
+        // get current sml_id you would have to use
+        String countStr = "1001";
+        try {
+            countStr = this.dbConnection.executeRetrieve(ROW, "1", 4, null).get(3);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
         // insert instagram link as the first one
         try {
-            this.dbConnection.executeInsert(currSmlId, IG, ig);
-            this.dbConnection.executeInsert(currSmlId, TWT, twt);
-            this.dbConnection.executeInsert(currSmlId, DSC, dsc);
-            this.idCount += 1;
+            this.dbConnection.executeInsert(countStr, IG, ig);
+            this.dbConnection.executeInsert(countStr, TWT, twt);
+            this.dbConnection.executeInsert(countStr, DSC, dsc);
+            String incrementedIdCount = Integer.parseInt(countStr) + 1 + "";
             // update idCount in table
-            this.dbConnection.executeUpdate(ID, "0", LINK, Integer.toString(idCount));
+            this.dbConnection.executeUpdate(ID, "0", LINK, incrementedIdCount);
 
         } catch (SQLException e) {
             System.out.println("Insertion unsucessful, please try again. Class: UseCaseAccessSML.java");
             e.printStackTrace();
         }
 
-        System.out.println("Insertion Successful, sml_id: " + currSmlId);
-        return currSmlId;
+        System.out.println("Insertion Successful, sml_id: " + countStr);
+        return countStr;
     }
 
 

@@ -29,12 +29,12 @@
         // get bd info for the day to display upon hover
         String ddmmDate = UseCaseDateFormatter.formatYearlyToMonthly(LocalDate.now().toString());
         ArrayList<String> bdIds = calendar.get(ddmmDate);
-		System.out.println("List of IDS at " + ddmmDate + "date in calendar: " + bdIds.toString());
+		System.out.println("List of IDS at " + ddmmDate + " date in calendar: " + bdIds.toString());
         ArrayList<String> bdInfo = new ArrayList<>();
         for(String bdId: bdIds){
-			System.out.println("BDID being used to pull today's bd info: " + bdId + " Is this bdId == ''" + (bdId == ""));
             // fetch bdId corresponding info and build the array to return with all the info setup
             bdInfo.add(birthdayController.getBdFromID(bdId).toString());
+			System.out.println("BD ID for which bdinfo is being retrieved: " + bdId);
 			
         }
 	%>

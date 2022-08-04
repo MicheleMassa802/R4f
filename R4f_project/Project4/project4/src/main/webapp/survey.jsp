@@ -63,7 +63,7 @@
 
 					<div class="question">
 						<label> 
-							What is your date of birth? [yyyy=mm-dd]
+							What is your date of birth? [yyyy-mm-dd]
 							<div class="survey-answer-box">
 								<input type="date" name="bd" id="q5" required>
 							</div>	
@@ -74,7 +74,7 @@
 						<label> 
 							What is your instagram username?
 							<div class="survey-answer-box">
-								<input type="text" name="ig" id="q6">
+								<input type="text" name="ig" id="q6" value="none">
 							</div>
 						</label>
 					</div>
@@ -83,7 +83,7 @@
 						<label> 
 							What is your twitter username?
 							<div class="survey-answer-box">
-								<input type="text" name="twt" id="q7">
+								<input type="text" name="twt" id="q7" value="none">
 							</div>
 						</label>
 					</div>
@@ -92,7 +92,7 @@
 						<label> 
 							What is your discord username?
 							<div class="survey-answer-box">
-								<input type="text" name="dsc" id="q8">
+								<input type="text" name="dsc" id="q8" value="none">
 							</div>
 						</label>
 					</div>

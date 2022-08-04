@@ -37,9 +37,10 @@ Prep: open the project by opening the folder project4, which can be found by nav
 
 # Using the R4F website
 
-Sadly, this project was created mostly as a test and as something to be put on my resume rather than as something that actually has a usage in the real world. The concept is what I wanted to bring to life and thats what I did; however, I never wanted to actually host the application as it comes with its difficulties regarding my security, and user information security. Overall, I am not able to afford the hosting of the R4F application both monetarily and from a safety standpoint. 
+If you are more of a fan of pretty UIs (or just a more normal person that doesn't like staring at the command line), you can visit the R4F website at the link:
+https://r4f.herokuapp.com/index.jsp
 
-If you really want to use R4F, you'll have to follow the steps under the "Downloading R4F" section, and even then, you are acknowledging the risks of using a application developed by someone who is not too smart when it comes to information security.
+Please note that due to my database plan for R4F being free, I am limited to very few queries per hour when it comes to communicating with the database, which can be translated to roughly 1 registration and a few logins per hour, so if you ever find an error in the app that is not related to wrong credentials or you selecting a username thats already taken, then chances are you'll just have to wait about an hour... Sorry for the inconvenience ;-;
 
 
 # Important Notes:

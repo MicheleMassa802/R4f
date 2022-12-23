@@ -15,6 +15,8 @@ Current Version: 1.0
 
 # Downloading R4F
 
+NOTE: The database connection point has been deleted in order to make this repository public. This means that downloading the application through the repo will not lead to a working version (as the DB will not work).
+
 If you are anything like me and appreciate some good old fashioned command line action [so if you are preferably used to coding and compiling projects], then you can go ahead and clone the repo, in there follow the directories in the following way: R4F_project -> Project4 -> project4.
 
 This project4 folder is the one that contains the src folder where the actual application code resides, so you can use your IDE of preference to open the folder, navigate into: src -> main -> java -> com -> server4 -> MainPage, and once in the MainPage package, open up the Main.java file, run this file in order to experience R4F through command line prompts, in a very raw fashion.

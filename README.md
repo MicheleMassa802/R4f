@@ -39,8 +39,7 @@ Prep: open the project by opening the folder project4, which can be found by nav
 
 # Using the R4F website
 
-If you are more of a fan of pretty UIs (or just a more normal person that doesn't like staring at the command line), you can visit the R4F website at the link:
-https://r4f.herokuapp.com/index.jsp
+If you are more of a fan of pretty UIs... you are out of luck for now, my university semester just started and I therefore do not have time to make a timely fix for the link no longer working. In fact, the command line app will not work unless you modify the database code with your own connection to your own database, as Heroku has discontinued free databases. I am not sure how long it will take for this project to be back up, but for the moment I am aiming to restore it and hopefully find another way to deploy the project (that's not Heroku) freely so that the website can be put up again... I'm really sorry about this folks :( I'll try my best to get a good product out for all of you soon :>
 
 Please note that due to my database plan for R4F being free, I am limited to very few queries per hour when it comes to communicating with the database, which can be translated to roughly 1 registration and a few logins per hour, so if you ever find an error in the app that is not related to wrong credentials or you selecting a username thats already taken, then chances are you'll just have to wait about an hour... Sorry for the inconvenience ;-;
 

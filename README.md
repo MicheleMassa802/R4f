@@ -21,7 +21,6 @@ R4f is a website that works as a birthday tracker for people who are close to yo
 # Instructions for accessing the application:
 
 ## CMDLine Version:
-NOTE: The database connection point has been deleted in order to make this repository public. This means that downloading the application through the repo will not lead to a working version (as the DB will not work).
 
 If you are anything like me and appreciate some good old fashioned command line action [so if you are preferably used to coding and compiling projects], then you can go ahead and clone the repo, in there follow the directories in the following way: R4F_project -> Project4 -> project4.
 
